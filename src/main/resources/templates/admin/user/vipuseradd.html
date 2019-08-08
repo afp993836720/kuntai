@@ -1,0 +1,204 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div th:insert="~{admin/head :: headFragment}"></div>
+<div th:insert="~{admin/menu :: menuFragment}"></div>
+<div th:insert="~{admin/head :: sectionFragment}"></div>
+
+<!--main content start-->
+      <section id="main-content">
+          <section class="wrapper">
+              
+            
+          <div class="row">
+                  <div class="col-sm-12">
+                      <aside class="profile-info col-lg-9">
+                      <section class="panel">
+                          
+                          <div class="panel-body bio-graph-info">
+                              <h1 th:text="${isedit == 1}?'编辑代理商':'添加代理商'"> 添加用户</h1>
+
+                              <form class="form-horizontal" role="form" action="" method="post" id="formid">
+                                  
+                                  <div class="form-group">
+                                      <label class="col-lg-2 control-label">代理商名称</label>
+                                      <div class="col-lg-6">
+                                          <input type="text" class="form-control" name="username"  th:value="${user.username != null}?${user.username}:'系统生成'" th:disabled="${isedit != null && isedit==1}" onkeyup='this.value=this.value.replace(/\W/,"")'>
+
+                                      </div>
+                                  </div>
+
+                                  <div class="form-group" th:if="${isedit == 1}">
+                                      <label class="col-lg-2 control-label">状态</label>
+                                      <div class="col-lg-6">
+                                          <select name="ustatus" class="selectpicker show-tick form-control">
+                                              <option th:selected="${user.ustatus != null && user.ustatus == 0}" value="0">正常</option>
+                                              <option th:selected="${user.ustatus != null && user.ustatus == 1}" value="1">冻结</option>
+                                          </select>
+                                      </div>
+                                  </div>
+                                  
+                                  
+                                  <!--{if isset($isedit) && $isedit == 1}-->
+                                  
+                                  <div class="form-group" th:if="${isedit == 1}">
+                                      <label class="col-lg-2 control-label">余额</label>
+                                      <div class="col-lg-6">
+                                          <!--{if $_SESSION['otype'] == 3}-->
+                                          <input th:if="${session.otype==3}" type="text" class="form-control"  th:value="${user.usermoney != null}?${user.usermoney}:'0'" name="usermoney" th:disabled="${isedit != null && isedit==1}" style="" onkeyup='this.value=this.value.replace(/\W/,"")'>
+                                          <!--{else/}-->
+                                            <p class="form-control" disabled="true" th:unless="${session.otype==3}" th:text="${user.usermoney != null}?${user.usermoney}:'0'">{$usermoney?$usermoney:'0'}</p>
+                                          <!--{/if}-->
+                                      </div>
+                                  </div>
+                                  <!--{else/}-->
+                                  
+                                  
+                                  <!--{/if}-->
+                                  
+
+                                  <div class="form-group">
+                                      <label class="col-lg-2 control-label">手机号</label>
+                                      <div class="col-lg-6">
+                                          <input type="text" class="form-control"  th:value="${user.utel != null}?${user.utel}:''" name="utel" style="" onkeyup='this.value=this.value.replace(/\W/,"")'>
+                                      </div>
+                                  </div>
+
+                                  <div class="form-group">
+                                      <label class="col-lg-2 control-label">真实姓名</label>
+                                      <div class="col-lg-6">
+                                          <input type="text" class="form-control"  th:value="${user.nickname!=null}?${user.nickname}:''" name="nickname" style="" onkeyup='this.value=this.value.replace(/\W/,"")'>
+                                      </div>
+                                  </div>
+
+                                  <div class="form-group">
+                                      <label class="col-lg-2 control-label">红利比例</label>
+                                      <div class="col-lg-6">
+                                          <input type="text" class="form-control"   th:value="${user.rebate!=null}?${user.rebate}:'0'" th:disabled="${user.uid==null || session.uid==user.uid}" th:name="${user.uid!=null || session.uid!=user.uid}?'rebate':''" >
+                                          
+                                      </div>
+                                  </div>
+                                  <div class="form-group">
+                                      <label class="col-lg-2 control-label">佣金比例</label>
+                                      <div class="col-lg-6">
+                                          <input type="text" class="form-control"  th:value="${user.feerebate != null}?${user.feerebate}:'0'" th:disabled="${user.uid==null || session.uid==user.uid}" th:name="${user.uid!=null || session.uid!=user.uid}?'feerebate':''" >
+                                          
+                                      </div>
+                                  </div>
+                                  <div class="form-group">
+                                      <label class="col-lg-2 control-label">保证金</label>
+                                      <div class="col-lg-6">
+                                          <input type="text" class="form-control"  th:value="${user.minprice != null}?${user.minprice}:'0'" name="minprice">
+                                          <div class="alert alert-block alert-danger fade in" style="margin:10px 0 0 0 ">
+                                         <strong>说明：</strong> 大于此保证金才可以提现。
+                                    </div>
+                                      </div>
+                                  </div>
+
+
+                <!--{if isset($isedit) && $isedit == 1}-->
+
+                                  <input type="hidden" class="form-control"  th:value="${user.uid !=null}?${user.uid}:''" name="uid">
+                <!--{else/}-->
+                <input type="hidden" class="form-control"  th:value="${isedit}" name="type">
+                <!--{/if}-->
+                                  <div class="form-group">
+                                      <label class="col-lg-2 control-label">密码</label>
+                                      <div class="col-lg-6">
+                                          <input type="text" class="form-control"  value="" name="upwd">
+                                      </div>
+                                  </div>
+
+                                  <div class="form-group">
+                                      <label class="col-lg-2 control-label">确认密码</label>
+                                      <div class="col-lg-6">
+                                          <input type="text" class="form-control"  value="" name="upwd2">
+                                      </div>
+                                  </div>
+                                  
+                
+                                  
+                                  
+                                  
+                                  
+
+                                  <div class="form-group">
+                                      <div class="col-lg-offset-2 col-lg-10">
+                                          <button type="submit" class="btn btn-success" onclick="return edituser(this.form)" >提交</button>
+                                          
+                                      </div>
+                                  </div>
+                              </form>
+                          </div>
+                      </section>
+                      
+                  </aside>
+                  </div>
+
+          </div>       
+          
+          
+             
+
+          </section>
+      </section>
+      <!--main content end-->
+  </section>
+
+<div th:insert="~{admin/foot :: footerFragment}"></div>
+<script>
+var c_otype = '';
+// var type = "{$isedit}";
+
+$('.selectotype').change(function(argument) {
+  c_otype = $(this).val();
+  if(c_otype == 4){
+    $('.choosejl').show();
+  }else{
+    $('.choosejl').hide();
+  }
+});
+  function edituser(form){
+    
+    var utel = form.utel.value;
+    var nickname = form.nickname.value;
+    var username = form.username.value;
+    var upwd = form.upwd.value;
+    var upwd2 = form.upwd2.value;
+    var type = form.type.value;
+    // var adminpwd = form.adminpwd.value;
+    //var ordpwd = form.ordpwd.value;
+    // var otype = form.otype.value;
+    // var oid = form.oid.value;
+
+    console.log(type);
+    if(!username){layer.msg('请输入用户名'); return false;}
+    
+    if(type == 0){
+      var formurl = "vipuseredit";
+      if(!utel){layer.msg('请输入手机号'); return false;}
+    }else{
+      var formurl = "vipuseredit";
+    }
+
+    if(!nickname){layer.msg('请输入真实姓名'); return false;}
+    
+    if(type == 0 || (type == 1 && upwd)){ 
+      if(!upwd){layer.msg('请输入密码'); return false;}
+      if(upwd.length < 6){layer.msg('密码长度大于6位'); return false;}
+      if(!upwd2){layer.msg('请再输入密码'); return false;}
+      if(upwd !== upwd2){layer.msg('两次输入密码不同'); return false;}
+    }
+    
+
+      
+      var data = $('#formid').serialize();
+      var locurl = "userlist";
+
+      WPpost(formurl,data,locurl);
+
+      return false;
+  }
+
+
+
+</script>

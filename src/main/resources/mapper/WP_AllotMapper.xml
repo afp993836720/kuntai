@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shengpingj.kuntai.mapper.WP_AllotMapper" >
+  <resultMap id="BaseResultMap" type="com.shengpingj.kuntai.pojo.WP_Allot" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="uid" property="uid" jdbcType="INTEGER" />
+    <result column="order_id" property="orderId" jdbcType="INTEGER" />
+    <result column="time" property="time" jdbcType="VARCHAR" />
+    <result column="my_fee" property="myFee" jdbcType="VARCHAR" />
+    <result column="is_win" property="isWin" jdbcType="BIT" />
+    <result column="nowmoney" property="nowmoney" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="BIT" />
+  </resultMap>
+  <!--<sql id="Example_Where_Clause" >-->
+    <!--<where >-->
+      <!--<foreach collection="oredCriteria" item="criteria" separator="or" >-->
+        <!--<if test="criteria.valid" >-->
+          <!--<trim prefix="(" suffix=")" prefixOverrides="and" >-->
+            <!--<foreach collection="criteria.criteria" item="criterion" >-->
+              <!--<choose >-->
+                <!--<when test="criterion.noValue" >-->
+                  <!--and ${criterion.condition}-->
+                <!--</when>-->
+                <!--<when test="criterion.singleValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value}-->
+                <!--</when>-->
+                <!--<when test="criterion.betweenValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}-->
+                <!--</when>-->
+                <!--<when test="criterion.listValue" >-->
+                  <!--and ${criterion.condition}-->
+                  <!--<foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >-->
+                    <!--#{listItem}-->
+                  <!--</foreach>-->
+                <!--</when>-->
+              <!--</choose>-->
+            <!--</foreach>-->
+          <!--</trim>-->
+        <!--</if>-->
+      <!--</foreach>-->
+    <!--</where>-->
+  <!--</sql>-->
+  <!--<sql id="Update_By_Example_Where_Clause" >-->
+    <!--<where >-->
+      <!--<foreach collection="example.oredCriteria" item="criteria" separator="or" >-->
+        <!--<if test="criteria.valid" >-->
+          <!--<trim prefix="(" suffix=")" prefixOverrides="and" >-->
+            <!--<foreach collection="criteria.criteria" item="criterion" >-->
+              <!--<choose >-->
+                <!--<when test="criterion.noValue" >-->
+                  <!--and ${criterion.condition}-->
+                <!--</when>-->
+                <!--<when test="criterion.singleValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value}-->
+                <!--</when>-->
+                <!--<when test="criterion.betweenValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}-->
+                <!--</when>-->
+                <!--<when test="criterion.listValue" >-->
+                  <!--and ${criterion.condition}-->
+                  <!--<foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >-->
+                    <!--#{listItem}-->
+                  <!--</foreach>-->
+                <!--</when>-->
+              <!--</choose>-->
+            <!--</foreach>-->
+          <!--</trim>-->
+        <!--</if>-->
+      <!--</foreach>-->
+    <!--</where>-->
+  <!--</sql>-->
+  <!--<sql id="Base_Column_List" >-->
+    <!--id, uid, order_id, time, my_fee, is_win, nowmoney, type-->
+  <!--</sql>-->
+  <!--<select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shengpingj.kuntai.pojo.WP_AllotExample" >-->
+    <!--select-->
+    <!--<if test="distinct" >-->
+      <!--distinct-->
+    <!--</if>-->
+    <!--<include refid="Base_Column_List" />-->
+    <!--from wp_allot-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+    <!--<if test="orderByClause != null" >-->
+      <!--order by ${orderByClause}-->
+    <!--</if>-->
+  <!--</select>-->
+  <!--<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >-->
+    <!--select -->
+    <!--<include refid="Base_Column_List" />-->
+    <!--from wp_allot-->
+    <!--where id = #{id,jdbcType=INTEGER}-->
+  <!--</select>-->
+  <!--<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >-->
+    <!--delete from wp_allot-->
+    <!--where id = #{id,jdbcType=INTEGER}-->
+  <!--</delete>-->
+  <!--<delete id="deleteByExample" parameterType="com.shengpingj.kuntai.pojo.WP_AllotExample" >-->
+    <!--delete from wp_allot-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</delete>-->
+  <!--<insert id="insert" parameterType="com.shengpingj.kuntai.pojo.WP_Allot" >-->
+    <!--insert into wp_allot (id, uid, order_id, -->
+      <!--time, my_fee, is_win, nowmoney, -->
+      <!--type)-->
+    <!--values (#{id,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER}, -->
+      <!--#{time,jdbcType=VARCHAR}, #{myFee,jdbcType=VARCHAR}, #{isWin,jdbcType=BIT}, #{nowmoney,jdbcType=VARCHAR}, -->
+      <!--#{type,jdbcType=BIT})-->
+  <!--</insert>-->
+  <!--<insert id="insertSelective" parameterType="com.shengpingj.kuntai.pojo.WP_Allot" >-->
+    <!--insert into wp_allot-->
+    <!--<trim prefix="(" suffix=")" suffixOverrides="," >-->
+      <!--<if test="id != null" >-->
+        <!--id,-->
+      <!--</if>-->
+      <!--<if test="uid != null" >-->
+        <!--uid,-->
+      <!--</if>-->
+      <!--<if test="orderId != null" >-->
+        <!--order_id,-->
+      <!--</if>-->
+      <!--<if test="time != null" >-->
+        <!--time,-->
+      <!--</if>-->
+      <!--<if test="myFee != null" >-->
+        <!--my_fee,-->
+      <!--</if>-->
+      <!--<if test="isWin != null" >-->
+        <!--is_win,-->
+      <!--</if>-->
+      <!--<if test="nowmoney != null" >-->
+        <!--nowmoney,-->
+      <!--</if>-->
+      <!--<if test="type != null" >-->
+        <!--type,-->
+      <!--</if>-->
+    <!--</trim>-->
+    <!--<trim prefix="values (" suffix=")" suffixOverrides="," >-->
+      <!--<if test="id != null" >-->
+        <!--#{id,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="uid != null" >-->
+        <!--#{uid,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="orderId != null" >-->
+        <!--#{orderId,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="time != null" >-->
+        <!--#{time,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="myFee != null" >-->
+        <!--#{myFee,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="isWin != null" >-->
+        <!--#{isWin,jdbcType=BIT},-->
+      <!--</if>-->
+      <!--<if test="nowmoney != null" >-->
+        <!--#{nowmoney,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="type != null" >-->
+        <!--#{type,jdbcType=BIT},-->
+      <!--</if>-->
+    <!--</trim>-->
+  <!--</insert>-->
+  <!--<select id="countByExample" parameterType="com.shengpingj.kuntai.pojo.WP_AllotExample" resultType="java.lang.Integer" >-->
+    <!--select count(*) from wp_allot-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</select>-->
+  <!--<update id="updateByExampleSelective" parameterType="map" >-->
+    <!--update wp_allot-->
+    <!--<set >-->
+      <!--<if test="record.id != null" >-->
+        <!--id = #{record.id,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.uid != null" >-->
+        <!--uid = #{record.uid,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.orderId != null" >-->
+        <!--order_id = #{record.orderId,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.time != null" >-->
+        <!--time = #{record.time,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.myFee != null" >-->
+        <!--my_fee = #{record.myFee,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.isWin != null" >-->
+        <!--is_win = #{record.isWin,jdbcType=BIT},-->
+      <!--</if>-->
+      <!--<if test="record.nowmoney != null" >-->
+        <!--nowmoney = #{record.nowmoney,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.type != null" >-->
+        <!--type = #{record.type,jdbcType=BIT},-->
+      <!--</if>-->
+    <!--</set>-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Update_By_Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</update>-->
+  <!--<update id="updateByExample" parameterType="map" >-->
+    <!--update wp_allot-->
+    <!--set id = #{record.id,jdbcType=INTEGER},-->
+      <!--uid = #{record.uid,jdbcType=INTEGER},-->
+      <!--order_id = #{record.orderId,jdbcType=INTEGER},-->
+      <!--time = #{record.time,jdbcType=VARCHAR},-->
+      <!--my_fee = #{record.myFee,jdbcType=VARCHAR},-->
+      <!--is_win = #{record.isWin,jdbcType=BIT},-->
+      <!--nowmoney = #{record.nowmoney,jdbcType=VARCHAR},-->
+      <!--type = #{record.type,jdbcType=BIT}-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Update_By_Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</update>-->
+  <!--<update id="updateByPrimaryKeySelective" parameterType="com.shengpingj.kuntai.pojo.WP_Allot" >-->
+    <!--update wp_allot-->
+    <!--<set >-->
+      <!--<if test="uid != null" >-->
+        <!--uid = #{uid,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="orderId != null" >-->
+        <!--order_id = #{orderId,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="time != null" >-->
+        <!--time = #{time,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="myFee != null" >-->
+        <!--my_fee = #{myFee,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="isWin != null" >-->
+        <!--is_win = #{isWin,jdbcType=BIT},-->
+      <!--</if>-->
+      <!--<if test="nowmoney != null" >-->
+        <!--nowmoney = #{nowmoney,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="type != null" >-->
+        <!--type = #{type,jdbcType=BIT},-->
+      <!--</if>-->
+    <!--</set>-->
+    <!--where id = #{id,jdbcType=INTEGER}-->
+  <!--</update>-->
+  <!--<update id="updateByPrimaryKey" parameterType="com.shengpingj.kuntai.pojo.WP_Allot" >-->
+    <!--update wp_allot-->
+    <!--set uid = #{uid,jdbcType=INTEGER},-->
+      <!--order_id = #{orderId,jdbcType=INTEGER},-->
+      <!--time = #{time,jdbcType=VARCHAR},-->
+      <!--my_fee = #{myFee,jdbcType=VARCHAR},-->
+      <!--is_win = #{isWin,jdbcType=BIT},-->
+      <!--nowmoney = #{nowmoney,jdbcType=VARCHAR},-->
+      <!--type = #{type,jdbcType=BIT}-->
+    <!--where id = #{id,jdbcType=INTEGER}-->
+  <!--</update>-->
+</mapper>

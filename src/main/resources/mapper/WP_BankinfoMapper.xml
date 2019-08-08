@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shengpingj.kuntai.mapper.WP_BankinfoMapper" >
+  <resultMap id="BaseResultMap" type="com.shengpingj.kuntai.pojo.WP_Bankinfo" >
+    <id column="bid" property="bid" jdbcType="INTEGER" />
+    <result column="uid" property="uid" jdbcType="INTEGER" />
+    <result column="bankname" property="bankname" jdbcType="VARCHAR" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="branch" property="branch" jdbcType="VARCHAR" />
+    <result column="banknumber" property="banknumber" jdbcType="VARCHAR" />
+    <result column="busername" property="busername" jdbcType="VARCHAR" />
+    <result column="sfzcard" property="sfzcard" jdbcType="VARCHAR" />
+    <result column="sfzimg" property="sfzimg" jdbcType="VARCHAR" />
+    <result column="is_audit" property="isAudit" jdbcType="INTEGER" />
+    <result column="bankid" property="bankid" jdbcType="INTEGER" />
+    <result column="wxhao" property="wxhao" jdbcType="VARCHAR" />
+  </resultMap>
+  <!--<sql id="Example_Where_Clause" >-->
+    <!--<where >-->
+      <!--<foreach collection="oredCriteria" item="criteria" separator="or" >-->
+        <!--<if test="criteria.valid" >-->
+          <!--<trim prefix="(" suffix=")" prefixOverrides="and" >-->
+            <!--<foreach collection="criteria.criteria" item="criterion" >-->
+              <!--<choose >-->
+                <!--<when test="criterion.noValue" >-->
+                  <!--and ${criterion.condition}-->
+                <!--</when>-->
+                <!--<when test="criterion.singleValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value}-->
+                <!--</when>-->
+                <!--<when test="criterion.betweenValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}-->
+                <!--</when>-->
+                <!--<when test="criterion.listValue" >-->
+                  <!--and ${criterion.condition}-->
+                  <!--<foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >-->
+                    <!--#{listItem}-->
+                  <!--</foreach>-->
+                <!--</when>-->
+              <!--</choose>-->
+            <!--</foreach>-->
+          <!--</trim>-->
+        <!--</if>-->
+      <!--</foreach>-->
+    <!--</where>-->
+  <!--</sql>-->
+  <!--<sql id="Update_By_Example_Where_Clause" >-->
+    <!--<where >-->
+      <!--<foreach collection="example.oredCriteria" item="criteria" separator="or" >-->
+        <!--<if test="criteria.valid" >-->
+          <!--<trim prefix="(" suffix=")" prefixOverrides="and" >-->
+            <!--<foreach collection="criteria.criteria" item="criterion" >-->
+              <!--<choose >-->
+                <!--<when test="criterion.noValue" >-->
+                  <!--and ${criterion.condition}-->
+                <!--</when>-->
+                <!--<when test="criterion.singleValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value}-->
+                <!--</when>-->
+                <!--<when test="criterion.betweenValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}-->
+                <!--</when>-->
+                <!--<when test="criterion.listValue" >-->
+                  <!--and ${criterion.condition}-->
+                  <!--<foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >-->
+                    <!--#{listItem}-->
+                  <!--</foreach>-->
+                <!--</when>-->
+              <!--</choose>-->
+            <!--</foreach>-->
+          <!--</trim>-->
+        <!--</if>-->
+      <!--</foreach>-->
+    <!--</where>-->
+  <!--</sql>-->
+  <!--<sql id="Base_Column_List" >-->
+    <!--bid, uid, bankname, province, city, branch, banknumber, busername, sfzcard, sfzimg, -->
+    <!--is_audit, bankid, wxhao-->
+  <!--</sql>-->
+  <!--<select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shengpingj.kuntai.pojo.WP_BankinfoExample" >-->
+    <!--select-->
+    <!--<if test="distinct" >-->
+      <!--distinct-->
+    <!--</if>-->
+    <!--<include refid="Base_Column_List" />-->
+    <!--from wp_bankinfo-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+    <!--<if test="orderByClause != null" >-->
+      <!--order by ${orderByClause}-->
+    <!--</if>-->
+  <!--</select>-->
+  <!--<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >-->
+    <!--select -->
+    <!--<include refid="Base_Column_List" />-->
+    <!--from wp_bankinfo-->
+    <!--where bid = #{bid,jdbcType=INTEGER}-->
+  <!--</select>-->
+  <!--<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >-->
+    <!--delete from wp_bankinfo-->
+    <!--where bid = #{bid,jdbcType=INTEGER}-->
+  <!--</delete>-->
+  <!--<delete id="deleteByExample" parameterType="com.shengpingj.kuntai.pojo.WP_BankinfoExample" >-->
+    <!--delete from wp_bankinfo-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</delete>-->
+  <!--<insert id="insert" parameterType="com.shengpingj.kuntai.pojo.WP_Bankinfo" >-->
+    <!--insert into wp_bankinfo (bid, uid, bankname, -->
+      <!--province, city, branch, -->
+      <!--banknumber, busername, sfzcard, -->
+      <!--sfzimg, is_audit, bankid, -->
+      <!--wxhao)-->
+    <!--values (#{bid,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, #{bankname,jdbcType=VARCHAR}, -->
+      <!--#{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{branch,jdbcType=VARCHAR}, -->
+      <!--#{banknumber,jdbcType=VARCHAR}, #{busername,jdbcType=VARCHAR}, #{sfzcard,jdbcType=VARCHAR}, -->
+      <!--#{sfzimg,jdbcType=VARCHAR}, #{isAudit,jdbcType=INTEGER}, #{bankid,jdbcType=INTEGER}, -->
+      <!--#{wxhao,jdbcType=VARCHAR})-->
+  <!--</insert>-->
+  <!--<insert id="insertSelective" parameterType="com.shengpingj.kuntai.pojo.WP_Bankinfo" >-->
+    <!--insert into wp_bankinfo-->
+    <!--<trim prefix="(" suffix=")" suffixOverrides="," >-->
+      <!--<if test="bid != null" >-->
+        <!--bid,-->
+      <!--</if>-->
+      <!--<if test="uid != null" >-->
+        <!--uid,-->
+      <!--</if>-->
+      <!--<if test="bankname != null" >-->
+        <!--bankname,-->
+      <!--</if>-->
+      <!--<if test="province != null" >-->
+        <!--province,-->
+      <!--</if>-->
+      <!--<if test="city != null" >-->
+        <!--city,-->
+      <!--</if>-->
+      <!--<if test="branch != null" >-->
+        <!--branch,-->
+      <!--</if>-->
+      <!--<if test="banknumber != null" >-->
+        <!--banknumber,-->
+      <!--</if>-->
+      <!--<if test="busername != null" >-->
+        <!--busername,-->
+      <!--</if>-->
+      <!--<if test="sfzcard != null" >-->
+        <!--sfzcard,-->
+      <!--</if>-->
+      <!--<if test="sfzimg != null" >-->
+        <!--sfzimg,-->
+      <!--</if>-->
+      <!--<if test="isAudit != null" >-->
+        <!--is_audit,-->
+      <!--</if>-->
+      <!--<if test="bankid != null" >-->
+        <!--bankid,-->
+      <!--</if>-->
+      <!--<if test="wxhao != null" >-->
+        <!--wxhao,-->
+      <!--</if>-->
+    <!--</trim>-->
+    <!--<trim prefix="values (" suffix=")" suffixOverrides="," >-->
+      <!--<if test="bid != null" >-->
+        <!--#{bid,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="uid != null" >-->
+        <!--#{uid,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="bankname != null" >-->
+        <!--#{bankname,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="province != null" >-->
+        <!--#{province,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="city != null" >-->
+        <!--#{city,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="branch != null" >-->
+        <!--#{branch,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="banknumber != null" >-->
+        <!--#{banknumber,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="busername != null" >-->
+        <!--#{busername,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="sfzcard != null" >-->
+        <!--#{sfzcard,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="sfzimg != null" >-->
+        <!--#{sfzimg,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="isAudit != null" >-->
+        <!--#{isAudit,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="bankid != null" >-->
+        <!--#{bankid,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="wxhao != null" >-->
+        <!--#{wxhao,jdbcType=VARCHAR},-->
+      <!--</if>-->
+    <!--</trim>-->
+  <!--</insert>-->
+  <!--<select id="countByExample" parameterType="com.shengpingj.kuntai.pojo.WP_BankinfoExample" resultType="java.lang.Integer" >-->
+    <!--select count(*) from wp_bankinfo-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</select>-->
+  <!--<update id="updateByExampleSelective" parameterType="map" >-->
+    <!--update wp_bankinfo-->
+    <!--<set >-->
+      <!--<if test="record.bid != null" >-->
+        <!--bid = #{record.bid,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.uid != null" >-->
+        <!--uid = #{record.uid,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.bankname != null" >-->
+        <!--bankname = #{record.bankname,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.province != null" >-->
+        <!--province = #{record.province,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.city != null" >-->
+        <!--city = #{record.city,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.branch != null" >-->
+        <!--branch = #{record.branch,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.banknumber != null" >-->
+        <!--banknumber = #{record.banknumber,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.busername != null" >-->
+        <!--busername = #{record.busername,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.sfzcard != null" >-->
+        <!--sfzcard = #{record.sfzcard,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.sfzimg != null" >-->
+        <!--sfzimg = #{record.sfzimg,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.isAudit != null" >-->
+        <!--is_audit = #{record.isAudit,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.bankid != null" >-->
+        <!--bankid = #{record.bankid,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.wxhao != null" >-->
+        <!--wxhao = #{record.wxhao,jdbcType=VARCHAR},-->
+      <!--</if>-->
+    <!--</set>-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Update_By_Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</update>-->
+  <!--<update id="updateByExample" parameterType="map" >-->
+    <!--update wp_bankinfo-->
+    <!--set bid = #{record.bid,jdbcType=INTEGER},-->
+      <!--uid = #{record.uid,jdbcType=INTEGER},-->
+      <!--bankname = #{record.bankname,jdbcType=VARCHAR},-->
+      <!--province = #{record.province,jdbcType=VARCHAR},-->
+      <!--city = #{record.city,jdbcType=VARCHAR},-->
+      <!--branch = #{record.branch,jdbcType=VARCHAR},-->
+      <!--banknumber = #{record.banknumber,jdbcType=VARCHAR},-->
+      <!--busername = #{record.busername,jdbcType=VARCHAR},-->
+      <!--sfzcard = #{record.sfzcard,jdbcType=VARCHAR},-->
+      <!--sfzimg = #{record.sfzimg,jdbcType=VARCHAR},-->
+      <!--is_audit = #{record.isAudit,jdbcType=INTEGER},-->
+      <!--bankid = #{record.bankid,jdbcType=INTEGER},-->
+      <!--wxhao = #{record.wxhao,jdbcType=VARCHAR}-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Update_By_Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</update>-->
+  <!--<update id="updateByPrimaryKeySelective" parameterType="com.shengpingj.kuntai.pojo.WP_Bankinfo" >-->
+    <!--update wp_bankinfo-->
+    <!--<set >-->
+      <!--<if test="uid != null" >-->
+        <!--uid = #{uid,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="bankname != null" >-->
+        <!--bankname = #{bankname,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="province != null" >-->
+        <!--province = #{province,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="city != null" >-->
+        <!--city = #{city,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="branch != null" >-->
+        <!--branch = #{branch,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="banknumber != null" >-->
+        <!--banknumber = #{banknumber,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="busername != null" >-->
+        <!--busername = #{busername,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="sfzcard != null" >-->
+        <!--sfzcard = #{sfzcard,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="sfzimg != null" >-->
+        <!--sfzimg = #{sfzimg,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="isAudit != null" >-->
+        <!--is_audit = #{isAudit,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="bankid != null" >-->
+        <!--bankid = #{bankid,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="wxhao != null" >-->
+        <!--wxhao = #{wxhao,jdbcType=VARCHAR},-->
+      <!--</if>-->
+    <!--</set>-->
+    <!--where bid = #{bid,jdbcType=INTEGER}-->
+  <!--</update>-->
+  <!--<update id="updateByPrimaryKey" parameterType="com.shengpingj.kuntai.pojo.WP_Bankinfo" >-->
+    <!--update wp_bankinfo-->
+    <!--set uid = #{uid,jdbcType=INTEGER},-->
+      <!--bankname = #{bankname,jdbcType=VARCHAR},-->
+      <!--province = #{province,jdbcType=VARCHAR},-->
+      <!--city = #{city,jdbcType=VARCHAR},-->
+      <!--branch = #{branch,jdbcType=VARCHAR},-->
+      <!--banknumber = #{banknumber,jdbcType=VARCHAR},-->
+      <!--busername = #{busername,jdbcType=VARCHAR},-->
+      <!--sfzcard = #{sfzcard,jdbcType=VARCHAR},-->
+      <!--sfzimg = #{sfzimg,jdbcType=VARCHAR},-->
+      <!--is_audit = #{isAudit,jdbcType=INTEGER},-->
+      <!--bankid = #{bankid,jdbcType=INTEGER},-->
+      <!--wxhao = #{wxhao,jdbcType=VARCHAR}-->
+    <!--where bid = #{bid,jdbcType=INTEGER}-->
+  <!--</update>-->
+</mapper>

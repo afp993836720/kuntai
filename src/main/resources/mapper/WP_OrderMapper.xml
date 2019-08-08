@@ -1,0 +1,581 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shengpingj.kuntai.mapper.WP_OrderMapper" >
+  <resultMap id="BaseResultMap" type="com.shengpingj.kuntai.pojo.WP_Order" >
+    <id column="oid" property="oid" jdbcType="INTEGER" />
+    <result column="uid" property="uid" jdbcType="INTEGER" />
+    <result column="pid" property="pid" jdbcType="INTEGER" />
+    <result column="ostyle" property="ostyle" jdbcType="INTEGER" />
+    <result column="buytime" property="buytime" jdbcType="VARCHAR" />
+    <result column="onumber" property="onumber" jdbcType="INTEGER" />
+    <result column="selltime" property="selltime" jdbcType="VARCHAR" />
+    <result column="ostaus" property="ostaus" jdbcType="INTEGER" />
+    <result column="buyprice" property="buyprice" jdbcType="DOUBLE" />
+    <result column="sellprice" property="sellprice" jdbcType="VARCHAR" />
+    <result column="endprofit" property="endprofit" jdbcType="VARCHAR" />
+    <result column="endloss" property="endloss" jdbcType="INTEGER" />
+    <result column="fee" property="fee" jdbcType="DOUBLE" />
+    <result column="eid" property="eid" jdbcType="REAL" />
+    <result column="orderno" property="orderno" jdbcType="VARCHAR" />
+    <result column="ptitle" property="ptitle" jdbcType="VARCHAR" />
+    <result column="commission" property="commission" jdbcType="DOUBLE" />
+    <result column="ploss" property="ploss" jdbcType="DOUBLE" />
+    <result column="display" property="display" jdbcType="INTEGER" />
+    <result column="isshow" property="isshow" jdbcType="INTEGER" />
+    <result column="is_win" property="isWin" jdbcType="BIT" />
+    <result column="kong_type" property="kongType" jdbcType="BIT" />
+    <result column="sx_fee" property="sxFee" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="selectOrderLimit" resultType="com.shengpingj.kuntai.pojo.vo.UserOrder" >
+SELECT o.*,u.username AS username,u.nickname AS nickname,u.managername AS managername FROM wp_order o JOIN wp_userinfo u WHERE o.uid = u.uid ORDER BY o.oid DESC LIMIT 0,10;
+
+  </select>
+  <select id="selectAllOrder" resultType="com.shengpingj.kuntai.pojo.vo.UserOrder" >
+SELECT o.*,u.username AS username,u.nickname AS nickname,u.managername AS managername FROM wp_order o JOIN wp_userinfo u WHERE o.uid = u.uid ORDER BY o.oid DESC
+  </select>
+  <select id="selectOrderByOid" resultType="com.shengpingj.kuntai.pojo.vo.UserOrder" >
+    SELECT o.*,u.username AS username,u.nickname AS nickname,u.managername AS managername ,u.usermoney AS usermoney FROM wp_order o JOIN wp_userinfo u WHERE o.uid = u.uid and o.oid = #{oid}
+  </select>
+  <select id="selectOrderLimitByUids" resultType="com.shengpingj.kuntai.pojo.vo.UserOrder" parameterType="java.lang.Integer">
+    SELECT o.*,u.username AS username,u.nickname AS nickname,u.managername AS managername FROM wp_order o JOIN wp_userinfo u WHERE o.uid = u.uid
+    AND u.uid in
+    <foreach collection="ids" item="id" index="index" separator="," open="(" close=")">
+      #{id}
+    </foreach>
+    ORDER BY o.oid DESC LIMIT 0,10;
+  </select>
+  <select id="selectAllOrderByUids" resultType="com.shengpingj.kuntai.pojo.vo.UserOrder" parameterType="java.lang.Integer">
+    SELECT o.*,u.username AS username,u.nickname AS nickname,u.managername AS managername FROM wp_order o JOIN wp_userinfo u WHERE o.uid = u.uid
+    AND u.uid in
+    <foreach collection="ids" item="id" index="index" separator="," open="(" close=")">
+      #{id}
+    </foreach>
+    ORDER BY o.oid desc
+  </select>
+  <select id="SumSxFee" resultType="java.lang.Double">
+    select sum(o.sx_fee) from wp_order o
+    <where>
+      <if test="uid != null">
+        and o.uid = #{uid}
+      </if>
+    </where>
+  </select>
+  <select id="SumPloss" parameterType="com.shengpingj.kuntai.pojo.vo.GetData" resultType="java.lang.Double">
+    select sum(b.ploss) from wp_order b
+    <where>
+      <if test="uid != null">
+        and b.uid = #{uid}
+      </if>
+      <if test="getdata != null">
+        <if test="getdata.starttime != null">
+          and b.buytime >= #{getdata.starttime}
+        </if>
+        <if test="getdata.endtime != null">
+          and #{getdata.endtime} >=  b.buytime
+        </if>
+      </if>
+    </where>
+  </select>
+  <select id="SumPlossByIds" parameterType="com.shengpingj.kuntai.pojo.vo.GetData" resultType="java.lang.Double">
+    select sum(b.ploss) from wp_order b
+    <where>
+
+      <if test="getdata != null">
+        <if test="getdata.starttime != null">
+          and b.buytime >= #{getdata.starttime}
+        </if>
+        <if test="getdata.endtime != null">
+          and #{getdata.endtime} >=  b.buytime
+        </if>
+      </if>
+      <if test="ids != null">
+        and b.uid in
+        <foreach collection="ids" separator="," close=")" open="(" item="id" index="index">
+          #{id}
+        </foreach>
+
+      </if>
+    </where>
+  </select>
+  <select id="selectCountByUid" resultType="java.lang.Integer">
+    select count(*) from wp_order where uid = #{uid}
+  </select>
+  <select id="selectAllOrderByTime" parameterType="java.lang.String" resultType="java.lang.Integer">
+  select count(*) from wp_order where buytime >= #{startTime} and #{endTime} >= buytime
+  </select>
+  <select id="sumPlossByTime" parameterType="java.lang.String" resultType="java.lang.Double">
+  select sum(b.ploss) from wp_order b where b.buytime >= #{startTime} and #{endTime} >= b.buytime
+</select>
+  <select id="sumFeeByTime" parameterType="java.lang.String" resultType="java.lang.Double">
+  select sum(b.fee) from wp_order b where b.buytime >= #{startTime} and #{endTime} >= b.buytime
+</select>
+  <select id="sumSxFeeByTime" parameterType="java.lang.String" resultType="java.lang.Double">
+  select sum(b.sx_fee) from wp_order b where b.buytime >= #{startTime} and #{endTime} >= b.buytime
+</select>
+  <!--<sql id="Example_Where_Clause" >-->
+    <!--<where >-->
+      <!--<foreach collection="oredCriteria" item="criteria" separator="or" >-->
+        <!--<if test="criteria.valid" >-->
+          <!--<trim prefix="(" suffix=")" prefixOverrides="and" >-->
+            <!--<foreach collection="criteria.criteria" item="criterion" >-->
+              <!--<choose >-->
+                <!--<when test="criterion.noValue" >-->
+                  <!--and ${criterion.condition}-->
+                <!--</when>-->
+                <!--<when test="criterion.singleValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value}-->
+                <!--</when>-->
+                <!--<when test="criterion.betweenValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}-->
+                <!--</when>-->
+                <!--<when test="criterion.listValue" >-->
+                  <!--and ${criterion.condition}-->
+                  <!--<foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >-->
+                    <!--#{listItem}-->
+                  <!--</foreach>-->
+                <!--</when>-->
+              <!--</choose>-->
+            <!--</foreach>-->
+          <!--</trim>-->
+        <!--</if>-->
+      <!--</foreach>-->
+    <!--</where>-->
+  <!--</sql>-->
+  <!--<sql id="Update_By_Example_Where_Clause" >-->
+    <!--<where >-->
+      <!--<foreach collection="example.oredCriteria" item="criteria" separator="or" >-->
+        <!--<if test="criteria.valid" >-->
+          <!--<trim prefix="(" suffix=")" prefixOverrides="and" >-->
+            <!--<foreach collection="criteria.criteria" item="criterion" >-->
+              <!--<choose >-->
+                <!--<when test="criterion.noValue" >-->
+                  <!--and ${criterion.condition}-->
+                <!--</when>-->
+                <!--<when test="criterion.singleValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value}-->
+                <!--</when>-->
+                <!--<when test="criterion.betweenValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}-->
+                <!--</when>-->
+                <!--<when test="criterion.listValue" >-->
+                  <!--and ${criterion.condition}-->
+                  <!--<foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >-->
+                    <!--#{listItem}-->
+                  <!--</foreach>-->
+                <!--</when>-->
+              <!--</choose>-->
+            <!--</foreach>-->
+          <!--</trim>-->
+        <!--</if>-->
+      <!--</foreach>-->
+    <!--</where>-->
+  <!--</sql>-->
+  <!--<sql id="Base_Column_List" >-->
+    <!--oid, uid, pid, ostyle, buytime, onumber, selltime, ostaus, buyprice, sellprice, endprofit, -->
+    <!--endloss, fee, eid, orderno, ptitle, commission, ploss, display, isshow, is_win, kong_type, -->
+    <!--sx_fee-->
+  <!--</sql>-->
+  <!--<select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shengpingj.kuntai.pojo.WP_OrderExample" >-->
+    <!--select-->
+    <!--<if test="distinct" >-->
+      <!--distinct-->
+    <!--</if>-->
+    <!--<include refid="Base_Column_List" />-->
+    <!--from wp_order-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+    <!--<if test="orderByClause != null" >-->
+      <!--order by ${orderByClause}-->
+    <!--</if>-->
+  <!--</select>-->
+  <!--<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >-->
+    <!--select -->
+    <!--<include refid="Base_Column_List" />-->
+    <!--from wp_order-->
+    <!--where oid = #{oid,jdbcType=INTEGER}-->
+  <!--</select>-->
+  <!--<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >-->
+    <!--delete from wp_order-->
+    <!--where oid = #{oid,jdbcType=INTEGER}-->
+  <!--</delete>-->
+  <!--<delete id="deleteByExample" parameterType="com.shengpingj.kuntai.pojo.WP_OrderExample" >-->
+    <!--delete from wp_order-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</delete>-->
+  <!--<insert id="insert" parameterType="com.shengpingj.kuntai.pojo.WP_Order" >-->
+    <!--insert into wp_order (oid, uid, pid, -->
+      <!--ostyle, buytime, onumber, -->
+      <!--selltime, ostaus, buyprice, -->
+      <!--sellprice, endprofit, endloss, -->
+      <!--fee, eid, orderno, ptitle, -->
+      <!--commission, ploss, display, -->
+      <!--isshow, is_win, kong_type, sx_fee-->
+      <!--)-->
+    <!--values (#{oid,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, #{pid,jdbcType=INTEGER}, -->
+      <!--#{ostyle,jdbcType=INTEGER}, #{buytime,jdbcType=INTEGER}, #{onumber,jdbcType=INTEGER}, -->
+      <!--#{selltime,jdbcType=INTEGER}, #{ostaus,jdbcType=INTEGER}, #{buyprice,jdbcType=DOUBLE}, -->
+      <!--#{sellprice,jdbcType=VARCHAR}, #{endprofit,jdbcType=VARCHAR}, #{endloss,jdbcType=INTEGER}, -->
+      <!--#{fee,jdbcType=DOUBLE}, #{eid,jdbcType=REAL}, #{orderno,jdbcType=VARCHAR}, #{ptitle,jdbcType=VARCHAR}, -->
+      <!--#{commission,jdbcType=DOUBLE}, #{ploss,jdbcType=DOUBLE}, #{display,jdbcType=INTEGER}, -->
+      <!--#{isshow,jdbcType=INTEGER}, #{isWin,jdbcType=BIT}, #{kongType,jdbcType=BIT}, #{sxFee,jdbcType=VARCHAR}-->
+      <!--)-->
+  <!--</insert>-->
+  <!--<insert id="insertSelective" parameterType="com.shengpingj.kuntai.pojo.WP_Order" >-->
+    <!--insert into wp_order-->
+    <!--<trim prefix="(" suffix=")" suffixOverrides="," >-->
+      <!--<if test="oid != null" >-->
+        <!--oid,-->
+      <!--</if>-->
+      <!--<if test="uid != null" >-->
+        <!--uid,-->
+      <!--</if>-->
+      <!--<if test="pid != null" >-->
+        <!--pid,-->
+      <!--</if>-->
+      <!--<if test="ostyle != null" >-->
+        <!--ostyle,-->
+      <!--</if>-->
+      <!--<if test="buytime != null" >-->
+        <!--buytime,-->
+      <!--</if>-->
+      <!--<if test="onumber != null" >-->
+        <!--onumber,-->
+      <!--</if>-->
+      <!--<if test="selltime != null" >-->
+        <!--selltime,-->
+      <!--</if>-->
+      <!--<if test="ostaus != null" >-->
+        <!--ostaus,-->
+      <!--</if>-->
+      <!--<if test="buyprice != null" >-->
+        <!--buyprice,-->
+      <!--</if>-->
+      <!--<if test="sellprice != null" >-->
+        <!--sellprice,-->
+      <!--</if>-->
+      <!--<if test="endprofit != null" >-->
+        <!--endprofit,-->
+      <!--</if>-->
+      <!--<if test="endloss != null" >-->
+        <!--endloss,-->
+      <!--</if>-->
+      <!--<if test="fee != null" >-->
+        <!--fee,-->
+      <!--</if>-->
+      <!--<if test="eid != null" >-->
+        <!--eid,-->
+      <!--</if>-->
+      <!--<if test="orderno != null" >-->
+        <!--orderno,-->
+      <!--</if>-->
+      <!--<if test="ptitle != null" >-->
+        <!--ptitle,-->
+      <!--</if>-->
+      <!--<if test="commission != null" >-->
+        <!--commission,-->
+      <!--</if>-->
+      <!--<if test="ploss != null" >-->
+        <!--ploss,-->
+      <!--</if>-->
+      <!--<if test="display != null" >-->
+        <!--display,-->
+      <!--</if>-->
+      <!--<if test="isshow != null" >-->
+        <!--isshow,-->
+      <!--</if>-->
+      <!--<if test="isWin != null" >-->
+        <!--is_win,-->
+      <!--</if>-->
+      <!--<if test="kongType != null" >-->
+        <!--kong_type,-->
+      <!--</if>-->
+      <!--<if test="sxFee != null" >-->
+        <!--sx_fee,-->
+      <!--</if>-->
+    <!--</trim>-->
+    <!--<trim prefix="values (" suffix=")" suffixOverrides="," >-->
+      <!--<if test="oid != null" >-->
+        <!--#{oid,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="uid != null" >-->
+        <!--#{uid,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="pid != null" >-->
+        <!--#{pid,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="ostyle != null" >-->
+        <!--#{ostyle,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="buytime != null" >-->
+        <!--#{buytime,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="onumber != null" >-->
+        <!--#{onumber,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="selltime != null" >-->
+        <!--#{selltime,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="ostaus != null" >-->
+        <!--#{ostaus,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="buyprice != null" >-->
+        <!--#{buyprice,jdbcType=DOUBLE},-->
+      <!--</if>-->
+      <!--<if test="sellprice != null" >-->
+        <!--#{sellprice,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="endprofit != null" >-->
+        <!--#{endprofit,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="endloss != null" >-->
+        <!--#{endloss,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="fee != null" >-->
+        <!--#{fee,jdbcType=DOUBLE},-->
+      <!--</if>-->
+      <!--<if test="eid != null" >-->
+        <!--#{eid,jdbcType=REAL},-->
+      <!--</if>-->
+      <!--<if test="orderno != null" >-->
+        <!--#{orderno,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="ptitle != null" >-->
+        <!--#{ptitle,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="commission != null" >-->
+        <!--#{commission,jdbcType=DOUBLE},-->
+      <!--</if>-->
+      <!--<if test="ploss != null" >-->
+        <!--#{ploss,jdbcType=DOUBLE},-->
+      <!--</if>-->
+      <!--<if test="display != null" >-->
+        <!--#{display,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="isshow != null" >-->
+        <!--#{isshow,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="isWin != null" >-->
+        <!--#{isWin,jdbcType=BIT},-->
+      <!--</if>-->
+      <!--<if test="kongType != null" >-->
+        <!--#{kongType,jdbcType=BIT},-->
+      <!--</if>-->
+      <!--<if test="sxFee != null" >-->
+        <!--#{sxFee,jdbcType=VARCHAR},-->
+      <!--</if>-->
+    <!--</trim>-->
+  <!--</insert>-->
+  <!--<select id="countByExample" parameterType="com.shengpingj.kuntai.pojo.WP_OrderExample" resultType="java.lang.Integer" >-->
+    <!--select count(*) from wp_order-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</select>-->
+  <!--<update id="updateByExampleSelective" parameterType="map" >-->
+    <!--update wp_order-->
+    <!--<set >-->
+      <!--<if test="record.oid != null" >-->
+        <!--oid = #{record.oid,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.uid != null" >-->
+        <!--uid = #{record.uid,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.pid != null" >-->
+        <!--pid = #{record.pid,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.ostyle != null" >-->
+        <!--ostyle = #{record.ostyle,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.buytime != null" >-->
+        <!--buytime = #{record.buytime,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.onumber != null" >-->
+        <!--onumber = #{record.onumber,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.selltime != null" >-->
+        <!--selltime = #{record.selltime,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.ostaus != null" >-->
+        <!--ostaus = #{record.ostaus,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.buyprice != null" >-->
+        <!--buyprice = #{record.buyprice,jdbcType=DOUBLE},-->
+      <!--</if>-->
+      <!--<if test="record.sellprice != null" >-->
+        <!--sellprice = #{record.sellprice,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.endprofit != null" >-->
+        <!--endprofit = #{record.endprofit,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.endloss != null" >-->
+        <!--endloss = #{record.endloss,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.fee != null" >-->
+        <!--fee = #{record.fee,jdbcType=DOUBLE},-->
+      <!--</if>-->
+      <!--<if test="record.eid != null" >-->
+        <!--eid = #{record.eid,jdbcType=REAL},-->
+      <!--</if>-->
+      <!--<if test="record.orderno != null" >-->
+        <!--orderno = #{record.orderno,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.ptitle != null" >-->
+        <!--ptitle = #{record.ptitle,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.commission != null" >-->
+        <!--commission = #{record.commission,jdbcType=DOUBLE},-->
+      <!--</if>-->
+      <!--<if test="record.ploss != null" >-->
+        <!--ploss = #{record.ploss,jdbcType=DOUBLE},-->
+      <!--</if>-->
+      <!--<if test="record.display != null" >-->
+        <!--display = #{record.display,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.isshow != null" >-->
+        <!--isshow = #{record.isshow,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.isWin != null" >-->
+        <!--is_win = #{record.isWin,jdbcType=BIT},-->
+      <!--</if>-->
+      <!--<if test="record.kongType != null" >-->
+        <!--kong_type = #{record.kongType,jdbcType=BIT},-->
+      <!--</if>-->
+      <!--<if test="record.sxFee != null" >-->
+        <!--sx_fee = #{record.sxFee,jdbcType=VARCHAR},-->
+      <!--</if>-->
+    <!--</set>-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Update_By_Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</update>-->
+  <!--<update id="updateByExample" parameterType="map" >-->
+    <!--update wp_order-->
+    <!--set oid = #{record.oid,jdbcType=INTEGER},-->
+      <!--uid = #{record.uid,jdbcType=INTEGER},-->
+      <!--pid = #{record.pid,jdbcType=INTEGER},-->
+      <!--ostyle = #{record.ostyle,jdbcType=INTEGER},-->
+      <!--buytime = #{record.buytime,jdbcType=INTEGER},-->
+      <!--onumber = #{record.onumber,jdbcType=INTEGER},-->
+      <!--selltime = #{record.selltime,jdbcType=INTEGER},-->
+      <!--ostaus = #{record.ostaus,jdbcType=INTEGER},-->
+      <!--buyprice = #{record.buyprice,jdbcType=DOUBLE},-->
+      <!--sellprice = #{record.sellprice,jdbcType=VARCHAR},-->
+      <!--endprofit = #{record.endprofit,jdbcType=VARCHAR},-->
+      <!--endloss = #{record.endloss,jdbcType=INTEGER},-->
+      <!--fee = #{record.fee,jdbcType=DOUBLE},-->
+      <!--eid = #{record.eid,jdbcType=REAL},-->
+      <!--orderno = #{record.orderno,jdbcType=VARCHAR},-->
+      <!--ptitle = #{record.ptitle,jdbcType=VARCHAR},-->
+      <!--commission = #{record.commission,jdbcType=DOUBLE},-->
+      <!--ploss = #{record.ploss,jdbcType=DOUBLE},-->
+      <!--display = #{record.display,jdbcType=INTEGER},-->
+      <!--isshow = #{record.isshow,jdbcType=INTEGER},-->
+      <!--is_win = #{record.isWin,jdbcType=BIT},-->
+      <!--kong_type = #{record.kongType,jdbcType=BIT},-->
+      <!--sx_fee = #{record.sxFee,jdbcType=VARCHAR}-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Update_By_Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</update>-->
+  <!--<update id="updateByPrimaryKeySelective" parameterType="com.shengpingj.kuntai.pojo.WP_Order" >-->
+    <!--update wp_order-->
+    <!--<set >-->
+      <!--<if test="uid != null" >-->
+        <!--uid = #{uid,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="pid != null" >-->
+        <!--pid = #{pid,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="ostyle != null" >-->
+        <!--ostyle = #{ostyle,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="buytime != null" >-->
+        <!--buytime = #{buytime,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="onumber != null" >-->
+        <!--onumber = #{onumber,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="selltime != null" >-->
+        <!--selltime = #{selltime,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="ostaus != null" >-->
+        <!--ostaus = #{ostaus,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="buyprice != null" >-->
+        <!--buyprice = #{buyprice,jdbcType=DOUBLE},-->
+      <!--</if>-->
+      <!--<if test="sellprice != null" >-->
+        <!--sellprice = #{sellprice,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="endprofit != null" >-->
+        <!--endprofit = #{endprofit,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="endloss != null" >-->
+        <!--endloss = #{endloss,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="fee != null" >-->
+        <!--fee = #{fee,jdbcType=DOUBLE},-->
+      <!--</if>-->
+      <!--<if test="eid != null" >-->
+        <!--eid = #{eid,jdbcType=REAL},-->
+      <!--</if>-->
+      <!--<if test="orderno != null" >-->
+        <!--orderno = #{orderno,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="ptitle != null" >-->
+        <!--ptitle = #{ptitle,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="commission != null" >-->
+        <!--commission = #{commission,jdbcType=DOUBLE},-->
+      <!--</if>-->
+      <!--<if test="ploss != null" >-->
+        <!--ploss = #{ploss,jdbcType=DOUBLE},-->
+      <!--</if>-->
+      <!--<if test="display != null" >-->
+        <!--display = #{display,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="isshow != null" >-->
+        <!--isshow = #{isshow,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="isWin != null" >-->
+        <!--is_win = #{isWin,jdbcType=BIT},-->
+      <!--</if>-->
+      <!--<if test="kongType != null" >-->
+        <!--kong_type = #{kongType,jdbcType=BIT},-->
+      <!--</if>-->
+      <!--<if test="sxFee != null" >-->
+        <!--sx_fee = #{sxFee,jdbcType=VARCHAR},-->
+      <!--</if>-->
+    <!--</set>-->
+    <!--where oid = #{oid,jdbcType=INTEGER}-->
+  <!--</update>-->
+  <!--<update id="updateByPrimaryKey" parameterType="com.shengpingj.kuntai.pojo.WP_Order" >-->
+    <!--update wp_order-->
+    <!--set uid = #{uid,jdbcType=INTEGER},-->
+      <!--pid = #{pid,jdbcType=INTEGER},-->
+      <!--ostyle = #{ostyle,jdbcType=INTEGER},-->
+      <!--buytime = #{buytime,jdbcType=INTEGER},-->
+      <!--onumber = #{onumber,jdbcType=INTEGER},-->
+      <!--selltime = #{selltime,jdbcType=INTEGER},-->
+      <!--ostaus = #{ostaus,jdbcType=INTEGER},-->
+      <!--buyprice = #{buyprice,jdbcType=DOUBLE},-->
+      <!--sellprice = #{sellprice,jdbcType=VARCHAR},-->
+      <!--endprofit = #{endprofit,jdbcType=VARCHAR},-->
+      <!--endloss = #{endloss,jdbcType=INTEGER},-->
+      <!--fee = #{fee,jdbcType=DOUBLE},-->
+      <!--eid = #{eid,jdbcType=REAL},-->
+      <!--orderno = #{orderno,jdbcType=VARCHAR},-->
+      <!--ptitle = #{ptitle,jdbcType=VARCHAR},-->
+      <!--commission = #{commission,jdbcType=DOUBLE},-->
+      <!--ploss = #{ploss,jdbcType=DOUBLE},-->
+      <!--display = #{display,jdbcType=INTEGER},-->
+      <!--isshow = #{isshow,jdbcType=INTEGER},-->
+      <!--is_win = #{isWin,jdbcType=BIT},-->
+      <!--kong_type = #{kongType,jdbcType=BIT},-->
+      <!--sx_fee = #{sxFee,jdbcType=VARCHAR}-->
+    <!--where oid = #{oid,jdbcType=INTEGER}-->
+  <!--</update>-->
+</mapper>

@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shengpingj.kuntai.mapper.WP_NewsinfoMapper" >
+  <resultMap id="BaseResultMap" type="com.shengpingj.kuntai.pojo.WP_Newsinfo" >
+    <id column="nid" property="nid" jdbcType="INTEGER" />
+    <result column="ntitle" property="ntitle" jdbcType="VARCHAR" />
+    <result column="ncover" property="ncover" jdbcType="VARCHAR" />
+    <result column="fid" property="fid" jdbcType="INTEGER" />
+    <result column="ntime" property="ntime" jdbcType="INTEGER" />
+    <result column="nauthor" property="nauthor" jdbcType="VARCHAR" />
+    <result column="isdelete" property="isdelete" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.shengpingj.kuntai.pojo.WP_Newsinfo" extends="BaseResultMap" >
+    <result column="ncontent" property="ncontent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <!--<sql id="Example_Where_Clause" >-->
+    <!--<where >-->
+      <!--<foreach collection="oredCriteria" item="criteria" separator="or" >-->
+        <!--<if test="criteria.valid" >-->
+          <!--<trim prefix="(" suffix=")" prefixOverrides="and" >-->
+            <!--<foreach collection="criteria.criteria" item="criterion" >-->
+              <!--<choose >-->
+                <!--<when test="criterion.noValue" >-->
+                  <!--and ${criterion.condition}-->
+                <!--</when>-->
+                <!--<when test="criterion.singleValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value}-->
+                <!--</when>-->
+                <!--<when test="criterion.betweenValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}-->
+                <!--</when>-->
+                <!--<when test="criterion.listValue" >-->
+                  <!--and ${criterion.condition}-->
+                  <!--<foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >-->
+                    <!--#{listItem}-->
+                  <!--</foreach>-->
+                <!--</when>-->
+              <!--</choose>-->
+            <!--</foreach>-->
+          <!--</trim>-->
+        <!--</if>-->
+      <!--</foreach>-->
+    <!--</where>-->
+  <!--</sql>-->
+  <!--<sql id="Update_By_Example_Where_Clause" >-->
+    <!--<where >-->
+      <!--<foreach collection="example.oredCriteria" item="criteria" separator="or" >-->
+        <!--<if test="criteria.valid" >-->
+          <!--<trim prefix="(" suffix=")" prefixOverrides="and" >-->
+            <!--<foreach collection="criteria.criteria" item="criterion" >-->
+              <!--<choose >-->
+                <!--<when test="criterion.noValue" >-->
+                  <!--and ${criterion.condition}-->
+                <!--</when>-->
+                <!--<when test="criterion.singleValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value}-->
+                <!--</when>-->
+                <!--<when test="criterion.betweenValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}-->
+                <!--</when>-->
+                <!--<when test="criterion.listValue" >-->
+                  <!--and ${criterion.condition}-->
+                  <!--<foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >-->
+                    <!--#{listItem}-->
+                  <!--</foreach>-->
+                <!--</when>-->
+              <!--</choose>-->
+            <!--</foreach>-->
+          <!--</trim>-->
+        <!--</if>-->
+      <!--</foreach>-->
+    <!--</where>-->
+  <!--</sql>-->
+  <!--<sql id="Base_Column_List" >-->
+    <!--nid, ntitle, ncover, fid, ntime, nauthor, isdelete-->
+  <!--</sql>-->
+  <!--<sql id="Blob_Column_List" >-->
+    <!--ncontent-->
+  <!--</sql>-->
+  <!--<select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.shengpingj.kuntai.pojo.WP_NewsinfoExample" >-->
+    <!--select-->
+    <!--<if test="distinct" >-->
+      <!--distinct-->
+    <!--</if>-->
+    <!--<include refid="Base_Column_List" />-->
+    <!--,-->
+    <!--<include refid="Blob_Column_List" />-->
+    <!--from wp_newsinfo-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+    <!--<if test="orderByClause != null" >-->
+      <!--order by ${orderByClause}-->
+    <!--</if>-->
+  <!--</select>-->
+  <!--<select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shengpingj.kuntai.pojo.WP_NewsinfoExample" >-->
+    <!--select-->
+    <!--<if test="distinct" >-->
+      <!--distinct-->
+    <!--</if>-->
+    <!--<include refid="Base_Column_List" />-->
+    <!--from wp_newsinfo-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+    <!--<if test="orderByClause != null" >-->
+      <!--order by ${orderByClause}-->
+    <!--</if>-->
+  <!--</select>-->
+  <!--<select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >-->
+    <!--select -->
+    <!--<include refid="Base_Column_List" />-->
+    <!--,-->
+    <!--<include refid="Blob_Column_List" />-->
+    <!--from wp_newsinfo-->
+    <!--where nid = #{nid,jdbcType=INTEGER}-->
+  <!--</select>-->
+  <!--<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >-->
+    <!--delete from wp_newsinfo-->
+    <!--where nid = #{nid,jdbcType=INTEGER}-->
+  <!--</delete>-->
+  <!--<delete id="deleteByExample" parameterType="com.shengpingj.kuntai.pojo.WP_NewsinfoExample" >-->
+    <!--delete from wp_newsinfo-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</delete>-->
+  <!--<insert id="insert" parameterType="com.shengpingj.kuntai.pojo.WP_Newsinfo" >-->
+    <!--insert into wp_newsinfo (nid, ntitle, ncover, -->
+      <!--fid, ntime, nauthor, -->
+      <!--isdelete, ncontent)-->
+    <!--values (#{nid,jdbcType=INTEGER}, #{ntitle,jdbcType=VARCHAR}, #{ncover,jdbcType=VARCHAR}, -->
+      <!--#{fid,jdbcType=INTEGER}, #{ntime,jdbcType=INTEGER}, #{nauthor,jdbcType=VARCHAR}, -->
+      <!--#{isdelete,jdbcType=INTEGER}, #{ncontent,jdbcType=LONGVARCHAR})-->
+  <!--</insert>-->
+  <!--<insert id="insertSelective" parameterType="com.shengpingj.kuntai.pojo.WP_Newsinfo" >-->
+    <!--insert into wp_newsinfo-->
+    <!--<trim prefix="(" suffix=")" suffixOverrides="," >-->
+      <!--<if test="nid != null" >-->
+        <!--nid,-->
+      <!--</if>-->
+      <!--<if test="ntitle != null" >-->
+        <!--ntitle,-->
+      <!--</if>-->
+      <!--<if test="ncover != null" >-->
+        <!--ncover,-->
+      <!--</if>-->
+      <!--<if test="fid != null" >-->
+        <!--fid,-->
+      <!--</if>-->
+      <!--<if test="ntime != null" >-->
+        <!--ntime,-->
+      <!--</if>-->
+      <!--<if test="nauthor != null" >-->
+        <!--nauthor,-->
+      <!--</if>-->
+      <!--<if test="isdelete != null" >-->
+        <!--isdelete,-->
+      <!--</if>-->
+      <!--<if test="ncontent != null" >-->
+        <!--ncontent,-->
+      <!--</if>-->
+    <!--</trim>-->
+    <!--<trim prefix="values (" suffix=")" suffixOverrides="," >-->
+      <!--<if test="nid != null" >-->
+        <!--#{nid,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="ntitle != null" >-->
+        <!--#{ntitle,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="ncover != null" >-->
+        <!--#{ncover,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="fid != null" >-->
+        <!--#{fid,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="ntime != null" >-->
+        <!--#{ntime,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="nauthor != null" >-->
+        <!--#{nauthor,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="isdelete != null" >-->
+        <!--#{isdelete,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="ncontent != null" >-->
+        <!--#{ncontent,jdbcType=LONGVARCHAR},-->
+      <!--</if>-->
+    <!--</trim>-->
+  <!--</insert>-->
+  <!--<select id="countByExample" parameterType="com.shengpingj.kuntai.pojo.WP_NewsinfoExample" resultType="java.lang.Integer" >-->
+    <!--select count(*) from wp_newsinfo-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</select>-->
+  <!--<update id="updateByExampleSelective" parameterType="map" >-->
+    <!--update wp_newsinfo-->
+    <!--<set >-->
+      <!--<if test="record.nid != null" >-->
+        <!--nid = #{record.nid,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.ntitle != null" >-->
+        <!--ntitle = #{record.ntitle,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.ncover != null" >-->
+        <!--ncover = #{record.ncover,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.fid != null" >-->
+        <!--fid = #{record.fid,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.ntime != null" >-->
+        <!--ntime = #{record.ntime,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.nauthor != null" >-->
+        <!--nauthor = #{record.nauthor,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.isdelete != null" >-->
+        <!--isdelete = #{record.isdelete,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.ncontent != null" >-->
+        <!--ncontent = #{record.ncontent,jdbcType=LONGVARCHAR},-->
+      <!--</if>-->
+    <!--</set>-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Update_By_Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</update>-->
+  <!--<update id="updateByExampleWithBLOBs" parameterType="map" >-->
+    <!--update wp_newsinfo-->
+    <!--set nid = #{record.nid,jdbcType=INTEGER},-->
+      <!--ntitle = #{record.ntitle,jdbcType=VARCHAR},-->
+      <!--ncover = #{record.ncover,jdbcType=VARCHAR},-->
+      <!--fid = #{record.fid,jdbcType=INTEGER},-->
+      <!--ntime = #{record.ntime,jdbcType=INTEGER},-->
+      <!--nauthor = #{record.nauthor,jdbcType=VARCHAR},-->
+      <!--isdelete = #{record.isdelete,jdbcType=INTEGER},-->
+      <!--ncontent = #{record.ncontent,jdbcType=LONGVARCHAR}-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Update_By_Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</update>-->
+  <!--<update id="updateByExample" parameterType="map" >-->
+    <!--update wp_newsinfo-->
+    <!--set nid = #{record.nid,jdbcType=INTEGER},-->
+      <!--ntitle = #{record.ntitle,jdbcType=VARCHAR},-->
+      <!--ncover = #{record.ncover,jdbcType=VARCHAR},-->
+      <!--fid = #{record.fid,jdbcType=INTEGER},-->
+      <!--ntime = #{record.ntime,jdbcType=INTEGER},-->
+      <!--nauthor = #{record.nauthor,jdbcType=VARCHAR},-->
+      <!--isdelete = #{record.isdelete,jdbcType=INTEGER}-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Update_By_Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</update>-->
+  <!--<update id="updateByPrimaryKeySelective" parameterType="com.shengpingj.kuntai.pojo.WP_Newsinfo" >-->
+    <!--update wp_newsinfo-->
+    <!--<set >-->
+      <!--<if test="ntitle != null" >-->
+        <!--ntitle = #{ntitle,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="ncover != null" >-->
+        <!--ncover = #{ncover,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="fid != null" >-->
+        <!--fid = #{fid,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="ntime != null" >-->
+        <!--ntime = #{ntime,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="nauthor != null" >-->
+        <!--nauthor = #{nauthor,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="isdelete != null" >-->
+        <!--isdelete = #{isdelete,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="ncontent != null" >-->
+        <!--ncontent = #{ncontent,jdbcType=LONGVARCHAR},-->
+      <!--</if>-->
+    <!--</set>-->
+    <!--where nid = #{nid,jdbcType=INTEGER}-->
+  <!--</update>-->
+  <!--<update id="updateByPrimaryKeyWithBLOBs" parameterType="com.shengpingj.kuntai.pojo.WP_Newsinfo" >-->
+    <!--update wp_newsinfo-->
+    <!--set ntitle = #{ntitle,jdbcType=VARCHAR},-->
+      <!--ncover = #{ncover,jdbcType=VARCHAR},-->
+      <!--fid = #{fid,jdbcType=INTEGER},-->
+      <!--ntime = #{ntime,jdbcType=INTEGER},-->
+      <!--nauthor = #{nauthor,jdbcType=VARCHAR},-->
+      <!--isdelete = #{isdelete,jdbcType=INTEGER},-->
+      <!--ncontent = #{ncontent,jdbcType=LONGVARCHAR}-->
+    <!--where nid = #{nid,jdbcType=INTEGER}-->
+  <!--</update>-->
+  <!--<update id="updateByPrimaryKey" parameterType="com.shengpingj.kuntai.pojo.WP_Newsinfo" >-->
+    <!--update wp_newsinfo-->
+    <!--set ntitle = #{ntitle,jdbcType=VARCHAR},-->
+      <!--ncover = #{ncover,jdbcType=VARCHAR},-->
+      <!--fid = #{fid,jdbcType=INTEGER},-->
+      <!--ntime = #{ntime,jdbcType=INTEGER},-->
+      <!--nauthor = #{nauthor,jdbcType=VARCHAR},-->
+      <!--isdelete = #{isdelete,jdbcType=INTEGER}-->
+    <!--where nid = #{nid,jdbcType=INTEGER}-->
+  <!--</update>-->
+</mapper>

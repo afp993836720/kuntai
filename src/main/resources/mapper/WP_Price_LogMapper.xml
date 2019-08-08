@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shengpingj.kuntai.mapper.WP_Price_LogMapper" >
+  <resultMap id="BaseResultMap" type="com.shengpingj.kuntai.pojo.WP_Price_Log" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="uid" property="uid" jdbcType="INTEGER" />
+    <result column="oid" property="oid" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="BIT" />
+    <result column="account" property="account" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="time" property="time" jdbcType="VARCHAR" />
+    <result column="nowmoney" property="nowmoney" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="selectAllPriceLog" parameterType="com.shengpingj.kuntai.pojo.vo.GetData" resultType="com.shengpingj.kuntai.pojo.vo.PriceLogView">
+select pl.*,u.username,u.utel from wp_price_log pl join wp_userinfo u
+
+    <where>
+      and u.uid = pl.uid
+      <if test="uid != null">
+        AND u.uid = #{uid}
+      </if>
+      <if test="getData.username != null">
+        AND u.username like '%'#{getData.username}'%' or u.utel like '%'#{getData.username}'%' or u.nickname like '%'#{getData.username}'%'
+      </if>
+      <if test="getData.starttime != null">
+        AND pl.time >= #{getData.starttime}
+      </if>
+      <if test="getData.endtime != null">
+        AND #{getData.endtime} >=pl.time
+      </if>
+    </where>
+    order by pl.id desc
+  </select>
+  <select id="SumAccount" parameterType="com.shengpingj.kuntai.pojo.vo.GetData" resultType="java.lang.Double">
+      select sum(b.account) from wp_price_log b
+      <where>
+        <if test="uid != null">
+          and b.uid = #{uid}
+        </if>
+        <if test="title != null">
+          and b.title = #{title}
+        </if>
+        <if test="getdata.starttime != null">
+          and b.time >= #{getdata.starttime}
+        </if>
+        <if test="getdata.endtime != null">
+          and #{getdata.endtime} >=  b.time
+        </if>
+      </where>
+  </select>
+  <select id="SumAccountByIds" parameterType="com.shengpingj.kuntai.pojo.vo.GetData" resultType="java.lang.Double">
+    select sum(b.account) from wp_price_log b
+    <where>
+
+      <if test="title != null">
+        and b.title = #{title}
+      </if>
+      <if test="getdata.starttime != null">
+        and b.time >= #{getdata.starttime}
+      </if>
+      <if test="getdata.endtime != null">
+        and #{getdata.endtime} >=  b.time
+      </if>
+      <if test="ids != null">
+        and b.uid in
+        <foreach collection="ids" item="id" separator="," close=")" open="(" index="index">
+          #{id}
+        </foreach>
+      </if>
+    </where>
+  </select>
+  <select id="selectAllMyPriceView" resultType="com.shengpingj.kuntai.pojo.vo.MyPriceView" parameterType="com.shengpingj.kuntai.pojo.vo.GetData">
+    select pl.*,u.username,u.utel,u.uid from wp_price_log pl join wp_userinfo u
+
+    <where>
+      and u.uid = pl.uid
+      <if test="uid != null">
+        AND u.uid = #{uid}
+      </if>
+      <if test="getdata.starttime != null">
+        AND pl.time >= #{getdata.starttime}
+      </if>
+      <if test="getdata.endtime != null">
+        AND #{getdata.endtime} >=pl.time
+      </if>
+    </where>
+    order by pl.id desc
+  </select>
+  <!--<sql id="Example_Where_Clause" >-->
+    <!--<where >-->
+      <!--<foreach collection="oredCriteria" item="criteria" separator="or" >-->
+        <!--<if test="criteria.valid" >-->
+          <!--<trim prefix="(" suffix=")" prefixOverrides="and" >-->
+            <!--<foreach collection="criteria.criteria" item="criterion" >-->
+              <!--<choose >-->
+                <!--<when test="criterion.noValue" >-->
+                  <!--and ${criterion.condition}-->
+                <!--</when>-->
+                <!--<when test="criterion.singleValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value}-->
+                <!--</when>-->
+                <!--<when test="criterion.betweenValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}-->
+                <!--</when>-->
+                <!--<when test="criterion.listValue" >-->
+                  <!--and ${criterion.condition}-->
+                  <!--<foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >-->
+                    <!--#{listItem}-->
+                  <!--</foreach>-->
+                <!--</when>-->
+              <!--</choose>-->
+            <!--</foreach>-->
+          <!--</trim>-->
+        <!--</if>-->
+      <!--</foreach>-->
+    <!--</where>-->
+  <!--</sql>-->
+  <!--<sql id="Update_By_Example_Where_Clause" >-->
+    <!--<where >-->
+      <!--<foreach collection="example.oredCriteria" item="criteria" separator="or" >-->
+        <!--<if test="criteria.valid" >-->
+          <!--<trim prefix="(" suffix=")" prefixOverrides="and" >-->
+            <!--<foreach collection="criteria.criteria" item="criterion" >-->
+              <!--<choose >-->
+                <!--<when test="criterion.noValue" >-->
+                  <!--and ${criterion.condition}-->
+                <!--</when>-->
+                <!--<when test="criterion.singleValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value}-->
+                <!--</when>-->
+                <!--<when test="criterion.betweenValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}-->
+                <!--</when>-->
+                <!--<when test="criterion.listValue" >-->
+                  <!--and ${criterion.condition}-->
+                  <!--<foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >-->
+                    <!--#{listItem}-->
+                  <!--</foreach>-->
+                <!--</when>-->
+              <!--</choose>-->
+            <!--</foreach>-->
+          <!--</trim>-->
+        <!--</if>-->
+      <!--</foreach>-->
+    <!--</where>-->
+  <!--</sql>-->
+  <!--<sql id="Base_Column_List" >-->
+    <!--id, uid, oid, type, account, title, content, time, nowmoney-->
+  <!--</sql>-->
+  <!--<select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shengpingj.kuntai.pojo.WP_Price_LogExample" >-->
+    <!--select-->
+    <!--<if test="distinct" >-->
+      <!--distinct-->
+    <!--</if>-->
+    <!--<include refid="Base_Column_List" />-->
+    <!--from wp_price_log-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+    <!--<if test="orderByClause != null" >-->
+      <!--order by ${orderByClause}-->
+    <!--</if>-->
+  <!--</select>-->
+  <!--<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >-->
+    <!--select -->
+    <!--<include refid="Base_Column_List" />-->
+    <!--from wp_price_log-->
+    <!--where id = #{id,jdbcType=INTEGER}-->
+  <!--</select>-->
+  <!--<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >-->
+    <!--delete from wp_price_log-->
+    <!--where id = #{id,jdbcType=INTEGER}-->
+  <!--</delete>-->
+  <!--<delete id="deleteByExample" parameterType="com.shengpingj.kuntai.pojo.WP_Price_LogExample" >-->
+    <!--delete from wp_price_log-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</delete>-->
+  <!--<insert id="insert" parameterType="com.shengpingj.kuntai.pojo.WP_Price_Log" >-->
+    <!--insert into wp_price_log (id, uid, oid, -->
+      <!--type, account, title, content, -->
+      <!--time, nowmoney)-->
+    <!--values (#{id,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, #{oid,jdbcType=INTEGER}, -->
+      <!--#{type,jdbcType=BIT}, #{account,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, -->
+      <!--#{time,jdbcType=VARCHAR}, #{nowmoney,jdbcType=VARCHAR})-->
+  <!--</insert>-->
+  <!--<insert id="insertSelective" parameterType="com.shengpingj.kuntai.pojo.WP_Price_Log" >-->
+    <!--insert into wp_price_log-->
+    <!--<trim prefix="(" suffix=")" suffixOverrides="," >-->
+      <!--<if test="id != null" >-->
+        <!--id,-->
+      <!--</if>-->
+      <!--<if test="uid != null" >-->
+        <!--uid,-->
+      <!--</if>-->
+      <!--<if test="oid != null" >-->
+        <!--oid,-->
+      <!--</if>-->
+      <!--<if test="type != null" >-->
+        <!--type,-->
+      <!--</if>-->
+      <!--<if test="account != null" >-->
+        <!--account,-->
+      <!--</if>-->
+      <!--<if test="title != null" >-->
+        <!--title,-->
+      <!--</if>-->
+      <!--<if test="content != null" >-->
+        <!--content,-->
+      <!--</if>-->
+      <!--<if test="time != null" >-->
+        <!--time,-->
+      <!--</if>-->
+      <!--<if test="nowmoney != null" >-->
+        <!--nowmoney,-->
+      <!--</if>-->
+    <!--</trim>-->
+    <!--<trim prefix="values (" suffix=")" suffixOverrides="," >-->
+      <!--<if test="id != null" >-->
+        <!--#{id,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="uid != null" >-->
+        <!--#{uid,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="oid != null" >-->
+        <!--#{oid,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="type != null" >-->
+        <!--#{type,jdbcType=BIT},-->
+      <!--</if>-->
+      <!--<if test="account != null" >-->
+        <!--#{account,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="title != null" >-->
+        <!--#{title,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="content != null" >-->
+        <!--#{content,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="time != null" >-->
+        <!--#{time,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="nowmoney != null" >-->
+        <!--#{nowmoney,jdbcType=VARCHAR},-->
+      <!--</if>-->
+    <!--</trim>-->
+  <!--</insert>-->
+  <!--<select id="countByExample" parameterType="com.shengpingj.kuntai.pojo.WP_Price_LogExample" resultType="java.lang.Integer" >-->
+    <!--select count(*) from wp_price_log-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</select>-->
+  <!--<update id="updateByExampleSelective" parameterType="map" >-->
+    <!--update wp_price_log-->
+    <!--<set >-->
+      <!--<if test="record.id != null" >-->
+        <!--id = #{record.id,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.uid != null" >-->
+        <!--uid = #{record.uid,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.oid != null" >-->
+        <!--oid = #{record.oid,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.type != null" >-->
+        <!--type = #{record.type,jdbcType=BIT},-->
+      <!--</if>-->
+      <!--<if test="record.account != null" >-->
+        <!--account = #{record.account,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.title != null" >-->
+        <!--title = #{record.title,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.content != null" >-->
+        <!--content = #{record.content,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.time != null" >-->
+        <!--time = #{record.time,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.nowmoney != null" >-->
+        <!--nowmoney = #{record.nowmoney,jdbcType=VARCHAR},-->
+      <!--</if>-->
+    <!--</set>-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Update_By_Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</update>-->
+  <!--<update id="updateByExample" parameterType="map" >-->
+    <!--update wp_price_log-->
+    <!--set id = #{record.id,jdbcType=INTEGER},-->
+      <!--uid = #{record.uid,jdbcType=INTEGER},-->
+      <!--oid = #{record.oid,jdbcType=INTEGER},-->
+      <!--type = #{record.type,jdbcType=BIT},-->
+      <!--account = #{record.account,jdbcType=VARCHAR},-->
+      <!--title = #{record.title,jdbcType=VARCHAR},-->
+      <!--content = #{record.content,jdbcType=VARCHAR},-->
+      <!--time = #{record.time,jdbcType=VARCHAR},-->
+      <!--nowmoney = #{record.nowmoney,jdbcType=VARCHAR}-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Update_By_Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</update>-->
+  <!--<update id="updateByPrimaryKeySelective" parameterType="com.shengpingj.kuntai.pojo.WP_Price_Log" >-->
+    <!--update wp_price_log-->
+    <!--<set >-->
+      <!--<if test="uid != null" >-->
+        <!--uid = #{uid,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="oid != null" >-->
+        <!--oid = #{oid,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="type != null" >-->
+        <!--type = #{type,jdbcType=BIT},-->
+      <!--</if>-->
+      <!--<if test="account != null" >-->
+        <!--account = #{account,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="title != null" >-->
+        <!--title = #{title,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="content != null" >-->
+        <!--content = #{content,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="time != null" >-->
+        <!--time = #{time,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="nowmoney != null" >-->
+        <!--nowmoney = #{nowmoney,jdbcType=VARCHAR},-->
+      <!--</if>-->
+    <!--</set>-->
+    <!--where id = #{id,jdbcType=INTEGER}-->
+  <!--</update>-->
+  <!--<update id="updateByPrimaryKey" parameterType="com.shengpingj.kuntai.pojo.WP_Price_Log" >-->
+    <!--update wp_price_log-->
+    <!--set uid = #{uid,jdbcType=INTEGER},-->
+      <!--oid = #{oid,jdbcType=INTEGER},-->
+      <!--type = #{type,jdbcType=BIT},-->
+      <!--account = #{account,jdbcType=VARCHAR},-->
+      <!--title = #{title,jdbcType=VARCHAR},-->
+      <!--content = #{content,jdbcType=VARCHAR},-->
+      <!--time = #{time,jdbcType=VARCHAR},-->
+      <!--nowmoney = #{nowmoney,jdbcType=VARCHAR}-->
+    <!--where id = #{id,jdbcType=INTEGER}-->
+  <!--</update>-->
+</mapper>

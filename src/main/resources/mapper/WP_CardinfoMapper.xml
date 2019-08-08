@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shengpingj.kuntai.mapper.WP_CardinfoMapper" >
+  <resultMap id="BaseResultMap" type="com.shengpingj.kuntai.pojo.WP_Cardinfo" >
+    <id column="cid" property="cid" jdbcType="INTEGER" />
+    <result column="uid" property="uid" jdbcType="INTEGER" />
+    <result column="cardname" property="cardname" jdbcType="VARCHAR" />
+    <result column="cardnum" property="cardnum" jdbcType="VARCHAR" />
+    <result column="cardpic" property="cardpic" jdbcType="VARCHAR" />
+    <result column="wxnumber" property="wxnumber" jdbcType="VARCHAR" />
+    <result column="ctime" property="ctime" jdbcType="VARCHAR" />
+    <result column="is_check" property="isCheck" jdbcType="INTEGER" />
+  </resultMap>
+  <!--<sql id="Example_Where_Clause" >-->
+    <!--<where >-->
+      <!--<foreach collection="oredCriteria" item="criteria" separator="or" >-->
+        <!--<if test="criteria.valid" >-->
+          <!--<trim prefix="(" suffix=")" prefixOverrides="and" >-->
+            <!--<foreach collection="criteria.criteria" item="criterion" >-->
+              <!--<choose >-->
+                <!--<when test="criterion.noValue" >-->
+                  <!--and ${criterion.condition}-->
+                <!--</when>-->
+                <!--<when test="criterion.singleValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value}-->
+                <!--</when>-->
+                <!--<when test="criterion.betweenValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}-->
+                <!--</when>-->
+                <!--<when test="criterion.listValue" >-->
+                  <!--and ${criterion.condition}-->
+                  <!--<foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >-->
+                    <!--#{listItem}-->
+                  <!--</foreach>-->
+                <!--</when>-->
+              <!--</choose>-->
+            <!--</foreach>-->
+          <!--</trim>-->
+        <!--</if>-->
+      <!--</foreach>-->
+    <!--</where>-->
+  <!--</sql>-->
+  <!--<sql id="Update_By_Example_Where_Clause" >-->
+    <!--<where >-->
+      <!--<foreach collection="example.oredCriteria" item="criteria" separator="or" >-->
+        <!--<if test="criteria.valid" >-->
+          <!--<trim prefix="(" suffix=")" prefixOverrides="and" >-->
+            <!--<foreach collection="criteria.criteria" item="criterion" >-->
+              <!--<choose >-->
+                <!--<when test="criterion.noValue" >-->
+                  <!--and ${criterion.condition}-->
+                <!--</when>-->
+                <!--<when test="criterion.singleValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value}-->
+                <!--</when>-->
+                <!--<when test="criterion.betweenValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}-->
+                <!--</when>-->
+                <!--<when test="criterion.listValue" >-->
+                  <!--and ${criterion.condition}-->
+                  <!--<foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >-->
+                    <!--#{listItem}-->
+                  <!--</foreach>-->
+                <!--</when>-->
+              <!--</choose>-->
+            <!--</foreach>-->
+          <!--</trim>-->
+        <!--</if>-->
+      <!--</foreach>-->
+    <!--</where>-->
+  <!--</sql>-->
+  <!--<sql id="Base_Column_List" >-->
+    <!--cid, uid, cardname, cardnum, cardpic, wxnumber, ctime, is_check-->
+  <!--</sql>-->
+  <!--<select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shengpingj.kuntai.pojo.WP_CardinfoExample" >-->
+    <!--select-->
+    <!--<if test="distinct" >-->
+      <!--distinct-->
+    <!--</if>-->
+    <!--<include refid="Base_Column_List" />-->
+    <!--from wp_cardinfo-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+    <!--<if test="orderByClause != null" >-->
+      <!--order by ${orderByClause}-->
+    <!--</if>-->
+  <!--</select>-->
+  <!--<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >-->
+    <!--select -->
+    <!--<include refid="Base_Column_List" />-->
+    <!--from wp_cardinfo-->
+    <!--where cid = #{cid,jdbcType=INTEGER}-->
+  <!--</select>-->
+  <!--<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >-->
+    <!--delete from wp_cardinfo-->
+    <!--where cid = #{cid,jdbcType=INTEGER}-->
+  <!--</delete>-->
+  <!--<delete id="deleteByExample" parameterType="com.shengpingj.kuntai.pojo.WP_CardinfoExample" >-->
+    <!--delete from wp_cardinfo-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</delete>-->
+  <!--<insert id="insert" parameterType="com.shengpingj.kuntai.pojo.WP_Cardinfo" >-->
+    <!--insert into wp_cardinfo (cid, uid, cardname, -->
+      <!--cardnum, cardpic, wxnumber, -->
+      <!--ctime, is_check)-->
+    <!--values (#{cid,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, #{cardname,jdbcType=VARCHAR}, -->
+      <!--#{cardnum,jdbcType=VARCHAR}, #{cardpic,jdbcType=VARCHAR}, #{wxnumber,jdbcType=VARCHAR}, -->
+      <!--#{ctime,jdbcType=VARCHAR}, #{isCheck,jdbcType=INTEGER})-->
+  <!--</insert>-->
+  <!--<insert id="insertSelective" parameterType="com.shengpingj.kuntai.pojo.WP_Cardinfo" >-->
+    <!--insert into wp_cardinfo-->
+    <!--<trim prefix="(" suffix=")" suffixOverrides="," >-->
+      <!--<if test="cid != null" >-->
+        <!--cid,-->
+      <!--</if>-->
+      <!--<if test="uid != null" >-->
+        <!--uid,-->
+      <!--</if>-->
+      <!--<if test="cardname != null" >-->
+        <!--cardname,-->
+      <!--</if>-->
+      <!--<if test="cardnum != null" >-->
+        <!--cardnum,-->
+      <!--</if>-->
+      <!--<if test="cardpic != null" >-->
+        <!--cardpic,-->
+      <!--</if>-->
+      <!--<if test="wxnumber != null" >-->
+        <!--wxnumber,-->
+      <!--</if>-->
+      <!--<if test="ctime != null" >-->
+        <!--ctime,-->
+      <!--</if>-->
+      <!--<if test="isCheck != null" >-->
+        <!--is_check,-->
+      <!--</if>-->
+    <!--</trim>-->
+    <!--<trim prefix="values (" suffix=")" suffixOverrides="," >-->
+      <!--<if test="cid != null" >-->
+        <!--#{cid,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="uid != null" >-->
+        <!--#{uid,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="cardname != null" >-->
+        <!--#{cardname,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="cardnum != null" >-->
+        <!--#{cardnum,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="cardpic != null" >-->
+        <!--#{cardpic,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="wxnumber != null" >-->
+        <!--#{wxnumber,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="ctime != null" >-->
+        <!--#{ctime,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="isCheck != null" >-->
+        <!--#{isCheck,jdbcType=INTEGER},-->
+      <!--</if>-->
+    <!--</trim>-->
+  <!--</insert>-->
+  <!--<select id="countByExample" parameterType="com.shengpingj.kuntai.pojo.WP_CardinfoExample" resultType="java.lang.Integer" >-->
+    <!--select count(*) from wp_cardinfo-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</select>-->
+  <!--<update id="updateByExampleSelective" parameterType="map" >-->
+    <!--update wp_cardinfo-->
+    <!--<set >-->
+      <!--<if test="record.cid != null" >-->
+        <!--cid = #{record.cid,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.uid != null" >-->
+        <!--uid = #{record.uid,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.cardname != null" >-->
+        <!--cardname = #{record.cardname,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.cardnum != null" >-->
+        <!--cardnum = #{record.cardnum,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.cardpic != null" >-->
+        <!--cardpic = #{record.cardpic,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.wxnumber != null" >-->
+        <!--wxnumber = #{record.wxnumber,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.ctime != null" >-->
+        <!--ctime = #{record.ctime,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.isCheck != null" >-->
+        <!--is_check = #{record.isCheck,jdbcType=INTEGER},-->
+      <!--</if>-->
+    <!--</set>-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Update_By_Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</update>-->
+  <!--<update id="updateByExample" parameterType="map" >-->
+    <!--update wp_cardinfo-->
+    <!--set cid = #{record.cid,jdbcType=INTEGER},-->
+      <!--uid = #{record.uid,jdbcType=INTEGER},-->
+      <!--cardname = #{record.cardname,jdbcType=VARCHAR},-->
+      <!--cardnum = #{record.cardnum,jdbcType=VARCHAR},-->
+      <!--cardpic = #{record.cardpic,jdbcType=VARCHAR},-->
+      <!--wxnumber = #{record.wxnumber,jdbcType=VARCHAR},-->
+      <!--ctime = #{record.ctime,jdbcType=VARCHAR},-->
+      <!--is_check = #{record.isCheck,jdbcType=INTEGER}-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Update_By_Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</update>-->
+  <!--<update id="updateByPrimaryKeySelective" parameterType="com.shengpingj.kuntai.pojo.WP_Cardinfo" >-->
+    <!--update wp_cardinfo-->
+    <!--<set >-->
+      <!--<if test="uid != null" >-->
+        <!--uid = #{uid,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="cardname != null" >-->
+        <!--cardname = #{cardname,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="cardnum != null" >-->
+        <!--cardnum = #{cardnum,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="cardpic != null" >-->
+        <!--cardpic = #{cardpic,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="wxnumber != null" >-->
+        <!--wxnumber = #{wxnumber,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="ctime != null" >-->
+        <!--ctime = #{ctime,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="isCheck != null" >-->
+        <!--is_check = #{isCheck,jdbcType=INTEGER},-->
+      <!--</if>-->
+    <!--</set>-->
+    <!--where cid = #{cid,jdbcType=INTEGER}-->
+  <!--</update>-->
+  <!--<update id="updateByPrimaryKey" parameterType="com.shengpingj.kuntai.pojo.WP_Cardinfo" >-->
+    <!--update wp_cardinfo-->
+    <!--set uid = #{uid,jdbcType=INTEGER},-->
+      <!--cardname = #{cardname,jdbcType=VARCHAR},-->
+      <!--cardnum = #{cardnum,jdbcType=VARCHAR},-->
+      <!--cardpic = #{cardpic,jdbcType=VARCHAR},-->
+      <!--wxnumber = #{wxnumber,jdbcType=VARCHAR},-->
+      <!--ctime = #{ctime,jdbcType=VARCHAR},-->
+      <!--is_check = #{isCheck,jdbcType=INTEGER}-->
+    <!--where cid = #{cid,jdbcType=INTEGER}-->
+  <!--</update>-->
+</mapper>

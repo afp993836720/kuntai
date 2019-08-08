@@ -1,0 +1,113 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div th:insert="~{admin/head :: headFragment}"></div>
+<div th:insert="~{admin/menu :: menuFragment}"></div>
+<div th:insert="~{admin/head :: sectionFragment}"></div>
+   <!--main content start-->
+      <section id="main-content">
+          <section class="wrapper">
+              <!-- page start-->
+              <div class="row">
+                  <div class="col-lg-8">
+                      <!--widget start-->
+                      <aside class="profile-nav alt green-border">
+                          <section class="panel">
+                              
+                          <!--{if $bank}-->
+                              <div th:if="${bank != null}" class="panel-body bio-graph-info">
+                              
+                              <div class="form-horizontal">
+                                  
+                                  <div class="form-group">
+                                      <label class="col-lg-2 control-label">用户id：</label>
+                                      <div class="col-lg-6">
+                                          <p class="control-label" th:text="${bank.id}">{$bank.id}</p>
+                                      </div>
+                                  </div>
+									<hr>
+                                  <div class="form-group">
+                                      <label class="col-lg-2 control-label">持卡人姓名：</label>
+                                      <div class="col-lg-6">
+                                          <p class="control-label" th:text="${bank.accntnm}">{$bank.accntnm}</p>
+                                      </div>
+                                  </div>
+									<hr>
+                                  <div class="form-group">
+                                      <label class="col-lg-2 control-label">区域：</label>
+                                      <div class="col-lg-6">
+                                          <p class="control-label" th:text="${bank.area}" >{:getarea($bank['provinceid'])}  {:getarea($bank['cityno'])}</p>
+                                      </div>
+                                  </div>
+									<hr>
+                                  <div class="form-group">
+                                      <label class="col-lg-2 control-label">详细地址：</label>
+                                      <div class="col-lg-6">
+                                          <p class="control-label" th:text="${bank.address}">{$bank.address}</p>
+                                      </div>
+                                  </div>
+									<hr>
+                                  <div class="form-group">
+                                      <label class="col-lg-2 control-label">银行名称：</label>
+                                      <div class="col-lg-6">
+                                          <p class="control-label" th:text="${bank.bank_nm}">{$bank.bank_nm}</p>
+                                      </div>
+                                  </div>
+									<hr>
+                                  <div class="form-group">
+                                      <label class="col-lg-2 control-label">预留手机号：</label>
+                                      <div class="col-lg-6">
+                                          <p class="control-label" th:text="${bank.phone}">{$bank.phone}</p>
+                                      </div>
+                                  </div>
+									<hr>
+                                  <div class="form-group">
+                                      <label class="col-lg-2 control-label">银行卡号：</label>
+                                      <div class="col-lg-6">
+                                          <p class="control-label" th:text="${bank.accntno}">{$bank.accntno}</p>
+                                      </div>
+                                  </div>
+                  <hr>
+                                  <div class="form-group">
+                                      <label class="col-lg-2 control-label">身份证号：</label>
+                                      <div class="col-lg-6">
+                                          <p class="control-label" th:text="${bank.scard}">{$bank.scard}</p>
+                                      </div>
+                                  </div>
+									<hr>
+                                  
+
+                                  
+                              </div>
+
+
+
+                          </div>
+                        <div th:unless="${bank !=null}" class="row">
+                            <div class="col-lg-12">
+                              <div class="noorder">
+                                暂无数据
+                              </div>
+                            </div>
+                          </div>
+
+                          </section>
+                      </aside>
+                      <!--widget end-->
+                      
+                  </div>
+                 </div> 
+              
+                 
+              
+              <!-- page end-->
+          </section>
+      </section>
+      <!--main content end-->
+  </section>
+
+<div th:insert="~{admin/foot :: footerFragment}"></div>
+<script>
+
+
+
+</script>

@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shengpingj.kuntai.mapper.WP_CatProductMapper" >
+  <resultMap id="BaseResultMap" type="com.shengpingj.kuntai.pojo.WP_CatProduct" >
+    <id column="cid" property="cid" jdbcType="INTEGER" />
+    <result column="cname" property="cname" jdbcType="VARCHAR" />
+    <result column="myat" property="myat" jdbcType="DOUBLE" />
+    <result column="myatjia" property="myatjia" jdbcType="DOUBLE" />
+    <result column="ask" property="ask" jdbcType="DOUBLE" />
+    <result column="high" property="high" jdbcType="DOUBLE" />
+    <result column="low" property="low" jdbcType="DOUBLE" />
+    <result column="open" property="open" jdbcType="DOUBLE" />
+    <result column="close" property="close" jdbcType="DOUBLE" />
+    <result column="eidtime" property="eidtime" jdbcType="INTEGER" />
+  </resultMap>
+  <!--<sql id="Example_Where_Clause" >-->
+    <!--<where >-->
+      <!--<foreach collection="oredCriteria" item="criteria" separator="or" >-->
+        <!--<if test="criteria.valid" >-->
+          <!--<trim prefix="(" suffix=")" prefixOverrides="and" >-->
+            <!--<foreach collection="criteria.criteria" item="criterion" >-->
+              <!--<choose >-->
+                <!--<when test="criterion.noValue" >-->
+                  <!--and ${criterion.condition}-->
+                <!--</when>-->
+                <!--<when test="criterion.singleValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value}-->
+                <!--</when>-->
+                <!--<when test="criterion.betweenValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}-->
+                <!--</when>-->
+                <!--<when test="criterion.listValue" >-->
+                  <!--and ${criterion.condition}-->
+                  <!--<foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >-->
+                    <!--#{listItem}-->
+                  <!--</foreach>-->
+                <!--</when>-->
+              <!--</choose>-->
+            <!--</foreach>-->
+          <!--</trim>-->
+        <!--</if>-->
+      <!--</foreach>-->
+    <!--</where>-->
+  <!--</sql>-->
+  <!--<sql id="Update_By_Example_Where_Clause" >-->
+    <!--<where >-->
+      <!--<foreach collection="example.oredCriteria" item="criteria" separator="or" >-->
+        <!--<if test="criteria.valid" >-->
+          <!--<trim prefix="(" suffix=")" prefixOverrides="and" >-->
+            <!--<foreach collection="criteria.criteria" item="criterion" >-->
+              <!--<choose >-->
+                <!--<when test="criterion.noValue" >-->
+                  <!--and ${criterion.condition}-->
+                <!--</when>-->
+                <!--<when test="criterion.singleValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value}-->
+                <!--</when>-->
+                <!--<when test="criterion.betweenValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}-->
+                <!--</when>-->
+                <!--<when test="criterion.listValue" >-->
+                  <!--and ${criterion.condition}-->
+                  <!--<foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >-->
+                    <!--#{listItem}-->
+                  <!--</foreach>-->
+                <!--</when>-->
+              <!--</choose>-->
+            <!--</foreach>-->
+          <!--</trim>-->
+        <!--</if>-->
+      <!--</foreach>-->
+    <!--</where>-->
+  <!--</sql>-->
+  <!--<sql id="Base_Column_List" >-->
+    <!--cid, cname, myat, myatjia, ask, high, low, open, close, eidtime-->
+  <!--</sql>-->
+  <!--<select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shengpingj.kuntai.pojo.WP_CatProductExample" >-->
+    <!--select-->
+    <!--<if test="distinct" >-->
+      <!--distinct-->
+    <!--</if>-->
+    <!--<include refid="Base_Column_List" />-->
+    <!--from wp_catproduct-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+    <!--<if test="orderByClause != null" >-->
+      <!--order by ${orderByClause}-->
+    <!--</if>-->
+  <!--</select>-->
+  <!--<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >-->
+    <!--select -->
+    <!--<include refid="Base_Column_List" />-->
+    <!--from wp_catproduct-->
+    <!--where cid = #{cid,jdbcType=INTEGER}-->
+  <!--</select>-->
+  <!--<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >-->
+    <!--delete from wp_catproduct-->
+    <!--where cid = #{cid,jdbcType=INTEGER}-->
+  <!--</delete>-->
+  <!--<delete id="deleteByExample" parameterType="com.shengpingj.kuntai.pojo.WP_CatProductExample" >-->
+    <!--delete from wp_catproduct-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</delete>-->
+  <!--<insert id="insert" parameterType="com.shengpingj.kuntai.pojo.WP_CatProduct" >-->
+    <!--insert into wp_catproduct (cid, cname, myat, -->
+      <!--myatjia, ask, high, low, -->
+      <!--open, close, eidtime)-->
+    <!--values (#{cid,jdbcType=INTEGER}, #{cname,jdbcType=VARCHAR}, #{myat,jdbcType=DOUBLE}, -->
+      <!--#{myatjia,jdbcType=DOUBLE}, #{ask,jdbcType=DOUBLE}, #{high,jdbcType=DOUBLE}, #{low,jdbcType=DOUBLE}, -->
+      <!--#{open,jdbcType=DOUBLE}, #{close,jdbcType=DOUBLE}, #{eidtime,jdbcType=INTEGER})-->
+  <!--</insert>-->
+  <!--<insert id="insertSelective" parameterType="com.shengpingj.kuntai.pojo.WP_CatProduct" >-->
+    <!--insert into wp_catproduct-->
+    <!--<trim prefix="(" suffix=")" suffixOverrides="," >-->
+      <!--<if test="cid != null" >-->
+        <!--cid,-->
+      <!--</if>-->
+      <!--<if test="cname != null" >-->
+        <!--cname,-->
+      <!--</if>-->
+      <!--<if test="myat != null" >-->
+        <!--myat,-->
+      <!--</if>-->
+      <!--<if test="myatjia != null" >-->
+        <!--myatjia,-->
+      <!--</if>-->
+      <!--<if test="ask != null" >-->
+        <!--ask,-->
+      <!--</if>-->
+      <!--<if test="high != null" >-->
+        <!--high,-->
+      <!--</if>-->
+      <!--<if test="low != null" >-->
+        <!--low,-->
+      <!--</if>-->
+      <!--<if test="open != null" >-->
+        <!--open,-->
+      <!--</if>-->
+      <!--<if test="close != null" >-->
+        <!--close,-->
+      <!--</if>-->
+      <!--<if test="eidtime != null" >-->
+        <!--eidtime,-->
+      <!--</if>-->
+    <!--</trim>-->
+    <!--<trim prefix="values (" suffix=")" suffixOverrides="," >-->
+      <!--<if test="cid != null" >-->
+        <!--#{cid,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="cname != null" >-->
+        <!--#{cname,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="myat != null" >-->
+        <!--#{myat,jdbcType=DOUBLE},-->
+      <!--</if>-->
+      <!--<if test="myatjia != null" >-->
+        <!--#{myatjia,jdbcType=DOUBLE},-->
+      <!--</if>-->
+      <!--<if test="ask != null" >-->
+        <!--#{ask,jdbcType=DOUBLE},-->
+      <!--</if>-->
+      <!--<if test="high != null" >-->
+        <!--#{high,jdbcType=DOUBLE},-->
+      <!--</if>-->
+      <!--<if test="low != null" >-->
+        <!--#{low,jdbcType=DOUBLE},-->
+      <!--</if>-->
+      <!--<if test="open != null" >-->
+        <!--#{open,jdbcType=DOUBLE},-->
+      <!--</if>-->
+      <!--<if test="close != null" >-->
+        <!--#{close,jdbcType=DOUBLE},-->
+      <!--</if>-->
+      <!--<if test="eidtime != null" >-->
+        <!--#{eidtime,jdbcType=INTEGER},-->
+      <!--</if>-->
+    <!--</trim>-->
+  <!--</insert>-->
+  <!--<select id="countByExample" parameterType="com.shengpingj.kuntai.pojo.WP_CatProductExample" resultType="java.lang.Integer" >-->
+    <!--select count(*) from wp_catproduct-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</select>-->
+  <!--<update id="updateByExampleSelective" parameterType="map" >-->
+    <!--update wp_catproduct-->
+    <!--<set >-->
+      <!--<if test="record.cid != null" >-->
+        <!--cid = #{record.cid,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.cname != null" >-->
+        <!--cname = #{record.cname,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.myat != null" >-->
+        <!--myat = #{record.myat,jdbcType=DOUBLE},-->
+      <!--</if>-->
+      <!--<if test="record.myatjia != null" >-->
+        <!--myatjia = #{record.myatjia,jdbcType=DOUBLE},-->
+      <!--</if>-->
+      <!--<if test="record.ask != null" >-->
+        <!--ask = #{record.ask,jdbcType=DOUBLE},-->
+      <!--</if>-->
+      <!--<if test="record.high != null" >-->
+        <!--high = #{record.high,jdbcType=DOUBLE},-->
+      <!--</if>-->
+      <!--<if test="record.low != null" >-->
+        <!--low = #{record.low,jdbcType=DOUBLE},-->
+      <!--</if>-->
+      <!--<if test="record.open != null" >-->
+        <!--open = #{record.open,jdbcType=DOUBLE},-->
+      <!--</if>-->
+      <!--<if test="record.close != null" >-->
+        <!--close = #{record.close,jdbcType=DOUBLE},-->
+      <!--</if>-->
+      <!--<if test="record.eidtime != null" >-->
+        <!--eidtime = #{record.eidtime,jdbcType=INTEGER},-->
+      <!--</if>-->
+    <!--</set>-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Update_By_Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</update>-->
+  <!--<update id="updateByExample" parameterType="map" >-->
+    <!--update wp_catproduct-->
+    <!--set cid = #{record.cid,jdbcType=INTEGER},-->
+      <!--cname = #{record.cname,jdbcType=VARCHAR},-->
+      <!--myat = #{record.myat,jdbcType=DOUBLE},-->
+      <!--myatjia = #{record.myatjia,jdbcType=DOUBLE},-->
+      <!--ask = #{record.ask,jdbcType=DOUBLE},-->
+      <!--high = #{record.high,jdbcType=DOUBLE},-->
+      <!--low = #{record.low,jdbcType=DOUBLE},-->
+      <!--open = #{record.open,jdbcType=DOUBLE},-->
+      <!--close = #{record.close,jdbcType=DOUBLE},-->
+      <!--eidtime = #{record.eidtime,jdbcType=INTEGER}-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Update_By_Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</update>-->
+  <!--<update id="updateByPrimaryKeySelective" parameterType="com.shengpingj.kuntai.pojo.WP_CatProduct" >-->
+    <!--update wp_catproduct-->
+    <!--<set >-->
+      <!--<if test="cname != null" >-->
+        <!--cname = #{cname,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="myat != null" >-->
+        <!--myat = #{myat,jdbcType=DOUBLE},-->
+      <!--</if>-->
+      <!--<if test="myatjia != null" >-->
+        <!--myatjia = #{myatjia,jdbcType=DOUBLE},-->
+      <!--</if>-->
+      <!--<if test="ask != null" >-->
+        <!--ask = #{ask,jdbcType=DOUBLE},-->
+      <!--</if>-->
+      <!--<if test="high != null" >-->
+        <!--high = #{high,jdbcType=DOUBLE},-->
+      <!--</if>-->
+      <!--<if test="low != null" >-->
+        <!--low = #{low,jdbcType=DOUBLE},-->
+      <!--</if>-->
+      <!--<if test="open != null" >-->
+        <!--open = #{open,jdbcType=DOUBLE},-->
+      <!--</if>-->
+      <!--<if test="close != null" >-->
+        <!--close = #{close,jdbcType=DOUBLE},-->
+      <!--</if>-->
+      <!--<if test="eidtime != null" >-->
+        <!--eidtime = #{eidtime,jdbcType=INTEGER},-->
+      <!--</if>-->
+    <!--</set>-->
+    <!--where cid = #{cid,jdbcType=INTEGER}-->
+  <!--</update>-->
+  <!--<update id="updateByPrimaryKey" parameterType="com.shengpingj.kuntai.pojo.WP_CatProduct" >-->
+    <!--update wp_catproduct-->
+    <!--set cname = #{cname,jdbcType=VARCHAR},-->
+      <!--myat = #{myat,jdbcType=DOUBLE},-->
+      <!--myatjia = #{myatjia,jdbcType=DOUBLE},-->
+      <!--ask = #{ask,jdbcType=DOUBLE},-->
+      <!--high = #{high,jdbcType=DOUBLE},-->
+      <!--low = #{low,jdbcType=DOUBLE},-->
+      <!--open = #{open,jdbcType=DOUBLE},-->
+      <!--close = #{close,jdbcType=DOUBLE},-->
+      <!--eidtime = #{eidtime,jdbcType=INTEGER}-->
+    <!--where cid = #{cid,jdbcType=INTEGER}-->
+  <!--</update>-->
+</mapper>

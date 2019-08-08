@@ -1,0 +1,128 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div th:insert="~{admin/head :: headFragment}"></div>
+
+<div th:insert="~{admin/head :: sectionFragment}"></div>
+
+<!-- 编辑器引入结束 -->
+<div th:insert="~{admin/menu :: menuFragment}"></div>
+
+
+<!--main content start-->
+      <section id="main-content">
+          <section class="wrapper">
+
+
+          <div class="row">
+                  <div class="col-sm-12">
+                      <aside class="profile-info col-lg-9">
+                      <section class="panel">
+
+                          <div class="panel-body bio-graph-info">
+                              <h1> 添加充值配置</h1>
+                              <form class="form-horizontal" role="form" method="post" id="formid">
+
+                                  <div class="form-group">
+                                      <label class="col-lg-2 control-label">名称</label>
+                                      <div class="col-lg-6">
+                                          <input type="text" class="form-control" name="payName"  th:value="${vo.payName != null}?${vo.payName}:''"  >
+                                      </div>
+                                  </div>
+                                  <div class="form-group">
+                                      <label class="col-lg-2 control-label">配置信息</label>
+                                      <div class="col-lg-6">
+                                          <textarea name="payConf"  class="form-control" cols="30" rows="10" th:text="${vo.payConf != null}?${vo.payConf}:''">{$pay_conf?$pay_conf:''}</textarea>
+                                          <div class="alert alert-block alert-danger fade in" style="margin:10px 0 0 0 ">
+                                             <strong>格式：</strong> key1:value1|key2:value2|......
+                                          </div>
+                                      </div>
+                                      
+                                  </div>
+
+                                  <div class="form-group">
+                                      <label class="col-lg-2 control-label">是否使用</label>
+                                      <div class="col-lg-6">
+                                          <input type="text" class="form-control" name="isUse"  th:value="${vo.isUse != null}?${vo.isUse}:'0'"  >
+                                          <div class="alert alert-block alert-danger fade in" style="margin:10px 0 0 0 ">
+                                             <strong>说明：</strong> 1显示；0不显示
+                                          </div>
+                                      </div>
+                                  </div>
+
+                                  <div class="form-group">
+                                      <label class="col-lg-2 control-label">每笔手续费</label>
+                                      <div class="col-lg-6">
+                                          <input type="text" class="form-control" name="payPoint"  th:value="${vo.payPoint!= null}?${vo.payPoint}:'0'"  >
+                                          <div class="alert alert-block alert-danger fade in" style="margin:10px 0 0 0 ">
+                                             <strong>说明：</strong> 输入百分比，如：2%则输入2
+                                          </div>
+                                      </div>
+                                  </div>
+
+
+                                  <div class="form-group">
+                                      <label class="col-lg-2 control-label">排序</label>
+                                      <div class="col-lg-6">
+                                          <input type="text" class="form-control" name="payOrder"  th:value="${vo.payOrder != null}?${vo.payOrder}:'0'"  >
+                                          <div class="alert alert-block alert-danger fade in" style="margin:10px 0 0 0 ">
+                                             <strong>说明：</strong> 数字越大越靠前
+                                          </div>
+                                      </div>
+                                  </div>
+
+
+                                    <input type="hidden" th:value="${vo.id}" name="id" th:if="${vo.id != null}">
+
+
+
+                                  <div class="form-group">
+                                      <div class="col-lg-offset-2 col-lg-10">
+                                          <input type="submit" value="提交"  onclick="return editcon(this.form)" class="btn btn-success">
+
+                                      </div>
+                                  </div>
+
+                              </form>
+                          </div>
+                      </section>
+
+                  </aside>
+                  </div>
+
+          </div>
+
+
+
+
+          </section>
+      </section>
+      <!--main content end-->
+  </section>
+
+
+<div th:insert="~{admin/foot :: footerFragment}"></div>
+<script type="text/javascript" src="/umeditor/umindex.js"></script>
+<script>
+  function editcon(form){
+
+    var payName = form.payName.value;
+    var payConf = form.payConf.value;
+    var isUse = form.isUse.value;
+    var payPoint = form.payPoint.value;
+
+    if(!payName){layer.msg('请输入名称'); return false;}
+    if(!payConf){layer.msg('请输入配置信息'); return false;}
+
+    var formurl = "editrech";
+    var data = $('#formid').serialize();
+    var locurl = "recharge";
+
+    WPpost(formurl,data,locurl);
+
+    return false;
+
+  }
+
+
+ 
+</script>

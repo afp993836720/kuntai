@@ -1,0 +1,345 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div th:insert="~{admin/head :: headFragment}"></div>
+<div th:insert="~{admin/menu :: menuFragment}"></div>
+<div th:insert="~{admin/head :: sectionFragment}"></div>
+<!--main content start-->
+      <section id="main-content">
+          <section class="wrapper">
+              <!--state overview start-->
+              
+              <div class="row state-overview">
+				<form action="" method="get">
+                <div class="container">
+                <div class="row">
+                 
+                      <div class="col-lg-3 mar-10">
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon1">订单编号</span>
+                            <input type="text"  name="orderid"  class="form-control" th:value="${getdata.oid != null?getdata.oid:''}" placeholder="输入订单编号/订单id"/>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 mar-10">
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon1">
+                              <select name="stype" id="">
+                                  <!--{if isset($getdata.stype) && $getdata.stype == 1} selected="selected" {/if}-->
+                                  <!--${getdata.stype == null} || ${getdata.stype == 1}? 'selected':''-->
+                                  <!--${getdata.stype == null} || ${getdata.stype == 2}? 'selected':''-->
+                                <option th:selected="${getdata.stype== 1}"  value="1">客户</option>
+                                <option th:selected="${getdata.stype == 2}"  value="2">代理商</option>
+                              </select>
+                            </span>
+                            <input type="text"   class="form-control" th:value="${getdata.username !=null} ? getdata.username:''" name="username" placeholder="昵称/姓名/手机号/编号"/>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-6 mar-10">
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon1">订单时间</span>
+                            <input type="text"  id="datetimepicker" class="form-control" placeholder="点击选择时间" name="starttime" th:value="${getdata.starttime != null?$getdata.starttime:''}"/>
+                            <span class="input-group-addon" id="basic-addon1">至</span>
+                            <input type="text"  id="datetimepicker_end" class="form-control" placeholder="点击选择时间" name="endtime" th:value="${getdata.endtime != null?$getdata.endtime:''}" />
+                        </div>
+                      </div>
+               </div>
+               <div class="row">
+                      <div class="col-lg-3 mar-10">
+                        <div class="input-group">
+                            <span class="input-group-addon">涨跌</span>
+                            <select name="ostyle" id="" class="selectpicker show-tick form-control">
+                                <option value="">默认不选</option>
+                                <option th:selected="${getdata.ostyle == 1}" value="1">买涨</option>
+                                <option th:selected="${getdata.ostyle == 2}" value="2">买跌</option>
+                            </select>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 mar-10">
+                        <div class="input-group">
+                            <span class="input-group-addon">盈亏</span>
+                            <select name="ploss" id="" class="selectpicker show-tick form-control">
+                                <option value="">默认不选</option>
+                                <option th:selected="${getdata.ploss == 1}" value="1">赢利</option>
+                                <option th:selected="${getdata.ploss == 2}" value="2">亏损</option>
+                                <option th:selected="${getdata.ploss == 3}" value="3">无效</option>
+                            </select>
+                        </div>
+                      </div>
+                      
+                      <div class="col-lg-3 mar-10">
+                        <div class="input-group">
+                            <span class="input-group-addon">产品</span>
+                            <select name="pid" id="" class="selectpicker show-tick form-control" >
+                                <option value="">默认不选</option>
+                                <!-- {volist name="pro" id="vo"} -->
+                                <!--{if isset($getdata['pid']) && $getdata['pid'] == $vo['pid']} selected="selected" {/if}-->
+
+                                <option th:each="vo:${prolist}" th:selected="${getdata.pid eq  vo.pid}"  th:value="${vo.pid}" th:text="${vo.ptitle}">{$vo.ptitle}</option>
+                                <!-- {/volist} -->
+                                
+                            </select>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 mar-10">
+                        <div class="input-group">
+                            <span class="input-group-addon">状态</span>
+                            <select name="ostaus" id="" class="selectpicker show-tick form-control">
+                                <option value="" >默认不选</option>
+                                <option th:selected="${getdata.ostaus == 1}"  value="1">建仓</option>
+                                <option th:selected="${getdata.ostaus == 2}"  value="2">平仓</option>
+                            </select>
+                        </div>
+                      </div>
+                  </div>
+                  <div class="mar-10">
+                   <input type="submit" class="btn btn-success" value="搜索">
+                  </div>
+                </div>
+                </form>
+              </div>
+              
+              <!--state overview end-->
+            
+            <a href="{:url('order/orderlist')}"><button type="submit" class="btn btn-danger">搜索全部</button></a>&nbsp;&nbsp;&nbsp;&nbsp; <span class="color_red">&nbsp;&nbsp;<strong>默认为当天订单</strong></span>
+			<a href="{:url('order/orderlist')}" th:if="${type == 1}"><button type="submit" class="btn btn-danger">停止刷新</button></a>
+
+			<a href="{:url('order/orderlist',array('type'=>1))}" th:unless="${type == 1}"><button type="submit" class="btn btn-danger">自动刷新</button></a>
+
+            
+            <br><br>
+             <div class="row">
+                  <div class="col-lg-12">
+                      <section class="panel">
+                          <header class="panel-heading">
+                              交易记录
+                          </header>
+                          <table class="table table-striped table-advance table-hover">
+                            <thead class="ordertable">
+                              <tr>
+                                <th>订单编号</th>
+                                <th>交易账号</th>
+                                <th>用户姓名</th>
+                                <th>订单时间</th>
+                                <th>产品信息</th>
+                                <th>状态</th>
+                                <th>方向</th>
+                                <th>时间/点数</th>
+                                <th>建仓点位</th>
+                                <th>平仓点位</th>
+                                <th>委托余额</th>
+                                <th>无效委托余额</th>
+                                <th>有效委托余额</th>             
+                                <th>实际盈亏</th>
+                                <th>买后余额</th>
+                                <th>归属代理商</th>
+                                <!--{if $otype == 3 || $iskong == 1}-->
+                                <th th:if="${otype == 3 || iskong == 1}">单控操作</th>
+                                <!--{/if}-->
+                                <th>详情</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                          <!-- {volist name="order" id="vo"} -->
+                          <tr th:each="vo :${order}">
+                              <td th:text="${vo.oid}">${vo.oid}</td>
+                              <td th:text="${vo.username}">${$vo.username}</td>
+                              <td th:text="${vo.nickname}">${$vo.nickname}</td>
+                              <td th:text="${vo.timebuy}">${ }</td>
+                              <td th:text="${vo.ptitle}">${$vo.ptitle}</td>
+                              <td th:text="${vo.ostaus ==1} ? '平仓' : '建仓'">yes</td>
+                              <td th:class="${vo.ostyle == 0}?'color_red':'color_green'" th:text="${vo.ostyle == 0}?'买涨':'买跌'">买涨</td>
+                              <td th:text="${vo.eid == 0}?${vo.endprofit}+'点':${vo.endprofit}+'秒'">11</td>
+                              <td th:text="${vo.buyprice}">${vo.buyprice}</td>
+                              <td th:if="${vo.ostaus == 1}">
+
+                                  <font th:style="'color:'+${vo.buyprice > vo.sellprice} ? '#2fb44e':'#ed0000'" size="3" th:text="${vo.sellprice}">${vo.sellprice}</font>
+
+
+                                  <!--{if $vo.pid == 1} class="jks drop" {elseif $vo.pid == 2} class="yks drop" {elseif $vo.pid == 3} class="tks drop" {elseif $vo.pid == 4} class="zsy drop" {/if}-->
+                                  <span th:unless="${vo.ostaus == 1}" th th:class="${vo.pid == 1}?'jks drop':${vo.pid == 2}?'yks drop':${vo.pid == 3}?'tks drop':${vo.pid == 4}?'zsy drop':''"></span>
+
+                              </td>
+
+                              <td class="color_red" th:text="'￥'+ ${vo.fee}">¥${vo.fee}</td>
+
+
+                              <td class="color_red" th:text="${vo.ploss == 0} ? '￥'+${vo.fee}:'￥0'">¥${vo.fee}</td>
+
+
+
+                              <td class="color_red" th:text="${vo.ploss != 0} ? '￥'+${vo.fee}:'￥0'" >¥${vo.fee}</td>
+
+
+                              <td th:class="${vo.ploss > 0} ? 'color_red' : 'color_green'" th:text="'￥'+${vo.ploss}">¥${vo.ploss}</td>
+                              <td class="color_red" th:text="'￥'+ ${vo.commission}">¥${vo.commission}</td>
+                              <td th:text="${vo.managername}">${vo.managername}</td>
+
+                                  <!--<td>{$vo.managername}</td>-->
+								   <!--<td>{if (getusers($vo['uoid'],'nickname'))} {:getusers($vo['uoid'],'nickname')} {else /}{$vo.managername}{/if}</td>-->
+                                  
+                                  <!--{if $otype == 3 || $iskong == 1}-->
+                                  <td th:if="${otype == 3 || iskong == 1}" >
+                                  <!--{if $vo.ostaus!=11-->
+                                    <select name="ostyle" id="" class="selectpicker select_change show-tick form-control" th:if="${vo.ostaus != 1}">
+                                        <option th:selected="${vo.kong_type == 0}?'selected':''"  th:value="${vo.oid}_0">默认</option>
+                                        <option th:selected="${vo.kong_type == 1}?'selected':''"  th:value="${vo.oid}_1">盈</option>
+                                        <option th:selected="${vo.kong_type == 2}?'selected':''"  th:value="${vo.oid}_2">亏</option>
+                                    </select>
+                                      <span th:unless="${vo.ostaus != 1}" th:text="${vo.kong_type == 1}?'盈':(${vo.kong_type == 2}?'输':'已平仓')">111</span>
+                                  <!--{else/}{if $vo.kong_type == 1} 盈 {elseif  $vo.kong_type == 2 /} 输 {else/} 已平仓{/if}{/if}-->
+                                    </td>
+                                    <!--{/if}-->
+                                    <td>
+                                      <a th:href="@{/admin/order/orderinfo(oid =${vo.oid})}"><button class="btn btn-primary btn-xs" title="点击查看"><i class="icon-list-alt"></i></button></a>
+                                      
+                                  </td>
+                              </tr>
+							<!-- {/volist} -->
+                              </tbody>
+                          </table>
+               <!--{if isset($noorder) && $noorder == 1} -->
+                          <div class="row" th:if="${noorder != null && noorder == 1}">
+                            <div class="col-lg-12">
+                              <div class="noorder">
+                                暂无数据
+                              </div>
+                            </div>
+                          </div>
+               <!--{/if} -->
+                      </section>
+                      <div>
+						<div class="row state-overview">
+                  <div class="col-lg-2 col-sm-2">
+                      <section class="panel">
+                          <div class="symbol red color_white">
+                              <h5>盈亏统计</h5>
+                          </div>
+                          <div class="order-boo">
+                              <h1 id="profit"></h1>
+                          </div>
+                      </section>
+                  </div>
+                  <div class="col-lg-2 col-sm-2">
+                      <section class="panel">
+                          <div class="symbol gray color_white">
+                              <h5>交易手数</h5>
+                          </div>
+                          <div class="order-boo">
+                              <h1 id="count"></h1>
+                          </div>
+                      </section>
+                  </div>
+                  <div class="col-lg-2 col-sm-2">
+                      <section class="panel">
+                          <div class="symbol blue color_white">
+                              <h5>委托金额</h5>
+                          </div>
+                          <div class="order-boo">
+                              <h1 id="fee"></h1>
+                          </div>
+                      </section>
+                  </div>
+
+                  <div class="col-lg-2 col-sm-2">
+                      <section class="panel">
+                          <div class="symbol red color_white">
+                              <h5>有效金额</h5>
+                          </div>
+                          <div class="order-boo">
+                              <h1 id="valid_fee"></h1>
+                          </div>
+                      </section>
+                  </div>
+
+                  <div class="col-lg-2 col-sm-2">
+                      <section class="panel">
+                          <div class="symbol terques color_white">
+                              <h5>无效金额</h5>
+                          </div>
+                          <div class="order-boo">
+                              <h1 id="invalid_fee"></h1>
+                              
+                          </div>
+                      </section>
+                  </div>
+                  
+                  <div class="col-lg-2 col-sm-2">
+                      <section class="panel">
+                          <div class="symbol gray color_white">
+                              <h5>手续费</h5>
+                          </div>
+                          <div class="order-boo">
+                              <h1 id="valid_shouxu"></h1>
+                          </div>
+                      </section>
+                  </div>
+
+              </div>
+                      </div>
+                  </div>
+              </div>
+
+          </section>
+      </section>
+      <!--main content end-->
+  </section>
+
+<div th:insert="~{admin/foot :: footerFragment}"></div>
+<script>
+ordersta();
+//底部统计
+function ordersta(){
+  var formurl = "{:url('/admin/order/ordersta')}";
+  var data  = '{$jsongetdata}';
+  
+console.log(data);
+  
+  $.post(formurl,data,function(data){
+      if (data) {
+        $('#profit').html('¥'+data.profit);
+        $('#count').html(data.count+'笔');
+        $('#fee').html('¥'+data.fee);
+        $('#invalid_fee').html('¥'+data.invalid_fee);
+        $('#valid_fee').html('¥'+data.valid_fee);
+        $('#now_fee').html('¥'+data.now_fee);
+        $('#valid_shouxu').html('¥'+data.valid_shouxu);
+      }
+
+
+    });
+    
+}
+
+
+//时间选择器
+$('#datetimepicker').datetimepicker();
+$('#datetimepicker_end').datetimepicker();
+
+
+$(".select_change").change(function(){
+  var kong_id = $(this).val();
+  if(kong_id){
+    var kong_arr = kong_id.split('_');
+  }
+  var oid = kong_arr[0];
+  var kong_type = kong_arr[1];
+  var postdata = 'oid='+oid+"&kong_type="+kong_type;
+  var posturl = "{:url('dankong')}";
+  $.post(posturl,postdata,function(res){
+    layer.msg(res.data);
+  })
+  
+})
+{if input('type') == 1}
+
+setInterval('shuaxin()', 5000);
+
+{/if}
+
+function shuaxin(){
+	history.go(0)
+}
+</script>

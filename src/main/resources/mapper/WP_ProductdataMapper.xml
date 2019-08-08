@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shengpingj.kuntai.mapper.WP_ProductdataMapper" >
+  <resultMap id="BaseResultMap" type="com.shengpingj.kuntai.pojo.WP_Productdata" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="pid" property="pid" jdbcType="VARCHAR" />
+    <result column="Name" property="name" jdbcType="VARCHAR" />
+    <result column="Price" property="price" jdbcType="VARCHAR" />
+    <result column="Open" property="open" jdbcType="VARCHAR" />
+    <result column="Close" property="close" jdbcType="VARCHAR" />
+    <result column="High" property="high" jdbcType="VARCHAR" />
+    <result column="Low" property="low" jdbcType="VARCHAR" />
+    <result column="Diff" property="diff" jdbcType="VARCHAR" />
+    <result column="DiffRate" property="diffrate" jdbcType="VARCHAR" />
+    <result column="UpdateTime" property="updatetime" jdbcType="VARCHAR" />
+    <result column="rands" property="rands" jdbcType="VARCHAR" />
+    <result column="point" property="point" jdbcType="VARCHAR" />
+    <result column="isdelete" property="isdelete" jdbcType="INTEGER" />
+  </resultMap>
+  <update id="updateGoodsData">
+    update wp_productdata set isdelete = 1 where pid = #{id}
+  </update>
+  <!--<sql id="Example_Where_Clause" >-->
+    <!--<where >-->
+      <!--<foreach collection="oredCriteria" item="criteria" separator="or" >-->
+        <!--<if test="criteria.valid" >-->
+          <!--<trim prefix="(" suffix=")" prefixOverrides="and" >-->
+            <!--<foreach collection="criteria.criteria" item="criterion" >-->
+              <!--<choose >-->
+                <!--<when test="criterion.noValue" >-->
+                  <!--and ${criterion.condition}-->
+                <!--</when>-->
+                <!--<when test="criterion.singleValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value}-->
+                <!--</when>-->
+                <!--<when test="criterion.betweenValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}-->
+                <!--</when>-->
+                <!--<when test="criterion.listValue" >-->
+                  <!--and ${criterion.condition}-->
+                  <!--<foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >-->
+                    <!--#{listItem}-->
+                  <!--</foreach>-->
+                <!--</when>-->
+              <!--</choose>-->
+            <!--</foreach>-->
+          <!--</trim>-->
+        <!--</if>-->
+      <!--</foreach>-->
+    <!--</where>-->
+  <!--</sql>-->
+  <!--<sql id="Update_By_Example_Where_Clause" >-->
+    <!--<where >-->
+      <!--<foreach collection="example.oredCriteria" item="criteria" separator="or" >-->
+        <!--<if test="criteria.valid" >-->
+          <!--<trim prefix="(" suffix=")" prefixOverrides="and" >-->
+            <!--<foreach collection="criteria.criteria" item="criterion" >-->
+              <!--<choose >-->
+                <!--<when test="criterion.noValue" >-->
+                  <!--and ${criterion.condition}-->
+                <!--</when>-->
+                <!--<when test="criterion.singleValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value}-->
+                <!--</when>-->
+                <!--<when test="criterion.betweenValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}-->
+                <!--</when>-->
+                <!--<when test="criterion.listValue" >-->
+                  <!--and ${criterion.condition}-->
+                  <!--<foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >-->
+                    <!--#{listItem}-->
+                  <!--</foreach>-->
+                <!--</when>-->
+              <!--</choose>-->
+            <!--</foreach>-->
+          <!--</trim>-->
+        <!--</if>-->
+      <!--</foreach>-->
+    <!--</where>-->
+  <!--</sql>-->
+  <!--<sql id="Base_Column_List" >-->
+    <!--id, pid, Name, Price, Open, Close, High, Low, Diff, DiffRate, UpdateTime, rands, -->
+    <!--point, isdelete-->
+  <!--</sql>-->
+  <!--<select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shengpingj.kuntai.pojo.WP_ProductdataExample" >-->
+    <!--select-->
+    <!--<if test="distinct" >-->
+      <!--distinct-->
+    <!--</if>-->
+    <!--<include refid="Base_Column_List" />-->
+    <!--from wp_productdata-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+    <!--<if test="orderByClause != null" >-->
+      <!--order by ${orderByClause}-->
+    <!--</if>-->
+  <!--</select>-->
+  <!--<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >-->
+    <!--select -->
+    <!--<include refid="Base_Column_List" />-->
+    <!--from wp_productdata-->
+    <!--where id = #{id,jdbcType=INTEGER}-->
+  <!--</select>-->
+  <!--<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >-->
+    <!--delete from wp_productdata-->
+    <!--where id = #{id,jdbcType=INTEGER}-->
+  <!--</delete>-->
+  <!--<delete id="deleteByExample" parameterType="com.shengpingj.kuntai.pojo.WP_ProductdataExample" >-->
+    <!--delete from wp_productdata-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</delete>-->
+  <!--<insert id="insert" parameterType="com.shengpingj.kuntai.pojo.WP_Productdata" >-->
+    <!--insert into wp_productdata (id, pid, Name, -->
+      <!--Price, Open, Close, -->
+      <!--High, Low, Diff, DiffRate, -->
+      <!--UpdateTime, rands, point, -->
+      <!--isdelete)-->
+    <!--values (#{id,jdbcType=INTEGER}, #{pid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, -->
+      <!--#{price,jdbcType=VARCHAR}, #{open,jdbcType=VARCHAR}, #{close,jdbcType=VARCHAR}, -->
+      <!--#{high,jdbcType=VARCHAR}, #{low,jdbcType=VARCHAR}, #{diff,jdbcType=VARCHAR}, #{diffrate,jdbcType=VARCHAR}, -->
+      <!--#{updatetime,jdbcType=VARCHAR}, #{rands,jdbcType=VARCHAR}, #{point,jdbcType=VARCHAR}, -->
+      <!--#{isdelete,jdbcType=INTEGER})-->
+  <!--</insert>-->
+  <!--<insert id="insertSelective" parameterType="com.shengpingj.kuntai.pojo.WP_Productdata" >-->
+    <!--insert into wp_productdata-->
+    <!--<trim prefix="(" suffix=")" suffixOverrides="," >-->
+      <!--<if test="id != null" >-->
+        <!--id,-->
+      <!--</if>-->
+      <!--<if test="pid != null" >-->
+        <!--pid,-->
+      <!--</if>-->
+      <!--<if test="name != null" >-->
+        <!--Name,-->
+      <!--</if>-->
+      <!--<if test="price != null" >-->
+        <!--Price,-->
+      <!--</if>-->
+      <!--<if test="open != null" >-->
+        <!--Open,-->
+      <!--</if>-->
+      <!--<if test="close != null" >-->
+        <!--Close,-->
+      <!--</if>-->
+      <!--<if test="high != null" >-->
+        <!--High,-->
+      <!--</if>-->
+      <!--<if test="low != null" >-->
+        <!--Low,-->
+      <!--</if>-->
+      <!--<if test="diff != null" >-->
+        <!--Diff,-->
+      <!--</if>-->
+      <!--<if test="diffrate != null" >-->
+        <!--DiffRate,-->
+      <!--</if>-->
+      <!--<if test="updatetime != null" >-->
+        <!--UpdateTime,-->
+      <!--</if>-->
+      <!--<if test="rands != null" >-->
+        <!--rands,-->
+      <!--</if>-->
+      <!--<if test="point != null" >-->
+        <!--point,-->
+      <!--</if>-->
+      <!--<if test="isdelete != null" >-->
+        <!--isdelete,-->
+      <!--</if>-->
+    <!--</trim>-->
+    <!--<trim prefix="values (" suffix=")" suffixOverrides="," >-->
+      <!--<if test="id != null" >-->
+        <!--#{id,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="pid != null" >-->
+        <!--#{pid,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="name != null" >-->
+        <!--#{name,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="price != null" >-->
+        <!--#{price,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="open != null" >-->
+        <!--#{open,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="close != null" >-->
+        <!--#{close,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="high != null" >-->
+        <!--#{high,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="low != null" >-->
+        <!--#{low,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="diff != null" >-->
+        <!--#{diff,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="diffrate != null" >-->
+        <!--#{diffrate,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="updatetime != null" >-->
+        <!--#{updatetime,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="rands != null" >-->
+        <!--#{rands,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="point != null" >-->
+        <!--#{point,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="isdelete != null" >-->
+        <!--#{isdelete,jdbcType=INTEGER},-->
+      <!--</if>-->
+    <!--</trim>-->
+  <!--</insert>-->
+  <!--<select id="countByExample" parameterType="com.shengpingj.kuntai.pojo.WP_ProductdataExample" resultType="java.lang.Integer" >-->
+    <!--select count(*) from wp_productdata-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</select>-->
+  <!--<update id="updateByExampleSelective" parameterType="map" >-->
+    <!--update wp_productdata-->
+    <!--<set >-->
+      <!--<if test="record.id != null" >-->
+        <!--id = #{record.id,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.pid != null" >-->
+        <!--pid = #{record.pid,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.name != null" >-->
+        <!--Name = #{record.name,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.price != null" >-->
+        <!--Price = #{record.price,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.open != null" >-->
+        <!--Open = #{record.open,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.close != null" >-->
+        <!--Close = #{record.close,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.high != null" >-->
+        <!--High = #{record.high,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.low != null" >-->
+        <!--Low = #{record.low,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.diff != null" >-->
+        <!--Diff = #{record.diff,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.diffrate != null" >-->
+        <!--DiffRate = #{record.diffrate,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.updatetime != null" >-->
+        <!--UpdateTime = #{record.updatetime,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.rands != null" >-->
+        <!--rands = #{record.rands,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.point != null" >-->
+        <!--point = #{record.point,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.isdelete != null" >-->
+        <!--isdelete = #{record.isdelete,jdbcType=INTEGER},-->
+      <!--</if>-->
+    <!--</set>-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Update_By_Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</update>-->
+  <!--<update id="updateByExample" parameterType="map" >-->
+    <!--update wp_productdata-->
+    <!--set id = #{record.id,jdbcType=INTEGER},-->
+      <!--pid = #{record.pid,jdbcType=VARCHAR},-->
+      <!--Name = #{record.name,jdbcType=VARCHAR},-->
+      <!--Price = #{record.price,jdbcType=VARCHAR},-->
+      <!--Open = #{record.open,jdbcType=VARCHAR},-->
+      <!--Close = #{record.close,jdbcType=VARCHAR},-->
+      <!--High = #{record.high,jdbcType=VARCHAR},-->
+      <!--Low = #{record.low,jdbcType=VARCHAR},-->
+      <!--Diff = #{record.diff,jdbcType=VARCHAR},-->
+      <!--DiffRate = #{record.diffrate,jdbcType=VARCHAR},-->
+      <!--UpdateTime = #{record.updatetime,jdbcType=VARCHAR},-->
+      <!--rands = #{record.rands,jdbcType=VARCHAR},-->
+      <!--point = #{record.point,jdbcType=VARCHAR},-->
+      <!--isdelete = #{record.isdelete,jdbcType=INTEGER}-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Update_By_Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</update>-->
+  <!--<update id="updateByPrimaryKeySelective" parameterType="com.shengpingj.kuntai.pojo.WP_Productdata" >-->
+    <!--update wp_productdata-->
+    <!--<set >-->
+      <!--<if test="pid != null" >-->
+        <!--pid = #{pid,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="name != null" >-->
+        <!--Name = #{name,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="price != null" >-->
+        <!--Price = #{price,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="open != null" >-->
+        <!--Open = #{open,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="close != null" >-->
+        <!--Close = #{close,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="high != null" >-->
+        <!--High = #{high,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="low != null" >-->
+        <!--Low = #{low,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="diff != null" >-->
+        <!--Diff = #{diff,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="diffrate != null" >-->
+        <!--DiffRate = #{diffrate,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="updatetime != null" >-->
+        <!--UpdateTime = #{updatetime,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="rands != null" >-->
+        <!--rands = #{rands,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="point != null" >-->
+        <!--point = #{point,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="isdelete != null" >-->
+        <!--isdelete = #{isdelete,jdbcType=INTEGER},-->
+      <!--</if>-->
+    <!--</set>-->
+    <!--where id = #{id,jdbcType=INTEGER}-->
+  <!--</update>-->
+  <!--<update id="updateByPrimaryKey" parameterType="com.shengpingj.kuntai.pojo.WP_Productdata" >-->
+    <!--update wp_productdata-->
+    <!--set pid = #{pid,jdbcType=VARCHAR},-->
+      <!--Name = #{name,jdbcType=VARCHAR},-->
+      <!--Price = #{price,jdbcType=VARCHAR},-->
+      <!--Open = #{open,jdbcType=VARCHAR},-->
+      <!--Close = #{close,jdbcType=VARCHAR},-->
+      <!--High = #{high,jdbcType=VARCHAR},-->
+      <!--Low = #{low,jdbcType=VARCHAR},-->
+      <!--Diff = #{diff,jdbcType=VARCHAR},-->
+      <!--DiffRate = #{diffrate,jdbcType=VARCHAR},-->
+      <!--UpdateTime = #{updatetime,jdbcType=VARCHAR},-->
+      <!--rands = #{rands,jdbcType=VARCHAR},-->
+      <!--point = #{point,jdbcType=VARCHAR},-->
+      <!--isdelete = #{isdelete,jdbcType=INTEGER}-->
+    <!--where id = #{id,jdbcType=INTEGER}-->
+  <!--</update>-->
+</mapper>

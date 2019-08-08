@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shengpingj.kuntai.mapper.WP_WebconfigMapper" >
+  <resultMap id="BaseResultMap" type="com.shengpingj.kuntai.pojo.WP_Webconfig" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="isopen" property="isopen" jdbcType="INTEGER" />
+    <result column="webname" property="webname" jdbcType="VARCHAR" />
+    <result column="onelevel" property="onelevel" jdbcType="VARCHAR" />
+    <result column="twolevel" property="twolevel" jdbcType="VARCHAR" />
+    <result column="Pscale" property="pscale" jdbcType="VARCHAR" />
+    <result column="begintime" property="begintime" jdbcType="INTEGER" />
+    <result column="endtime" property="endtime" jdbcType="INTEGER" />
+    <result column="notice" property="notice" jdbcType="VARCHAR" />
+    <result column="isnotice" property="isnotice" jdbcType="INTEGER" />
+  </resultMap>
+  <!--<sql id="Example_Where_Clause" >-->
+    <!--<where >-->
+      <!--<foreach collection="oredCriteria" item="criteria" separator="or" >-->
+        <!--<if test="criteria.valid" >-->
+          <!--<trim prefix="(" suffix=")" prefixOverrides="and" >-->
+            <!--<foreach collection="criteria.criteria" item="criterion" >-->
+              <!--<choose >-->
+                <!--<when test="criterion.noValue" >-->
+                  <!--and ${criterion.condition}-->
+                <!--</when>-->
+                <!--<when test="criterion.singleValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value}-->
+                <!--</when>-->
+                <!--<when test="criterion.betweenValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}-->
+                <!--</when>-->
+                <!--<when test="criterion.listValue" >-->
+                  <!--and ${criterion.condition}-->
+                  <!--<foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >-->
+                    <!--#{listItem}-->
+                  <!--</foreach>-->
+                <!--</when>-->
+              <!--</choose>-->
+            <!--</foreach>-->
+          <!--</trim>-->
+        <!--</if>-->
+      <!--</foreach>-->
+    <!--</where>-->
+  <!--</sql>-->
+  <!--<sql id="Update_By_Example_Where_Clause" >-->
+    <!--<where >-->
+      <!--<foreach collection="example.oredCriteria" item="criteria" separator="or" >-->
+        <!--<if test="criteria.valid" >-->
+          <!--<trim prefix="(" suffix=")" prefixOverrides="and" >-->
+            <!--<foreach collection="criteria.criteria" item="criterion" >-->
+              <!--<choose >-->
+                <!--<when test="criterion.noValue" >-->
+                  <!--and ${criterion.condition}-->
+                <!--</when>-->
+                <!--<when test="criterion.singleValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value}-->
+                <!--</when>-->
+                <!--<when test="criterion.betweenValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}-->
+                <!--</when>-->
+                <!--<when test="criterion.listValue" >-->
+                  <!--and ${criterion.condition}-->
+                  <!--<foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >-->
+                    <!--#{listItem}-->
+                  <!--</foreach>-->
+                <!--</when>-->
+              <!--</choose>-->
+            <!--</foreach>-->
+          <!--</trim>-->
+        <!--</if>-->
+      <!--</foreach>-->
+    <!--</where>-->
+  <!--</sql>-->
+  <!--<sql id="Base_Column_List" >-->
+    <!--id, isopen, webname, onelevel, twolevel, Pscale, begintime, endtime, notice, isnotice-->
+  <!--</sql>-->
+  <!--<select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shengpingj.kuntai.pojo.WP_WebconfigExample" >-->
+    <!--select-->
+    <!--<if test="distinct" >-->
+      <!--distinct-->
+    <!--</if>-->
+    <!--<include refid="Base_Column_List" />-->
+    <!--from wp_webconfig-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+    <!--<if test="orderByClause != null" >-->
+      <!--order by ${orderByClause}-->
+    <!--</if>-->
+  <!--</select>-->
+  <!--<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >-->
+    <!--select -->
+    <!--<include refid="Base_Column_List" />-->
+    <!--from wp_webconfig-->
+    <!--where id = #{id,jdbcType=INTEGER}-->
+  <!--</select>-->
+  <!--<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >-->
+    <!--delete from wp_webconfig-->
+    <!--where id = #{id,jdbcType=INTEGER}-->
+  <!--</delete>-->
+  <!--<delete id="deleteByExample" parameterType="com.shengpingj.kuntai.pojo.WP_WebconfigExample" >-->
+    <!--delete from wp_webconfig-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</delete>-->
+  <!--<insert id="insert" parameterType="com.shengpingj.kuntai.pojo.WP_Webconfig" >-->
+    <!--insert into wp_webconfig (id, isopen, webname, -->
+      <!--onelevel, twolevel, Pscale, -->
+      <!--begintime, endtime, notice, -->
+      <!--isnotice)-->
+    <!--values (#{id,jdbcType=INTEGER}, #{isopen,jdbcType=INTEGER}, #{webname,jdbcType=VARCHAR}, -->
+      <!--#{onelevel,jdbcType=VARCHAR}, #{twolevel,jdbcType=VARCHAR}, #{pscale,jdbcType=VARCHAR}, -->
+      <!--#{begintime,jdbcType=INTEGER}, #{endtime,jdbcType=INTEGER}, #{notice,jdbcType=VARCHAR}, -->
+      <!--#{isnotice,jdbcType=INTEGER})-->
+  <!--</insert>-->
+  <!--<insert id="insertSelective" parameterType="com.shengpingj.kuntai.pojo.WP_Webconfig" >-->
+    <!--insert into wp_webconfig-->
+    <!--<trim prefix="(" suffix=")" suffixOverrides="," >-->
+      <!--<if test="id != null" >-->
+        <!--id,-->
+      <!--</if>-->
+      <!--<if test="isopen != null" >-->
+        <!--isopen,-->
+      <!--</if>-->
+      <!--<if test="webname != null" >-->
+        <!--webname,-->
+      <!--</if>-->
+      <!--<if test="onelevel != null" >-->
+        <!--onelevel,-->
+      <!--</if>-->
+      <!--<if test="twolevel != null" >-->
+        <!--twolevel,-->
+      <!--</if>-->
+      <!--<if test="pscale != null" >-->
+        <!--Pscale,-->
+      <!--</if>-->
+      <!--<if test="begintime != null" >-->
+        <!--begintime,-->
+      <!--</if>-->
+      <!--<if test="endtime != null" >-->
+        <!--endtime,-->
+      <!--</if>-->
+      <!--<if test="notice != null" >-->
+        <!--notice,-->
+      <!--</if>-->
+      <!--<if test="isnotice != null" >-->
+        <!--isnotice,-->
+      <!--</if>-->
+    <!--</trim>-->
+    <!--<trim prefix="values (" suffix=")" suffixOverrides="," >-->
+      <!--<if test="id != null" >-->
+        <!--#{id,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="isopen != null" >-->
+        <!--#{isopen,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="webname != null" >-->
+        <!--#{webname,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="onelevel != null" >-->
+        <!--#{onelevel,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="twolevel != null" >-->
+        <!--#{twolevel,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="pscale != null" >-->
+        <!--#{pscale,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="begintime != null" >-->
+        <!--#{begintime,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="endtime != null" >-->
+        <!--#{endtime,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="notice != null" >-->
+        <!--#{notice,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="isnotice != null" >-->
+        <!--#{isnotice,jdbcType=INTEGER},-->
+      <!--</if>-->
+    <!--</trim>-->
+  <!--</insert>-->
+  <!--<select id="countByExample" parameterType="com.shengpingj.kuntai.pojo.WP_WebconfigExample" resultType="java.lang.Integer" >-->
+    <!--select count(*) from wp_webconfig-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</select>-->
+  <!--<update id="updateByExampleSelective" parameterType="map" >-->
+    <!--update wp_webconfig-->
+    <!--<set >-->
+      <!--<if test="record.id != null" >-->
+        <!--id = #{record.id,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.isopen != null" >-->
+        <!--isopen = #{record.isopen,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.webname != null" >-->
+        <!--webname = #{record.webname,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.onelevel != null" >-->
+        <!--onelevel = #{record.onelevel,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.twolevel != null" >-->
+        <!--twolevel = #{record.twolevel,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.pscale != null" >-->
+        <!--Pscale = #{record.pscale,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.begintime != null" >-->
+        <!--begintime = #{record.begintime,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.endtime != null" >-->
+        <!--endtime = #{record.endtime,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.notice != null" >-->
+        <!--notice = #{record.notice,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.isnotice != null" >-->
+        <!--isnotice = #{record.isnotice,jdbcType=INTEGER},-->
+      <!--</if>-->
+    <!--</set>-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Update_By_Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</update>-->
+  <!--<update id="updateByExample" parameterType="map" >-->
+    <!--update wp_webconfig-->
+    <!--set id = #{record.id,jdbcType=INTEGER},-->
+      <!--isopen = #{record.isopen,jdbcType=INTEGER},-->
+      <!--webname = #{record.webname,jdbcType=VARCHAR},-->
+      <!--onelevel = #{record.onelevel,jdbcType=VARCHAR},-->
+      <!--twolevel = #{record.twolevel,jdbcType=VARCHAR},-->
+      <!--Pscale = #{record.pscale,jdbcType=VARCHAR},-->
+      <!--begintime = #{record.begintime,jdbcType=INTEGER},-->
+      <!--endtime = #{record.endtime,jdbcType=INTEGER},-->
+      <!--notice = #{record.notice,jdbcType=VARCHAR},-->
+      <!--isnotice = #{record.isnotice,jdbcType=INTEGER}-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Update_By_Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</update>-->
+  <!--<update id="updateByPrimaryKeySelective" parameterType="com.shengpingj.kuntai.pojo.WP_Webconfig" >-->
+    <!--update wp_webconfig-->
+    <!--<set >-->
+      <!--<if test="isopen != null" >-->
+        <!--isopen = #{isopen,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="webname != null" >-->
+        <!--webname = #{webname,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="onelevel != null" >-->
+        <!--onelevel = #{onelevel,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="twolevel != null" >-->
+        <!--twolevel = #{twolevel,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="pscale != null" >-->
+        <!--Pscale = #{pscale,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="begintime != null" >-->
+        <!--begintime = #{begintime,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="endtime != null" >-->
+        <!--endtime = #{endtime,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="notice != null" >-->
+        <!--notice = #{notice,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="isnotice != null" >-->
+        <!--isnotice = #{isnotice,jdbcType=INTEGER},-->
+      <!--</if>-->
+    <!--</set>-->
+    <!--where id = #{id,jdbcType=INTEGER}-->
+  <!--</update>-->
+  <!--<update id="updateByPrimaryKey" parameterType="com.shengpingj.kuntai.pojo.WP_Webconfig" >-->
+    <!--update wp_webconfig-->
+    <!--set isopen = #{isopen,jdbcType=INTEGER},-->
+      <!--webname = #{webname,jdbcType=VARCHAR},-->
+      <!--onelevel = #{onelevel,jdbcType=VARCHAR},-->
+      <!--twolevel = #{twolevel,jdbcType=VARCHAR},-->
+      <!--Pscale = #{pscale,jdbcType=VARCHAR},-->
+      <!--begintime = #{begintime,jdbcType=INTEGER},-->
+      <!--endtime = #{endtime,jdbcType=INTEGER},-->
+      <!--notice = #{notice,jdbcType=VARCHAR},-->
+      <!--isnotice = #{isnotice,jdbcType=INTEGER}-->
+    <!--where id = #{id,jdbcType=INTEGER}-->
+  <!--</update>-->
+</mapper>

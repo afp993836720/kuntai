@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shengpingj.kuntai.mapper.WP_RefundlogMapper" >
+  <resultMap id="BaseResultMap" type="com.shengpingj.kuntai.pojo.WP_Refundlog" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="mch_appid" property="mchAppid" jdbcType="VARCHAR" />
+    <result column="mchid" property="mchid" jdbcType="VARCHAR" />
+    <result column="device_info" property="deviceInfo" jdbcType="VARCHAR" />
+    <result column="nonce_str" property="nonceStr" jdbcType="VARCHAR" />
+    <result column="payment_no" property="paymentNo" jdbcType="VARCHAR" />
+    <result column="partner_trade_no" property="partnerTradeNo" jdbcType="VARCHAR" />
+    <result column="payment_time" property="paymentTime" jdbcType="TIMESTAMP" />
+    <result column="result_code" property="resultCode" jdbcType="VARCHAR" />
+  </resultMap>
+  <!--<sql id="Example_Where_Clause" >-->
+    <!--<where >-->
+      <!--<foreach collection="oredCriteria" item="criteria" separator="or" >-->
+        <!--<if test="criteria.valid" >-->
+          <!--<trim prefix="(" suffix=")" prefixOverrides="and" >-->
+            <!--<foreach collection="criteria.criteria" item="criterion" >-->
+              <!--<choose >-->
+                <!--<when test="criterion.noValue" >-->
+                  <!--and ${criterion.condition}-->
+                <!--</when>-->
+                <!--<when test="criterion.singleValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value}-->
+                <!--</when>-->
+                <!--<when test="criterion.betweenValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}-->
+                <!--</when>-->
+                <!--<when test="criterion.listValue" >-->
+                  <!--and ${criterion.condition}-->
+                  <!--<foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >-->
+                    <!--#{listItem}-->
+                  <!--</foreach>-->
+                <!--</when>-->
+              <!--</choose>-->
+            <!--</foreach>-->
+          <!--</trim>-->
+        <!--</if>-->
+      <!--</foreach>-->
+    <!--</where>-->
+  <!--</sql>-->
+  <!--<sql id="Update_By_Example_Where_Clause" >-->
+    <!--<where >-->
+      <!--<foreach collection="example.oredCriteria" item="criteria" separator="or" >-->
+        <!--<if test="criteria.valid" >-->
+          <!--<trim prefix="(" suffix=")" prefixOverrides="and" >-->
+            <!--<foreach collection="criteria.criteria" item="criterion" >-->
+              <!--<choose >-->
+                <!--<when test="criterion.noValue" >-->
+                  <!--and ${criterion.condition}-->
+                <!--</when>-->
+                <!--<when test="criterion.singleValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value}-->
+                <!--</when>-->
+                <!--<when test="criterion.betweenValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}-->
+                <!--</when>-->
+                <!--<when test="criterion.listValue" >-->
+                  <!--and ${criterion.condition}-->
+                  <!--<foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >-->
+                    <!--#{listItem}-->
+                  <!--</foreach>-->
+                <!--</when>-->
+              <!--</choose>-->
+            <!--</foreach>-->
+          <!--</trim>-->
+        <!--</if>-->
+      <!--</foreach>-->
+    <!--</where>-->
+  <!--</sql>-->
+  <!--<sql id="Base_Column_List" >-->
+    <!--id, mch_appid, mchid, device_info, nonce_str, payment_no, partner_trade_no, payment_time, -->
+    <!--result_code-->
+  <!--</sql>-->
+  <!--<select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shengpingj.kuntai.pojo.WP_RefundlogExample" >-->
+    <!--select-->
+    <!--<if test="distinct" >-->
+      <!--distinct-->
+    <!--</if>-->
+    <!--<include refid="Base_Column_List" />-->
+    <!--from wp_refundlog-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+    <!--<if test="orderByClause != null" >-->
+      <!--order by ${orderByClause}-->
+    <!--</if>-->
+  <!--</select>-->
+  <!--<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >-->
+    <!--select -->
+    <!--<include refid="Base_Column_List" />-->
+    <!--from wp_refundlog-->
+    <!--where id = #{id,jdbcType=INTEGER}-->
+  <!--</select>-->
+  <!--<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >-->
+    <!--delete from wp_refundlog-->
+    <!--where id = #{id,jdbcType=INTEGER}-->
+  <!--</delete>-->
+  <!--<delete id="deleteByExample" parameterType="com.shengpingj.kuntai.pojo.WP_RefundlogExample" >-->
+    <!--delete from wp_refundlog-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</delete>-->
+  <!--<insert id="insert" parameterType="com.shengpingj.kuntai.pojo.WP_Refundlog" >-->
+    <!--insert into wp_refundlog (id, mch_appid, mchid, -->
+      <!--device_info, nonce_str, payment_no, -->
+      <!--partner_trade_no, payment_time, result_code-->
+      <!--)-->
+    <!--values (#{id,jdbcType=INTEGER}, #{mchAppid,jdbcType=VARCHAR}, #{mchid,jdbcType=VARCHAR}, -->
+      <!--#{deviceInfo,jdbcType=VARCHAR}, #{nonceStr,jdbcType=VARCHAR}, #{paymentNo,jdbcType=VARCHAR}, -->
+      <!--#{partnerTradeNo,jdbcType=VARCHAR}, #{paymentTime,jdbcType=TIMESTAMP}, #{resultCode,jdbcType=VARCHAR}-->
+      <!--)-->
+  <!--</insert>-->
+  <!--<insert id="insertSelective" parameterType="com.shengpingj.kuntai.pojo.WP_Refundlog" >-->
+    <!--insert into wp_refundlog-->
+    <!--<trim prefix="(" suffix=")" suffixOverrides="," >-->
+      <!--<if test="id != null" >-->
+        <!--id,-->
+      <!--</if>-->
+      <!--<if test="mchAppid != null" >-->
+        <!--mch_appid,-->
+      <!--</if>-->
+      <!--<if test="mchid != null" >-->
+        <!--mchid,-->
+      <!--</if>-->
+      <!--<if test="deviceInfo != null" >-->
+        <!--device_info,-->
+      <!--</if>-->
+      <!--<if test="nonceStr != null" >-->
+        <!--nonce_str,-->
+      <!--</if>-->
+      <!--<if test="paymentNo != null" >-->
+        <!--payment_no,-->
+      <!--</if>-->
+      <!--<if test="partnerTradeNo != null" >-->
+        <!--partner_trade_no,-->
+      <!--</if>-->
+      <!--<if test="paymentTime != null" >-->
+        <!--payment_time,-->
+      <!--</if>-->
+      <!--<if test="resultCode != null" >-->
+        <!--result_code,-->
+      <!--</if>-->
+    <!--</trim>-->
+    <!--<trim prefix="values (" suffix=")" suffixOverrides="," >-->
+      <!--<if test="id != null" >-->
+        <!--#{id,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="mchAppid != null" >-->
+        <!--#{mchAppid,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="mchid != null" >-->
+        <!--#{mchid,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="deviceInfo != null" >-->
+        <!--#{deviceInfo,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="nonceStr != null" >-->
+        <!--#{nonceStr,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="paymentNo != null" >-->
+        <!--#{paymentNo,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="partnerTradeNo != null" >-->
+        <!--#{partnerTradeNo,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="paymentTime != null" >-->
+        <!--#{paymentTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+      <!--<if test="resultCode != null" >-->
+        <!--#{resultCode,jdbcType=VARCHAR},-->
+      <!--</if>-->
+    <!--</trim>-->
+  <!--</insert>-->
+  <!--<select id="countByExample" parameterType="com.shengpingj.kuntai.pojo.WP_RefundlogExample" resultType="java.lang.Integer" >-->
+    <!--select count(*) from wp_refundlog-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</select>-->
+  <!--<update id="updateByExampleSelective" parameterType="map" >-->
+    <!--update wp_refundlog-->
+    <!--<set >-->
+      <!--<if test="record.id != null" >-->
+        <!--id = #{record.id,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.mchAppid != null" >-->
+        <!--mch_appid = #{record.mchAppid,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.mchid != null" >-->
+        <!--mchid = #{record.mchid,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.deviceInfo != null" >-->
+        <!--device_info = #{record.deviceInfo,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.nonceStr != null" >-->
+        <!--nonce_str = #{record.nonceStr,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.paymentNo != null" >-->
+        <!--payment_no = #{record.paymentNo,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.partnerTradeNo != null" >-->
+        <!--partner_trade_no = #{record.partnerTradeNo,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.paymentTime != null" >-->
+        <!--payment_time = #{record.paymentTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+      <!--<if test="record.resultCode != null" >-->
+        <!--result_code = #{record.resultCode,jdbcType=VARCHAR},-->
+      <!--</if>-->
+    <!--</set>-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Update_By_Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</update>-->
+  <!--<update id="updateByExample" parameterType="map" >-->
+    <!--update wp_refundlog-->
+    <!--set id = #{record.id,jdbcType=INTEGER},-->
+      <!--mch_appid = #{record.mchAppid,jdbcType=VARCHAR},-->
+      <!--mchid = #{record.mchid,jdbcType=VARCHAR},-->
+      <!--device_info = #{record.deviceInfo,jdbcType=VARCHAR},-->
+      <!--nonce_str = #{record.nonceStr,jdbcType=VARCHAR},-->
+      <!--payment_no = #{record.paymentNo,jdbcType=VARCHAR},-->
+      <!--partner_trade_no = #{record.partnerTradeNo,jdbcType=VARCHAR},-->
+      <!--payment_time = #{record.paymentTime,jdbcType=TIMESTAMP},-->
+      <!--result_code = #{record.resultCode,jdbcType=VARCHAR}-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Update_By_Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</update>-->
+  <!--<update id="updateByPrimaryKeySelective" parameterType="com.shengpingj.kuntai.pojo.WP_Refundlog" >-->
+    <!--update wp_refundlog-->
+    <!--<set >-->
+      <!--<if test="mchAppid != null" >-->
+        <!--mch_appid = #{mchAppid,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="mchid != null" >-->
+        <!--mchid = #{mchid,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="deviceInfo != null" >-->
+        <!--device_info = #{deviceInfo,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="nonceStr != null" >-->
+        <!--nonce_str = #{nonceStr,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="paymentNo != null" >-->
+        <!--payment_no = #{paymentNo,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="partnerTradeNo != null" >-->
+        <!--partner_trade_no = #{partnerTradeNo,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="paymentTime != null" >-->
+        <!--payment_time = #{paymentTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+      <!--<if test="resultCode != null" >-->
+        <!--result_code = #{resultCode,jdbcType=VARCHAR},-->
+      <!--</if>-->
+    <!--</set>-->
+    <!--where id = #{id,jdbcType=INTEGER}-->
+  <!--</update>-->
+  <!--<update id="updateByPrimaryKey" parameterType="com.shengpingj.kuntai.pojo.WP_Refundlog" >-->
+    <!--update wp_refundlog-->
+    <!--set mch_appid = #{mchAppid,jdbcType=VARCHAR},-->
+      <!--mchid = #{mchid,jdbcType=VARCHAR},-->
+      <!--device_info = #{deviceInfo,jdbcType=VARCHAR},-->
+      <!--nonce_str = #{nonceStr,jdbcType=VARCHAR},-->
+      <!--payment_no = #{paymentNo,jdbcType=VARCHAR},-->
+      <!--partner_trade_no = #{partnerTradeNo,jdbcType=VARCHAR},-->
+      <!--payment_time = #{paymentTime,jdbcType=TIMESTAMP},-->
+      <!--result_code = #{resultCode,jdbcType=VARCHAR}-->
+    <!--where id = #{id,jdbcType=INTEGER}-->
+  <!--</update>-->
+</mapper>

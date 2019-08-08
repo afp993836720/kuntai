@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shengpingj.kuntai.mapper.WP_RiskMapper" >
+  <resultMap id="BaseResultMap" type="com.shengpingj.kuntai.pojo.WP_Risk" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="min_price" property="minPrice" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.shengpingj.kuntai.pojo.WP_RiskWithBLOBs" extends="BaseResultMap" >
+    <result column="to_win" property="toWin" jdbcType="LONGVARCHAR" />
+    <result column="to_loss" property="toLoss" jdbcType="LONGVARCHAR" />
+    <result column="chance" property="chance" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <select id="selectAllRisk" resultMap="ResultMapWithBLOBs">
+    select * from wp_risk
+  </select>
+  <update id="updatetRiskById" parameterType="com.shengpingj.kuntai.pojo.WP_RiskWithBLOBs">
+    update wp_risk set to_loss = #{toLoss},to_win=#{toWin},chance=#{chance},min_price=#{minPrice} where id = #{id}
+  </update>
+  <insert id="insertRiskById" parameterType="com.shengpingj.kuntai.pojo.WP_RiskWithBLOBs">
+    insert into wp_risk (to_win, to_loss, chance, min_price) values (#{toWin},#{toLoss},#{chance},#{minPrice});
+  </insert>
+  <!--<sql id="Example_Where_Clause" >-->
+    <!--<where >-->
+      <!--<foreach collection="oredCriteria" item="criteria" separator="or" >-->
+        <!--<if test="criteria.valid" >-->
+          <!--<trim prefix="(" suffix=")" prefixOverrides="and" >-->
+            <!--<foreach collection="criteria.criteria" item="criterion" >-->
+              <!--<choose >-->
+                <!--<when test="criterion.noValue" >-->
+                  <!--and ${criterion.condition}-->
+                <!--</when>-->
+                <!--<when test="criterion.singleValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value}-->
+                <!--</when>-->
+                <!--<when test="criterion.betweenValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}-->
+                <!--</when>-->
+                <!--<when test="criterion.listValue" >-->
+                  <!--and ${criterion.condition}-->
+                  <!--<foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >-->
+                    <!--#{listItem}-->
+                  <!--</foreach>-->
+                <!--</when>-->
+              <!--</choose>-->
+            <!--</foreach>-->
+          <!--</trim>-->
+        <!--</if>-->
+      <!--</foreach>-->
+    <!--</where>-->
+  <!--</sql>-->
+  <!--<sql id="Update_By_Example_Where_Clause" >-->
+    <!--<where >-->
+      <!--<foreach collection="example.oredCriteria" item="criteria" separator="or" >-->
+        <!--<if test="criteria.valid" >-->
+          <!--<trim prefix="(" suffix=")" prefixOverrides="and" >-->
+            <!--<foreach collection="criteria.criteria" item="criterion" >-->
+              <!--<choose >-->
+                <!--<when test="criterion.noValue" >-->
+                  <!--and ${criterion.condition}-->
+                <!--</when>-->
+                <!--<when test="criterion.singleValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value}-->
+                <!--</when>-->
+                <!--<when test="criterion.betweenValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}-->
+                <!--</when>-->
+                <!--<when test="criterion.listValue" >-->
+                  <!--and ${criterion.condition}-->
+                  <!--<foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >-->
+                    <!--#{listItem}-->
+                  <!--</foreach>-->
+                <!--</when>-->
+              <!--</choose>-->
+            <!--</foreach>-->
+          <!--</trim>-->
+        <!--</if>-->
+      <!--</foreach>-->
+    <!--</where>-->
+  <!--</sql>-->
+  <!--<sql id="Base_Column_List" >-->
+    <!--id, min_price-->
+  <!--</sql>-->
+  <!--<sql id="Blob_Column_List" >-->
+    <!--to_win, to_loss, chance-->
+  <!--</sql>-->
+  <!--<select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.shengpingj.kuntai.pojo.WP_RiskExample" >-->
+    <!--select-->
+    <!--<if test="distinct" >-->
+      <!--distinct-->
+    <!--</if>-->
+    <!--<include refid="Base_Column_List" />-->
+    <!--,-->
+    <!--<include refid="Blob_Column_List" />-->
+    <!--from wp_risk-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+    <!--<if test="orderByClause != null" >-->
+      <!--order by ${orderByClause}-->
+    <!--</if>-->
+  <!--</select>-->
+  <!--<select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shengpingj.kuntai.pojo.WP_RiskExample" >-->
+    <!--select-->
+    <!--<if test="distinct" >-->
+      <!--distinct-->
+    <!--</if>-->
+    <!--<include refid="Base_Column_List" />-->
+    <!--from wp_risk-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+    <!--<if test="orderByClause != null" >-->
+      <!--order by ${orderByClause}-->
+    <!--</if>-->
+  <!--</select>-->
+  <!--<select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >-->
+    <!--select -->
+    <!--<include refid="Base_Column_List" />-->
+    <!--,-->
+    <!--<include refid="Blob_Column_List" />-->
+    <!--from wp_risk-->
+    <!--where id = #{id,jdbcType=INTEGER}-->
+  <!--</select>-->
+  <!--<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >-->
+    <!--delete from wp_risk-->
+    <!--where id = #{id,jdbcType=INTEGER}-->
+  <!--</delete>-->
+  <!--<delete id="deleteByExample" parameterType="com.shengpingj.kuntai.pojo.WP_RiskExample" >-->
+    <!--delete from wp_risk-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</delete>-->
+  <!--<insert id="insert" parameterType="com.shengpingj.kuntai.pojo.WP_RiskWithBLOBs" >-->
+    <!--insert into wp_risk (id, min_price, to_win, -->
+      <!--to_loss, chance)-->
+    <!--values (#{id,jdbcType=INTEGER}, #{minPrice,jdbcType=VARCHAR}, #{toWin,jdbcType=LONGVARCHAR}, -->
+      <!--#{toLoss,jdbcType=LONGVARCHAR}, #{chance,jdbcType=LONGVARCHAR})-->
+  <!--</insert>-->
+  <!--<insert id="insertSelective" parameterType="com.shengpingj.kuntai.pojo.WP_RiskWithBLOBs" >-->
+    <!--insert into wp_risk-->
+    <!--<trim prefix="(" suffix=")" suffixOverrides="," >-->
+      <!--<if test="id != null" >-->
+        <!--id,-->
+      <!--</if>-->
+      <!--<if test="minPrice != null" >-->
+        <!--min_price,-->
+      <!--</if>-->
+      <!--<if test="toWin != null" >-->
+        <!--to_win,-->
+      <!--</if>-->
+      <!--<if test="toLoss != null" >-->
+        <!--to_loss,-->
+      <!--</if>-->
+      <!--<if test="chance != null" >-->
+        <!--chance,-->
+      <!--</if>-->
+    <!--</trim>-->
+    <!--<trim prefix="values (" suffix=")" suffixOverrides="," >-->
+      <!--<if test="id != null" >-->
+        <!--#{id,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="minPrice != null" >-->
+        <!--#{minPrice,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="toWin != null" >-->
+        <!--#{toWin,jdbcType=LONGVARCHAR},-->
+      <!--</if>-->
+      <!--<if test="toLoss != null" >-->
+        <!--#{toLoss,jdbcType=LONGVARCHAR},-->
+      <!--</if>-->
+      <!--<if test="chance != null" >-->
+        <!--#{chance,jdbcType=LONGVARCHAR},-->
+      <!--</if>-->
+    <!--</trim>-->
+  <!--</insert>-->
+  <!--<select id="countByExample" parameterType="com.shengpingj.kuntai.pojo.WP_RiskExample" resultType="java.lang.Integer" >-->
+    <!--select count(*) from wp_risk-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</select>-->
+  <!--<update id="updateByExampleSelective" parameterType="map" >-->
+    <!--update wp_risk-->
+    <!--<set >-->
+      <!--<if test="record.id != null" >-->
+        <!--id = #{record.id,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.minPrice != null" >-->
+        <!--min_price = #{record.minPrice,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.toWin != null" >-->
+        <!--to_win = #{record.toWin,jdbcType=LONGVARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.toLoss != null" >-->
+        <!--to_loss = #{record.toLoss,jdbcType=LONGVARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.chance != null" >-->
+        <!--chance = #{record.chance,jdbcType=LONGVARCHAR},-->
+      <!--</if>-->
+    <!--</set>-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Update_By_Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</update>-->
+  <!--<update id="updateByExampleWithBLOBs" parameterType="map" >-->
+    <!--update wp_risk-->
+    <!--set id = #{record.id,jdbcType=INTEGER},-->
+      <!--min_price = #{record.minPrice,jdbcType=VARCHAR},-->
+      <!--to_win = #{record.toWin,jdbcType=LONGVARCHAR},-->
+      <!--to_loss = #{record.toLoss,jdbcType=LONGVARCHAR},-->
+      <!--chance = #{record.chance,jdbcType=LONGVARCHAR}-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Update_By_Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</update>-->
+  <!--<update id="updateByExample" parameterType="map" >-->
+    <!--update wp_risk-->
+    <!--set id = #{record.id,jdbcType=INTEGER},-->
+      <!--min_price = #{record.minPrice,jdbcType=VARCHAR}-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Update_By_Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</update>-->
+  <!--<update id="updateByPrimaryKeySelective" parameterType="com.shengpingj.kuntai.pojo.WP_RiskWithBLOBs" >-->
+    <!--update wp_risk-->
+    <!--<set >-->
+      <!--<if test="minPrice != null" >-->
+        <!--min_price = #{minPrice,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="toWin != null" >-->
+        <!--to_win = #{toWin,jdbcType=LONGVARCHAR},-->
+      <!--</if>-->
+      <!--<if test="toLoss != null" >-->
+        <!--to_loss = #{toLoss,jdbcType=LONGVARCHAR},-->
+      <!--</if>-->
+      <!--<if test="chance != null" >-->
+        <!--chance = #{chance,jdbcType=LONGVARCHAR},-->
+      <!--</if>-->
+    <!--</set>-->
+    <!--where id = #{id,jdbcType=INTEGER}-->
+  <!--</update>-->
+  <!--<update id="updateByPrimaryKeyWithBLOBs" parameterType="com.shengpingj.kuntai.pojo.WP_RiskWithBLOBs" >-->
+    <!--update wp_risk-->
+    <!--set min_price = #{minPrice,jdbcType=VARCHAR},-->
+      <!--to_win = #{toWin,jdbcType=LONGVARCHAR},-->
+      <!--to_loss = #{toLoss,jdbcType=LONGVARCHAR},-->
+      <!--chance = #{chance,jdbcType=LONGVARCHAR}-->
+    <!--where id = #{id,jdbcType=INTEGER}-->
+  <!--</update>-->
+  <!--<update id="updateByPrimaryKey" parameterType="com.shengpingj.kuntai.pojo.WP_Risk" >-->
+    <!--update wp_risk-->
+    <!--set min_price = #{minPrice,jdbcType=VARCHAR}-->
+    <!--where id = #{id,jdbcType=INTEGER}-->
+  <!--</update>-->
+</mapper>

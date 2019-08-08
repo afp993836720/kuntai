@@ -1,0 +1,116 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div th:insert="~{admin/head :: headFragment}"></div>
+<div th:insert="~{admin/menu :: menuFragment}"></div>
+<div th:insert="~{admin/head :: sectionFragment}"></div>
+   <!--main content start-->
+      <section id="main-content">
+          <section class="wrapper">
+              <!-- page start-->
+              <div class="row">
+                  <div class="col-lg-8">
+                      <!--widget start-->
+                      <aside class="profile-nav alt green-border">
+                          <section class="panel">
+                              <div class="user-heading alt green-bg">
+                                  <a href="#">
+                                      <img alt="" src="">
+                                  </a>
+                                  <h1 th:text="'用户名:'+${order.nickname}">用户名：{$nickname}</h1>
+                                  <p th:text="'编号:'+${order.username}">编号：{$username}</p>
+                                  <p th:text="'余额:'+(${order.usermoney != null}? ${order.usermoney} : '0')">余额：{if isset($usermoney)}{$usermoney}{else/}0{/if}</p>
+                              </div>
+
+                              <div class="panel-body bio-graph-info">
+                              
+                              <div class="form-horizontal">
+                                  
+                                  <div class="form-group">
+                                      <label class="col-lg-2 control-label">订单编号：</label>
+                                      <div class="col-lg-6">
+                                          <p class="control-label" th:text="${order.orderno}">{$orderno}</p>
+                                      </div>
+                                  </div>
+									<hr>
+                                  <div class="form-group">
+                                      <label class="col-lg-2 control-label">商品：</label>
+                                      <div class="col-lg-6">
+                                          <p class="control-label" th:text="${order.ptitle}">{$ptitle}</p>
+                                      </div>
+                                  </div>
+									<hr>
+                                  <div class="form-group">
+                                      <label class="col-lg-2 control-label">订单状态：</label>
+                                      <div class="col-lg-6">
+                                          <p class="control-label" th:text="${order.ostaus == 1} ?'平仓':'建仓'">{if $ostaus == 1}平仓{else/}建仓{/if}</p>
+                                      </div>
+                                  </div>
+									<hr>
+                                  <div class="form-group">
+                                      <label class="col-lg-2 control-label">入仓价格：</label>
+                                      <div class="col-lg-6">
+                                          <p class="control-label" th:text="${order.buyprice}">{$buyprice}</p>
+                                      </div>
+                                  </div>
+									<hr>
+                                  <div class="form-group">
+                                      <label class="col-lg-2 control-label">平仓价格：</label>
+                                      <div class="col-lg-6">
+                                          <p class="control-label" th:text="${order.sellprice}">{$sellprice}</p>
+                                      </div>
+                                  </div>
+									<hr>
+                                  <div class="form-group">
+                                      <label class="col-lg-2 control-label">入仓金额：</label>
+                                      <div class="col-lg-6">
+                                          <p class="control-label" th:text="${order.fee}">{$fee}</p>
+                                      </div>
+                                  </div>
+									<hr>
+                                  <div class="form-group">
+                                      <label class="col-lg-2 control-label">入仓时间：</label>
+                                      <div class="col-lg-6">
+                                          <p class="control-label" th:text="${order.timebuy}">{$buytime|date="Y-m-d H:i:s",###}</p>
+                                      </div>
+                                  </div>
+									<hr>
+                                  <div class="form-group">
+                                      <label class="col-lg-2 control-label">平仓时间：</label>
+                                      <div class="col-lg-6">
+                                          <p class="control-label" th:text="${order.timesell}">{$selltime|date="Y-m-d H:i:s",###}</p>
+                                      </div>
+                                  </div>
+									<hr>
+                                  <div class="form-group">
+                                      <label class="col-lg-2 control-label">本单盈亏：</label>
+                                      <div class="col-lg-6">
+                                          <p class="control-label" th:text="${order.ploss}">{$ploss}</p>
+                                      </div>
+                                  </div>
+                                 
+
+                                  
+                              </div>
+                          </div>
+
+                          </section>
+                      </aside>
+                      <!--widget end-->
+                      
+                  </div>
+                 </div> 
+              
+                 
+              
+              <!-- page end-->
+          </section>
+      </section>
+      <!--main content end-->
+  </section>
+
+<div th:insert="~{admin/foot :: footerFragment}"></div>
+<script>
+
+
+
+</script>

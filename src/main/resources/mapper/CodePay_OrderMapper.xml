@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shengpingj.kuntai.mapper.CodePay_OrderMapper" >
+  <resultMap id="BaseResultMap" type="com.shengpingj.kuntai.pojo.CodePay_Order" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="pay_id" property="payId" jdbcType="VARCHAR" />
+    <result column="money" property="money" jdbcType="DECIMAL" />
+    <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="pay_no" property="payNo" jdbcType="VARCHAR" />
+    <result column="param" property="param" jdbcType="VARCHAR" />
+    <result column="pay_time" property="payTime" jdbcType="BIGINT" />
+    <result column="pay_tag" property="payTag" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="creat_time" property="creatTime" jdbcType="BIGINT" />
+    <result column="up_time" property="upTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <!--<sql id="Example_Where_Clause" >-->
+    <!--<where >-->
+      <!--<foreach collection="oredCriteria" item="criteria" separator="or" >-->
+        <!--<if test="criteria.valid" >-->
+          <!--<trim prefix="(" suffix=")" prefixOverrides="and" >-->
+            <!--<foreach collection="criteria.criteria" item="criterion" >-->
+              <!--<choose >-->
+                <!--<when test="criterion.noValue" >-->
+                  <!--and ${criterion.condition}-->
+                <!--</when>-->
+                <!--<when test="criterion.singleValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value}-->
+                <!--</when>-->
+                <!--<when test="criterion.betweenValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}-->
+                <!--</when>-->
+                <!--<when test="criterion.listValue" >-->
+                  <!--and ${criterion.condition}-->
+                  <!--<foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >-->
+                    <!--#{listItem}-->
+                  <!--</foreach>-->
+                <!--</when>-->
+              <!--</choose>-->
+            <!--</foreach>-->
+          <!--</trim>-->
+        <!--</if>-->
+      <!--</foreach>-->
+    <!--</where>-->
+  <!--</sql>-->
+  <!--<sql id="Update_By_Example_Where_Clause" >-->
+    <!--<where >-->
+      <!--<foreach collection="example.oredCriteria" item="criteria" separator="or" >-->
+        <!--<if test="criteria.valid" >-->
+          <!--<trim prefix="(" suffix=")" prefixOverrides="and" >-->
+            <!--<foreach collection="criteria.criteria" item="criterion" >-->
+              <!--<choose >-->
+                <!--<when test="criterion.noValue" >-->
+                  <!--and ${criterion.condition}-->
+                <!--</when>-->
+                <!--<when test="criterion.singleValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value}-->
+                <!--</when>-->
+                <!--<when test="criterion.betweenValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}-->
+                <!--</when>-->
+                <!--<when test="criterion.listValue" >-->
+                  <!--and ${criterion.condition}-->
+                  <!--<foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >-->
+                    <!--#{listItem}-->
+                  <!--</foreach>-->
+                <!--</when>-->
+              <!--</choose>-->
+            <!--</foreach>-->
+          <!--</trim>-->
+        <!--</if>-->
+      <!--</foreach>-->
+    <!--</where>-->
+  <!--</sql>-->
+  <!--<sql id="Base_Column_List" >-->
+    <!--id, pay_id, money, price, type, pay_no, param, pay_time, pay_tag, status, creat_time, -->
+    <!--up_time-->
+  <!--</sql>-->
+  <!--<select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shengpingj.kuntai.pojo.CodePay_OrderExample" >-->
+    <!--select-->
+    <!--<if test="distinct" >-->
+      <!--distinct-->
+    <!--</if>-->
+    <!--<include refid="Base_Column_List" />-->
+    <!--from codepay_order-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+    <!--<if test="orderByClause != null" >-->
+      <!--order by ${orderByClause}-->
+    <!--</if>-->
+  <!--</select>-->
+  <!--<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >-->
+    <!--select -->
+    <!--<include refid="Base_Column_List" />-->
+    <!--from codepay_order-->
+    <!--where id = #{id,jdbcType=INTEGER}-->
+  <!--</select>-->
+  <!--<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >-->
+    <!--delete from codepay_order-->
+    <!--where id = #{id,jdbcType=INTEGER}-->
+  <!--</delete>-->
+  <!--<delete id="deleteByExample" parameterType="com.shengpingj.shengping.pojo.CodePay_OrderExample" >-->
+    <!--delete from codepay_order-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</delete>-->
+  <!--<insert id="insert" parameterType="com.shengpingj.kuntai.pojo.CodePay_Order" >-->
+    <!--insert into codepay_order (id, pay_id, money, -->
+      <!--price, type, pay_no, -->
+      <!--param, pay_time, pay_tag, -->
+      <!--status, creat_time, up_time-->
+      <!--)-->
+    <!--values (#{id,jdbcType=INTEGER}, #{payId,jdbcType=VARCHAR}, #{money,jdbcType=DECIMAL}, -->
+      <!--#{price,jdbcType=DECIMAL}, #{type,jdbcType=INTEGER}, #{payNo,jdbcType=VARCHAR}, -->
+      <!--#{param,jdbcType=VARCHAR}, #{payTime,jdbcType=BIGINT}, #{payTag,jdbcType=VARCHAR}, -->
+      <!--#{status,jdbcType=INTEGER}, #{creatTime,jdbcType=BIGINT}, #{upTime,jdbcType=TIMESTAMP}-->
+      <!--)-->
+  <!--</insert>-->
+  <!--<insert id="insertSelective" parameterType="com.shengpingj.kuntai.pojo.CodePay_Order" >-->
+    <!--insert into codepay_order-->
+    <!--<trim prefix="(" suffix=")" suffixOverrides="," >-->
+      <!--<if test="id != null" >-->
+        <!--id,-->
+      <!--</if>-->
+      <!--<if test="payId != null" >-->
+        <!--pay_id,-->
+      <!--</if>-->
+      <!--<if test="money != null" >-->
+        <!--money,-->
+      <!--</if>-->
+      <!--<if test="price != null" >-->
+        <!--price,-->
+      <!--</if>-->
+      <!--<if test="type != null" >-->
+        <!--type,-->
+      <!--</if>-->
+      <!--<if test="payNo != null" >-->
+        <!--pay_no,-->
+      <!--</if>-->
+      <!--<if test="param != null" >-->
+        <!--param,-->
+      <!--</if>-->
+      <!--<if test="payTime != null" >-->
+        <!--pay_time,-->
+      <!--</if>-->
+      <!--<if test="payTag != null" >-->
+        <!--pay_tag,-->
+      <!--</if>-->
+      <!--<if test="status != null" >-->
+        <!--status,-->
+      <!--</if>-->
+      <!--<if test="creatTime != null" >-->
+        <!--creat_time,-->
+      <!--</if>-->
+      <!--<if test="upTime != null" >-->
+        <!--up_time,-->
+      <!--</if>-->
+    <!--</trim>-->
+    <!--<trim prefix="values (" suffix=")" suffixOverrides="," >-->
+      <!--<if test="id != null" >-->
+        <!--#{id,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="payId != null" >-->
+        <!--#{payId,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="money != null" >-->
+        <!--#{money,jdbcType=DECIMAL},-->
+      <!--</if>-->
+      <!--<if test="price != null" >-->
+        <!--#{price,jdbcType=DECIMAL},-->
+      <!--</if>-->
+      <!--<if test="type != null" >-->
+        <!--#{type,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="payNo != null" >-->
+        <!--#{payNo,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="param != null" >-->
+        <!--#{param,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="payTime != null" >-->
+        <!--#{payTime,jdbcType=BIGINT},-->
+      <!--</if>-->
+      <!--<if test="payTag != null" >-->
+        <!--#{payTag,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="status != null" >-->
+        <!--#{status,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="creatTime != null" >-->
+        <!--#{creatTime,jdbcType=BIGINT},-->
+      <!--</if>-->
+      <!--<if test="upTime != null" >-->
+        <!--#{upTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+    <!--</trim>-->
+  <!--</insert>-->
+  <!--<select id="countByExample" parameterType="com.shengpingj.kuntai.pojo.CodePay_OrderExample" resultType="java.lang.Integer" >-->
+    <!--select count(*) from codepay_order-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</select>-->
+  <!--<update id="updateByExampleSelective" parameterType="map" >-->
+    <!--update codepay_order-->
+    <!--<set >-->
+      <!--<if test="record.id != null" >-->
+        <!--id = #{record.id,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.payId != null" >-->
+        <!--pay_id = #{record.payId,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.money != null" >-->
+        <!--money = #{record.money,jdbcType=DECIMAL},-->
+      <!--</if>-->
+      <!--<if test="record.price != null" >-->
+        <!--price = #{record.price,jdbcType=DECIMAL},-->
+      <!--</if>-->
+      <!--<if test="record.type != null" >-->
+        <!--type = #{record.type,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.payNo != null" >-->
+        <!--pay_no = #{record.payNo,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.param != null" >-->
+        <!--param = #{record.param,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.payTime != null" >-->
+        <!--pay_time = #{record.payTime,jdbcType=BIGINT},-->
+      <!--</if>-->
+      <!--<if test="record.payTag != null" >-->
+        <!--pay_tag = #{record.payTag,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.status != null" >-->
+        <!--status = #{record.status,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.creatTime != null" >-->
+        <!--creat_time = #{record.creatTime,jdbcType=BIGINT},-->
+      <!--</if>-->
+      <!--<if test="record.upTime != null" >-->
+        <!--up_time = #{record.upTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+    <!--</set>-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Update_By_Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</update>-->
+  <!--<update id="updateByExample" parameterType="map" >-->
+    <!--update codepay_order-->
+    <!--set id = #{record.id,jdbcType=INTEGER},-->
+      <!--pay_id = #{record.payId,jdbcType=VARCHAR},-->
+      <!--money = #{record.money,jdbcType=DECIMAL},-->
+      <!--price = #{record.price,jdbcType=DECIMAL},-->
+      <!--type = #{record.type,jdbcType=INTEGER},-->
+      <!--pay_no = #{record.payNo,jdbcType=VARCHAR},-->
+      <!--param = #{record.param,jdbcType=VARCHAR},-->
+      <!--pay_time = #{record.payTime,jdbcType=BIGINT},-->
+      <!--pay_tag = #{record.payTag,jdbcType=VARCHAR},-->
+      <!--status = #{record.status,jdbcType=INTEGER},-->
+      <!--creat_time = #{record.creatTime,jdbcType=BIGINT},-->
+      <!--up_time = #{record.upTime,jdbcType=TIMESTAMP}-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Update_By_Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</update>-->
+  <!--<update id="updateByPrimaryKeySelective" parameterType="com.shengpingj.kuntai.pojo.CodePay_Order" >-->
+    <!--update codepay_order-->
+    <!--<set >-->
+      <!--<if test="payId != null" >-->
+        <!--pay_id = #{payId,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="money != null" >-->
+        <!--money = #{money,jdbcType=DECIMAL},-->
+      <!--</if>-->
+      <!--<if test="price != null" >-->
+        <!--price = #{price,jdbcType=DECIMAL},-->
+      <!--</if>-->
+      <!--<if test="type != null" >-->
+        <!--type = #{type,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="payNo != null" >-->
+        <!--pay_no = #{payNo,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="param != null" >-->
+        <!--param = #{param,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="payTime != null" >-->
+        <!--pay_time = #{payTime,jdbcType=BIGINT},-->
+      <!--</if>-->
+      <!--<if test="payTag != null" >-->
+        <!--pay_tag = #{payTag,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="status != null" >-->
+        <!--status = #{status,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="creatTime != null" >-->
+        <!--creat_time = #{creatTime,jdbcType=BIGINT},-->
+      <!--</if>-->
+      <!--<if test="upTime != null" >-->
+        <!--up_time = #{upTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+    <!--</set>-->
+    <!--where id = #{id,jdbcType=INTEGER}-->
+  <!--</update>-->
+  <!--<update id="updateByPrimaryKey" parameterType="com.shengpingj.kuntai.pojo.CodePay_Order" >-->
+    <!--update codepay_order-->
+    <!--set pay_id = #{payId,jdbcType=VARCHAR},-->
+      <!--money = #{money,jdbcType=DECIMAL},-->
+      <!--price = #{price,jdbcType=DECIMAL},-->
+      <!--type = #{type,jdbcType=INTEGER},-->
+      <!--pay_no = #{payNo,jdbcType=VARCHAR},-->
+      <!--param = #{param,jdbcType=VARCHAR},-->
+      <!--pay_time = #{payTime,jdbcType=BIGINT},-->
+      <!--pay_tag = #{payTag,jdbcType=VARCHAR},-->
+      <!--status = #{status,jdbcType=INTEGER},-->
+      <!--creat_time = #{creatTime,jdbcType=BIGINT},-->
+      <!--up_time = #{upTime,jdbcType=TIMESTAMP}-->
+    <!--where id = #{id,jdbcType=INTEGER}-->
+  <!--</update>-->
+</mapper>

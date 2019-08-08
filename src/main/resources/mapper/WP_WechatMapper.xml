@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shengpingj.kuntai.mapper.WP_WechatMapper" >
+  <resultMap id="BaseResultMap" type="com.shengpingj.kuntai.pojo.WP_Wechat" >
+    <id column="wcid" property="wcid" jdbcType="INTEGER" />
+    <result column="appid" property="appid" jdbcType="VARCHAR" />
+    <result column="appsecret" property="appsecret" jdbcType="VARCHAR" />
+    <result column="wxname" property="wxname" jdbcType="VARCHAR" />
+    <result column="wxlogin" property="wxlogin" jdbcType="VARCHAR" />
+    <result column="wxurl" property="wxurl" jdbcType="VARCHAR" />
+    <result column="token" property="token" jdbcType="VARCHAR" />
+    <result column="encodingaeskey" property="encodingaeskey" jdbcType="VARCHAR" />
+    <result column="parterid" property="parterid" jdbcType="INTEGER" />
+    <result column="parterkey" property="parterkey" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="selectWechat" resultType="com.shengpingj.kuntai.pojo.WP_Wechat">
+    select * from wp_wechat
+  </select>
+  <update id="updateWechatByWechat" parameterType="com.shengpingj.kuntai.pojo.WP_Wechat">
+    update wp_wechat
+    <set>
+      <if test="wechat.appid != null and wechat.appid.length()>0">
+        appid = #{wechat.appid},
+      </if>
+      <if test="wechat.appsecret != null and wechat.appsecret.length()>0">
+        appsecret = #{wechat.appsecret},
+      </if>
+      <if test="wechat.wxname != null and wechat.wxname.length()>0">
+        wxname = #{wechat.wxname},
+      </if>
+      <if test="wechat.wxlogin != null and wechat.wxlogin.length()>0">
+        wxlogin = #{wechat.wxlogin},
+      </if>
+      <if test="wechat.wxurl != null and wechat.wxurl.length()>0">
+        wxurl = #{wechat.wxurl},
+      </if>
+      <if test="wechat.token != null and wechat.token.length()>0">
+        token = #{wechat.token},
+      </if>
+      <if test="wechat.encodingaeskey != null and wechat.encodingaeskey.length()>0">
+        encodingaeskey = #{wechat.encodingaeskey},
+      </if>
+      <if test="wechat.parterid != null">
+        parterid = #{wechat.parterid},
+      </if>
+      <if test="wechat.parterkey != null and wechat.parterkey.length()>0">
+        parterkey = #{wechat.parterkey},
+      </if>
+    </set>
+    where wcid = #{wechat.wcid}
+  </update>
+  <!--<sql id="Example_Where_Clause" >-->
+    <!--<where >-->
+      <!--<foreach collection="oredCriteria" item="criteria" separator="or" >-->
+        <!--<if test="criteria.valid" >-->
+          <!--<trim prefix="(" suffix=")" prefixOverrides="and" >-->
+            <!--<foreach collection="criteria.criteria" item="criterion" >-->
+              <!--<choose >-->
+                <!--<when test="criterion.noValue" >-->
+                  <!--and ${criterion.condition}-->
+                <!--</when>-->
+                <!--<when test="criterion.singleValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value}-->
+                <!--</when>-->
+                <!--<when test="criterion.betweenValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}-->
+                <!--</when>-->
+                <!--<when test="criterion.listValue" >-->
+                  <!--and ${criterion.condition}-->
+                  <!--<foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >-->
+                    <!--#{listItem}-->
+                  <!--</foreach>-->
+                <!--</when>-->
+              <!--</choose>-->
+            <!--</foreach>-->
+          <!--</trim>-->
+        <!--</if>-->
+      <!--</foreach>-->
+    <!--</where>-->
+  <!--</sql>-->
+  <!--<sql id="Update_By_Example_Where_Clause" >-->
+    <!--<where >-->
+      <!--<foreach collection="example.oredCriteria" item="criteria" separator="or" >-->
+        <!--<if test="criteria.valid" >-->
+          <!--<trim prefix="(" suffix=")" prefixOverrides="and" >-->
+            <!--<foreach collection="criteria.criteria" item="criterion" >-->
+              <!--<choose >-->
+                <!--<when test="criterion.noValue" >-->
+                  <!--and ${criterion.condition}-->
+                <!--</when>-->
+                <!--<when test="criterion.singleValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value}-->
+                <!--</when>-->
+                <!--<when test="criterion.betweenValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}-->
+                <!--</when>-->
+                <!--<when test="criterion.listValue" >-->
+                  <!--and ${criterion.condition}-->
+                  <!--<foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >-->
+                    <!--#{listItem}-->
+                  <!--</foreach>-->
+                <!--</when>-->
+              <!--</choose>-->
+            <!--</foreach>-->
+          <!--</trim>-->
+        <!--</if>-->
+      <!--</foreach>-->
+    <!--</where>-->
+  <!--</sql>-->
+  <!--<sql id="Base_Column_List" >-->
+    <!--wcid, appid, appsecret, wxname, wxlogin, wxurl, token, encodingaeskey, parterid, -->
+    <!--parterkey-->
+  <!--</sql>-->
+  <!--<select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shengpingj.kuntai.pojo.WP_WechatExample" >-->
+    <!--select-->
+    <!--<if test="distinct" >-->
+      <!--distinct-->
+    <!--</if>-->
+    <!--<include refid="Base_Column_List" />-->
+    <!--from wp_wechat-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+    <!--<if test="orderByClause != null" >-->
+      <!--order by ${orderByClause}-->
+    <!--</if>-->
+  <!--</select>-->
+  <!--<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >-->
+    <!--select -->
+    <!--<include refid="Base_Column_List" />-->
+    <!--from wp_wechat-->
+    <!--where wcid = #{wcid,jdbcType=INTEGER}-->
+  <!--</select>-->
+  <!--<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >-->
+    <!--delete from wp_wechat-->
+    <!--where wcid = #{wcid,jdbcType=INTEGER}-->
+  <!--</delete>-->
+  <!--<delete id="deleteByExample" parameterType="com.shengpingj.kuntai.pojo.WP_WechatExample" >-->
+    <!--delete from wp_wechat-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</delete>-->
+  <!--<insert id="insert" parameterType="com.shengpingj.kuntai.pojo.WP_Wechat" >-->
+    <!--insert into wp_wechat (wcid, appid, appsecret, -->
+      <!--wxname, wxlogin, wxurl, -->
+      <!--token, encodingaeskey, parterid, -->
+      <!--parterkey)-->
+    <!--values (#{wcid,jdbcType=INTEGER}, #{appid,jdbcType=VARCHAR}, #{appsecret,jdbcType=VARCHAR}, -->
+      <!--#{wxname,jdbcType=VARCHAR}, #{wxlogin,jdbcType=VARCHAR}, #{wxurl,jdbcType=VARCHAR}, -->
+      <!--#{token,jdbcType=VARCHAR}, #{encodingaeskey,jdbcType=VARCHAR}, #{parterid,jdbcType=INTEGER}, -->
+      <!--#{parterkey,jdbcType=VARCHAR})-->
+  <!--</insert>-->
+  <!--<insert id="insertSelective" parameterType="com.shengpingj.kuntai.pojo.WP_Wechat" >-->
+    <!--insert into wp_wechat-->
+    <!--<trim prefix="(" suffix=")" suffixOverrides="," >-->
+      <!--<if test="wcid != null" >-->
+        <!--wcid,-->
+      <!--</if>-->
+      <!--<if test="appid != null" >-->
+        <!--appid,-->
+      <!--</if>-->
+      <!--<if test="appsecret != null" >-->
+        <!--appsecret,-->
+      <!--</if>-->
+      <!--<if test="wxname != null" >-->
+        <!--wxname,-->
+      <!--</if>-->
+      <!--<if test="wxlogin != null" >-->
+        <!--wxlogin,-->
+      <!--</if>-->
+      <!--<if test="wxurl != null" >-->
+        <!--wxurl,-->
+      <!--</if>-->
+      <!--<if test="token != null" >-->
+        <!--token,-->
+      <!--</if>-->
+      <!--<if test="encodingaeskey != null" >-->
+        <!--encodingaeskey,-->
+      <!--</if>-->
+      <!--<if test="parterid != null" >-->
+        <!--parterid,-->
+      <!--</if>-->
+      <!--<if test="parterkey != null" >-->
+        <!--parterkey,-->
+      <!--</if>-->
+    <!--</trim>-->
+    <!--<trim prefix="values (" suffix=")" suffixOverrides="," >-->
+      <!--<if test="wcid != null" >-->
+        <!--#{wcid,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="appid != null" >-->
+        <!--#{appid,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="appsecret != null" >-->
+        <!--#{appsecret,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="wxname != null" >-->
+        <!--#{wxname,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="wxlogin != null" >-->
+        <!--#{wxlogin,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="wxurl != null" >-->
+        <!--#{wxurl,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="token != null" >-->
+        <!--#{token,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="encodingaeskey != null" >-->
+        <!--#{encodingaeskey,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="parterid != null" >-->
+        <!--#{parterid,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="parterkey != null" >-->
+        <!--#{parterkey,jdbcType=VARCHAR},-->
+      <!--</if>-->
+    <!--</trim>-->
+  <!--</insert>-->
+  <!--<select id="countByExample" parameterType="com.shengpingj.kuntai.pojo.WP_WechatExample" resultType="java.lang.Integer" >-->
+    <!--select count(*) from wp_wechat-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</select>-->
+  <!--<update id="updateByExampleSelective" parameterType="map" >-->
+    <!--update wp_wechat-->
+    <!--<set >-->
+      <!--<if test="record.wcid != null" >-->
+        <!--wcid = #{record.wcid,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.appid != null" >-->
+        <!--appid = #{record.appid,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.appsecret != null" >-->
+        <!--appsecret = #{record.appsecret,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.wxname != null" >-->
+        <!--wxname = #{record.wxname,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.wxlogin != null" >-->
+        <!--wxlogin = #{record.wxlogin,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.wxurl != null" >-->
+        <!--wxurl = #{record.wxurl,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.token != null" >-->
+        <!--token = #{record.token,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.encodingaeskey != null" >-->
+        <!--encodingaeskey = #{record.encodingaeskey,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.parterid != null" >-->
+        <!--parterid = #{record.parterid,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.parterkey != null" >-->
+        <!--parterkey = #{record.parterkey,jdbcType=VARCHAR},-->
+      <!--</if>-->
+    <!--</set>-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Update_By_Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</update>-->
+  <!--<update id="updateByExample" parameterType="map" >-->
+    <!--update wp_wechat-->
+    <!--set wcid = #{record.wcid,jdbcType=INTEGER},-->
+      <!--appid = #{record.appid,jdbcType=VARCHAR},-->
+      <!--appsecret = #{record.appsecret,jdbcType=VARCHAR},-->
+      <!--wxname = #{record.wxname,jdbcType=VARCHAR},-->
+      <!--wxlogin = #{record.wxlogin,jdbcType=VARCHAR},-->
+      <!--wxurl = #{record.wxurl,jdbcType=VARCHAR},-->
+      <!--token = #{record.token,jdbcType=VARCHAR},-->
+      <!--encodingaeskey = #{record.encodingaeskey,jdbcType=VARCHAR},-->
+      <!--parterid = #{record.parterid,jdbcType=INTEGER},-->
+      <!--parterkey = #{record.parterkey,jdbcType=VARCHAR}-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Update_By_Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</update>-->
+  <!--<update id="updateByPrimaryKeySelective" parameterType="com.shengpingj.kuntai.pojo.WP_Wechat" >-->
+    <!--update wp_wechat-->
+    <!--<set >-->
+      <!--<if test="appid != null" >-->
+        <!--appid = #{appid,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="appsecret != null" >-->
+        <!--appsecret = #{appsecret,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="wxname != null" >-->
+        <!--wxname = #{wxname,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="wxlogin != null" >-->
+        <!--wxlogin = #{wxlogin,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="wxurl != null" >-->
+        <!--wxurl = #{wxurl,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="token != null" >-->
+        <!--token = #{token,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="encodingaeskey != null" >-->
+        <!--encodingaeskey = #{encodingaeskey,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="parterid != null" >-->
+        <!--parterid = #{parterid,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="parterkey != null" >-->
+        <!--parterkey = #{parterkey,jdbcType=VARCHAR},-->
+      <!--</if>-->
+    <!--</set>-->
+    <!--where wcid = #{wcid,jdbcType=INTEGER}-->
+  <!--</update>-->
+  <!--<update id="updateByPrimaryKey" parameterType="com.shengpingj.kuntai.pojo.WP_Wechat" >-->
+    <!--update wp_wechat-->
+    <!--set appid = #{appid,jdbcType=VARCHAR},-->
+      <!--appsecret = #{appsecret,jdbcType=VARCHAR},-->
+      <!--wxname = #{wxname,jdbcType=VARCHAR},-->
+      <!--wxlogin = #{wxlogin,jdbcType=VARCHAR},-->
+      <!--wxurl = #{wxurl,jdbcType=VARCHAR},-->
+      <!--token = #{token,jdbcType=VARCHAR},-->
+      <!--encodingaeskey = #{encodingaeskey,jdbcType=VARCHAR},-->
+      <!--parterid = #{parterid,jdbcType=INTEGER},-->
+      <!--parterkey = #{parterkey,jdbcType=VARCHAR}-->
+    <!--where wcid = #{wcid,jdbcType=INTEGER}-->
+  <!--</update>-->
+</mapper>

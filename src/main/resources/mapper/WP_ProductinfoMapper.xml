@@ -1,0 +1,484 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shengpingj.kuntai.mapper.WP_ProductinfoMapper" >
+  <resultMap id="BaseResultMap" type="com.shengpingj.kuntai.pojo.WP_Productinfo" >
+    <id column="pid" property="pid" jdbcType="INTEGER" />
+    <result column="ptitle" property="ptitle" jdbcType="VARCHAR" />
+    <result column="cid" property="cid" jdbcType="INTEGER" />
+    <result column="otid" property="otid" jdbcType="INTEGER" />
+    <result column="isopen" property="isopen" jdbcType="INTEGER" />
+    <result column="point_low" property="pointLow" jdbcType="VARCHAR" />
+    <result column="point_top" property="pointTop" jdbcType="VARCHAR" />
+    <result column="rands" property="rands" jdbcType="VARCHAR" />
+    <result column="time" property="time" jdbcType="INTEGER" />
+    <result column="isdelete" property="isdelete" jdbcType="INTEGER" />
+    <result column="procode" property="procode" jdbcType="VARCHAR" />
+    <result column="add_data" property="addData" jdbcType="DOUBLE" />
+    <result column="protime" property="protime" jdbcType="VARCHAR" />
+    <result column="propoint" property="propoint" jdbcType="VARCHAR" />
+    <result column="proscale" property="proscale" jdbcType="VARCHAR" />
+    <result column="proorder" property="proorder" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.shengpingj.kuntai.pojo.WP_Productinfo" extends="BaseResultMap" >
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <select id="selectAllGoods" resultType="com.shengpingj.kuntai.pojo.vo.GoodsView">
+SELECT pi.*,pc.pcname FROM wp_productinfo pi JOIN wp_productclass pc WHERE pc.pcid = pi.cid and pi.isdelete = 0 ORDER BY pi.proorder asc
+  </select>
+  <select id="selectAllGoodsByAjax" resultType="com.shengpingj.kuntai.pojo.vo.UserGoodsView">
+SELECT pi.pid,pi.ptitle,pd.Price,pd.UpdateTime,pd.Low,pd.High FROM wp_productinfo pi JOIN wp_productdata pd WHERE pd.pid = pi.cid and pi.isdelete = 0 ORDER BY pi.proorder asc
+  </select>
+  <select id="selectGoodsById" resultType="com.shengpingj.kuntai.pojo.vo.GoodsView">
+SELECT pi.*,ot.opentime FROM wp_productinfo pi JOIN wp_opentime ot WHERE pi.pid = ot.pid AND pi.pid = #{pid} AND ot.pid = #{pid};  </select>
+  <update id="updateGoods">
+    update wp_productinfo set isdelete = 1 where pid = #{id}
+  </update>
+  <update id="updateGoodsIsOpenById">
+    update wp_productinfo set isopen = #{isopen,jdbcType=INTEGER} where pid = #{pid}
+  </update>
+  <select id="selectGoodsByIsDelete" resultType="com.shengpingj.kuntai.pojo.vo.GoodsView">
+SELECT pi.*,pc.pcname FROM wp_productinfo pi JOIN wp_productclass pc WHERE pc.pcid = pi.cid and pi.isdelete = 1 ORDER BY pi.proorder asc
+  </select>
+  <update id="updateGoodsIsDeleteById">
+    update wp_productinfo set isdelete = 1 where pid = #{id}
+  </update>
+  <!--<sql id="Example_Where_Clause" >-->
+    <!--<where >-->
+      <!--<foreach collection="oredCriteria" item="criteria" separator="or" >-->
+        <!--<if test="criteria.valid" >-->
+          <!--<trim prefix="(" suffix=")" prefixOverrides="and" >-->
+            <!--<foreach collection="criteria.criteria" item="criterion" >-->
+              <!--<choose >-->
+                <!--<when test="criterion.noValue" >-->
+                  <!--and ${criterion.condition}-->
+                <!--</when>-->
+                <!--<when test="criterion.singleValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value}-->
+                <!--</when>-->
+                <!--<when test="criterion.betweenValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}-->
+                <!--</when>-->
+                <!--<when test="criterion.listValue" >-->
+                  <!--and ${criterion.condition}-->
+                  <!--<foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >-->
+                    <!--#{listItem}-->
+                  <!--</foreach>-->
+                <!--</when>-->
+              <!--</choose>-->
+            <!--</foreach>-->
+          <!--</trim>-->
+        <!--</if>-->
+      <!--</foreach>-->
+    <!--</where>-->
+  <!--</sql>-->
+  <!--<sql id="Update_By_Example_Where_Clause" >-->
+    <!--<where >-->
+      <!--<foreach collection="example.oredCriteria" item="criteria" separator="or" >-->
+        <!--<if test="criteria.valid" >-->
+          <!--<trim prefix="(" suffix=")" prefixOverrides="and" >-->
+            <!--<foreach collection="criteria.criteria" item="criterion" >-->
+              <!--<choose >-->
+                <!--<when test="criterion.noValue" >-->
+                  <!--and ${criterion.condition}-->
+                <!--</when>-->
+                <!--<when test="criterion.singleValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value}-->
+                <!--</when>-->
+                <!--<when test="criterion.betweenValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}-->
+                <!--</when>-->
+                <!--<when test="criterion.listValue" >-->
+                  <!--and ${criterion.condition}-->
+                  <!--<foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >-->
+                    <!--#{listItem}-->
+                  <!--</foreach>-->
+                <!--</when>-->
+              <!--</choose>-->
+            <!--</foreach>-->
+          <!--</trim>-->
+        <!--</if>-->
+      <!--</foreach>-->
+    <!--</where>-->
+  <!--</sql>-->
+  <!--<sql id="Base_Column_List" >-->
+    <!--pid, ptitle, cid, otid, isopen, point_low, point_top, rands, time, isdelete, procode, -->
+    <!--add_data, protime, propoint, proscale, proorder-->
+  <!--</sql>-->
+  <!--<sql id="Blob_Column_List" >-->
+    <!--content-->
+  <!--</sql>-->
+  <!--<select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.shengpingj.kuntai.pojo.WP_ProductinfoExample" >-->
+    <!--select-->
+    <!--<if test="distinct" >-->
+      <!--distinct-->
+    <!--</if>-->
+    <!--<include refid="Base_Column_List" />-->
+    <!--,-->
+    <!--<include refid="Blob_Column_List" />-->
+    <!--from wp_productinfo-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+    <!--<if test="orderByClause != null" >-->
+      <!--order by ${orderByClause}-->
+    <!--</if>-->
+  <!--</select>-->
+  <!--<select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shengpingj.kuntai.pojo.WP_ProductinfoExample" >-->
+    <!--select-->
+    <!--<if test="distinct" >-->
+      <!--distinct-->
+    <!--</if>-->
+    <!--<include refid="Base_Column_List" />-->
+    <!--from wp_productinfo-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+    <!--<if test="orderByClause != null" >-->
+      <!--order by ${orderByClause}-->
+    <!--</if>-->
+  <!--</select>-->
+  <!--<select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >-->
+    <!--select -->
+    <!--<include refid="Base_Column_List" />-->
+    <!--,-->
+    <!--<include refid="Blob_Column_List" />-->
+    <!--from wp_productinfo-->
+    <!--where pid = #{pid,jdbcType=INTEGER}-->
+  <!--</select>-->
+  <!--<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >-->
+    <!--delete from wp_productinfo-->
+    <!--where pid = #{pid,jdbcType=INTEGER}-->
+  <!--</delete>-->
+  <!--<delete id="deleteByExample" parameterType="com.shengpingj.kuntai.pojo.WP_ProductinfoExample" >-->
+    <!--delete from wp_productinfo-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</delete>-->
+  <!--<insert id="insert" parameterType="com.shengpingj.kuntai.pojo.WP_Productinfo" >-->
+    <!--insert into wp_productinfo (pid, ptitle, cid, -->
+      <!--otid, isopen, point_low, -->
+      <!--point_top, rands, time, -->
+      <!--isdelete, procode, add_data, -->
+      <!--protime, propoint, proscale, -->
+      <!--proorder, content)-->
+    <!--values (#{pid,jdbcType=INTEGER}, #{ptitle,jdbcType=VARCHAR}, #{cid,jdbcType=INTEGER}, -->
+      <!--#{otid,jdbcType=INTEGER}, #{isopen,jdbcType=INTEGER}, #{pointLow,jdbcType=VARCHAR}, -->
+      <!--#{pointTop,jdbcType=VARCHAR}, #{rands,jdbcType=VARCHAR}, #{time,jdbcType=INTEGER}, -->
+      <!--#{isdelete,jdbcType=INTEGER}, #{procode,jdbcType=VARCHAR}, #{addData,jdbcType=DOUBLE}, -->
+      <!--#{protime,jdbcType=VARCHAR}, #{propoint,jdbcType=VARCHAR}, #{proscale,jdbcType=VARCHAR}, -->
+      <!--#{proorder,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR})-->
+  <!--</insert>-->
+  <!--<insert id="insertSelective" parameterType="com.shengpingj.kuntai.pojo.WP_Productinfo" >-->
+    <!--insert into wp_productinfo-->
+    <!--<trim prefix="(" suffix=")" suffixOverrides="," >-->
+      <!--<if test="pid != null" >-->
+        <!--pid,-->
+      <!--</if>-->
+      <!--<if test="ptitle != null" >-->
+        <!--ptitle,-->
+      <!--</if>-->
+      <!--<if test="cid != null" >-->
+        <!--cid,-->
+      <!--</if>-->
+      <!--<if test="otid != null" >-->
+        <!--otid,-->
+      <!--</if>-->
+      <!--<if test="isopen != null" >-->
+        <!--isopen,-->
+      <!--</if>-->
+      <!--<if test="pointLow != null" >-->
+        <!--point_low,-->
+      <!--</if>-->
+      <!--<if test="pointTop != null" >-->
+        <!--point_top,-->
+      <!--</if>-->
+      <!--<if test="rands != null" >-->
+        <!--rands,-->
+      <!--</if>-->
+      <!--<if test="time != null" >-->
+        <!--time,-->
+      <!--</if>-->
+      <!--<if test="isdelete != null" >-->
+        <!--isdelete,-->
+      <!--</if>-->
+      <!--<if test="procode != null" >-->
+        <!--procode,-->
+      <!--</if>-->
+      <!--<if test="addData != null" >-->
+        <!--add_data,-->
+      <!--</if>-->
+      <!--<if test="protime != null" >-->
+        <!--protime,-->
+      <!--</if>-->
+      <!--<if test="propoint != null" >-->
+        <!--propoint,-->
+      <!--</if>-->
+      <!--<if test="proscale != null" >-->
+        <!--proscale,-->
+      <!--</if>-->
+      <!--<if test="proorder != null" >-->
+        <!--proorder,-->
+      <!--</if>-->
+      <!--<if test="content != null" >-->
+        <!--content,-->
+      <!--</if>-->
+    <!--</trim>-->
+    <!--<trim prefix="values (" suffix=")" suffixOverrides="," >-->
+      <!--<if test="pid != null" >-->
+        <!--#{pid,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="ptitle != null" >-->
+        <!--#{ptitle,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="cid != null" >-->
+        <!--#{cid,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="otid != null" >-->
+        <!--#{otid,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="isopen != null" >-->
+        <!--#{isopen,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="pointLow != null" >-->
+        <!--#{pointLow,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="pointTop != null" >-->
+        <!--#{pointTop,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="rands != null" >-->
+        <!--#{rands,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="time != null" >-->
+        <!--#{time,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="isdelete != null" >-->
+        <!--#{isdelete,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="procode != null" >-->
+        <!--#{procode,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="addData != null" >-->
+        <!--#{addData,jdbcType=DOUBLE},-->
+      <!--</if>-->
+      <!--<if test="protime != null" >-->
+        <!--#{protime,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="propoint != null" >-->
+        <!--#{propoint,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="proscale != null" >-->
+        <!--#{proscale,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="proorder != null" >-->
+        <!--#{proorder,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="content != null" >-->
+        <!--#{content,jdbcType=LONGVARCHAR},-->
+      <!--</if>-->
+    <!--</trim>-->
+  <!--</insert>-->
+  <!--<select id="countByExample" parameterType="com.shengpingj.kuntai.pojo.WP_ProductinfoExample" resultType="java.lang.Integer" >-->
+    <!--select count(*) from wp_productinfo-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</select>-->
+  <!--<update id="updateByExampleSelective" parameterType="map" >-->
+    <!--update wp_productinfo-->
+    <!--<set >-->
+      <!--<if test="record.pid != null" >-->
+        <!--pid = #{record.pid,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.ptitle != null" >-->
+        <!--ptitle = #{record.ptitle,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.cid != null" >-->
+        <!--cid = #{record.cid,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.otid != null" >-->
+        <!--otid = #{record.otid,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.isopen != null" >-->
+        <!--isopen = #{record.isopen,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.pointLow != null" >-->
+        <!--point_low = #{record.pointLow,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.pointTop != null" >-->
+        <!--point_top = #{record.pointTop,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.rands != null" >-->
+        <!--rands = #{record.rands,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.time != null" >-->
+        <!--time = #{record.time,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.isdelete != null" >-->
+        <!--isdelete = #{record.isdelete,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.procode != null" >-->
+        <!--procode = #{record.procode,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.addData != null" >-->
+        <!--add_data = #{record.addData,jdbcType=DOUBLE},-->
+      <!--</if>-->
+      <!--<if test="record.protime != null" >-->
+        <!--protime = #{record.protime,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.propoint != null" >-->
+        <!--propoint = #{record.propoint,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.proscale != null" >-->
+        <!--proscale = #{record.proscale,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.proorder != null" >-->
+        <!--proorder = #{record.proorder,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.content != null" >-->
+        <!--content = #{record.content,jdbcType=LONGVARCHAR},-->
+      <!--</if>-->
+    <!--</set>-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Update_By_Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</update>-->
+  <!--<update id="updateByExampleWithBLOBs" parameterType="map" >-->
+    <!--update wp_productinfo-->
+    <!--set pid = #{record.pid,jdbcType=INTEGER},-->
+      <!--ptitle = #{record.ptitle,jdbcType=VARCHAR},-->
+      <!--cid = #{record.cid,jdbcType=INTEGER},-->
+      <!--otid = #{record.otid,jdbcType=INTEGER},-->
+      <!--isopen = #{record.isopen,jdbcType=INTEGER},-->
+      <!--point_low = #{record.pointLow,jdbcType=VARCHAR},-->
+      <!--point_top = #{record.pointTop,jdbcType=VARCHAR},-->
+      <!--rands = #{record.rands,jdbcType=VARCHAR},-->
+      <!--time = #{record.time,jdbcType=INTEGER},-->
+      <!--isdelete = #{record.isdelete,jdbcType=INTEGER},-->
+      <!--procode = #{record.procode,jdbcType=VARCHAR},-->
+      <!--add_data = #{record.addData,jdbcType=DOUBLE},-->
+      <!--protime = #{record.protime,jdbcType=VARCHAR},-->
+      <!--propoint = #{record.propoint,jdbcType=VARCHAR},-->
+      <!--proscale = #{record.proscale,jdbcType=VARCHAR},-->
+      <!--proorder = #{record.proorder,jdbcType=INTEGER},-->
+      <!--content = #{record.content,jdbcType=LONGVARCHAR}-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Update_By_Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</update>-->
+  <!--<update id="updateByExample" parameterType="map" >-->
+    <!--update wp_productinfo-->
+    <!--set pid = #{record.pid,jdbcType=INTEGER},-->
+      <!--ptitle = #{record.ptitle,jdbcType=VARCHAR},-->
+      <!--cid = #{record.cid,jdbcType=INTEGER},-->
+      <!--otid = #{record.otid,jdbcType=INTEGER},-->
+      <!--isopen = #{record.isopen,jdbcType=INTEGER},-->
+      <!--point_low = #{record.pointLow,jdbcType=VARCHAR},-->
+      <!--point_top = #{record.pointTop,jdbcType=VARCHAR},-->
+      <!--rands = #{record.rands,jdbcType=VARCHAR},-->
+      <!--time = #{record.time,jdbcType=INTEGER},-->
+      <!--isdelete = #{record.isdelete,jdbcType=INTEGER},-->
+      <!--procode = #{record.procode,jdbcType=VARCHAR},-->
+      <!--add_data = #{record.addData,jdbcType=DOUBLE},-->
+      <!--protime = #{record.protime,jdbcType=VARCHAR},-->
+      <!--propoint = #{record.propoint,jdbcType=VARCHAR},-->
+      <!--proscale = #{record.proscale,jdbcType=VARCHAR},-->
+      <!--proorder = #{record.proorder,jdbcType=INTEGER}-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Update_By_Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</update>-->
+  <!--<update id="updateByPrimaryKeySelective" parameterType="com.shengpingj.kuntai.pojo.WP_Productinfo" >-->
+    <!--update wp_productinfo-->
+    <!--<set >-->
+      <!--<if test="ptitle != null" >-->
+        <!--ptitle = #{ptitle,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="cid != null" >-->
+        <!--cid = #{cid,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="otid != null" >-->
+        <!--otid = #{otid,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="isopen != null" >-->
+        <!--isopen = #{isopen,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="pointLow != null" >-->
+        <!--point_low = #{pointLow,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="pointTop != null" >-->
+        <!--point_top = #{pointTop,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="rands != null" >-->
+        <!--rands = #{rands,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="time != null" >-->
+        <!--time = #{time,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="isdelete != null" >-->
+        <!--isdelete = #{isdelete,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="procode != null" >-->
+        <!--procode = #{procode,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="addData != null" >-->
+        <!--add_data = #{addData,jdbcType=DOUBLE},-->
+      <!--</if>-->
+      <!--<if test="protime != null" >-->
+        <!--protime = #{protime,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="propoint != null" >-->
+        <!--propoint = #{propoint,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="proscale != null" >-->
+        <!--proscale = #{proscale,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="proorder != null" >-->
+        <!--proorder = #{proorder,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="content != null" >-->
+        <!--content = #{content,jdbcType=LONGVARCHAR},-->
+      <!--</if>-->
+    <!--</set>-->
+    <!--where pid = #{pid,jdbcType=INTEGER}-->
+  <!--</update>-->
+  <!--<update id="updateByPrimaryKeyWithBLOBs" parameterType="com.shengpingj.kuntai.pojo.WP_Productinfo" >-->
+    <!--update wp_productinfo-->
+    <!--set ptitle = #{ptitle,jdbcType=VARCHAR},-->
+      <!--cid = #{cid,jdbcType=INTEGER},-->
+      <!--otid = #{otid,jdbcType=INTEGER},-->
+      <!--isopen = #{isopen,jdbcType=INTEGER},-->
+      <!--point_low = #{pointLow,jdbcType=VARCHAR},-->
+      <!--point_top = #{pointTop,jdbcType=VARCHAR},-->
+      <!--rands = #{rands,jdbcType=VARCHAR},-->
+      <!--time = #{time,jdbcType=INTEGER},-->
+      <!--isdelete = #{isdelete,jdbcType=INTEGER},-->
+      <!--procode = #{procode,jdbcType=VARCHAR},-->
+      <!--add_data = #{addData,jdbcType=DOUBLE},-->
+      <!--protime = #{protime,jdbcType=VARCHAR},-->
+      <!--propoint = #{propoint,jdbcType=VARCHAR},-->
+      <!--proscale = #{proscale,jdbcType=VARCHAR},-->
+      <!--proorder = #{proorder,jdbcType=INTEGER},-->
+      <!--content = #{content,jdbcType=LONGVARCHAR}-->
+    <!--where pid = #{pid,jdbcType=INTEGER}-->
+  <!--</update>-->
+  <!--<update id="updateByPrimaryKey" parameterType="com.shengpingj.kuntai.pojo.WP_Productinfo" >-->
+    <!--update wp_productinfo-->
+    <!--set ptitle = #{ptitle,jdbcType=VARCHAR},-->
+      <!--cid = #{cid,jdbcType=INTEGER},-->
+      <!--otid = #{otid,jdbcType=INTEGER},-->
+      <!--isopen = #{isopen,jdbcType=INTEGER},-->
+      <!--point_low = #{pointLow,jdbcType=VARCHAR},-->
+      <!--point_top = #{pointTop,jdbcType=VARCHAR},-->
+      <!--rands = #{rands,jdbcType=VARCHAR},-->
+      <!--time = #{time,jdbcType=INTEGER},-->
+      <!--isdelete = #{isdelete,jdbcType=INTEGER},-->
+      <!--procode = #{procode,jdbcType=VARCHAR},-->
+      <!--add_data = #{addData,jdbcType=DOUBLE},-->
+      <!--protime = #{protime,jdbcType=VARCHAR},-->
+      <!--propoint = #{propoint,jdbcType=VARCHAR},-->
+      <!--proscale = #{proscale,jdbcType=VARCHAR},-->
+      <!--proorder = #{proorder,jdbcType=INTEGER}-->
+    <!--where pid = #{pid,jdbcType=INTEGER}-->
+  <!--</update>-->
+</mapper>

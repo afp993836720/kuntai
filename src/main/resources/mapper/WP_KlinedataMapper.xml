@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shengpingj.kuntai.mapper.WP_KlinedataMapper" >
+  <resultMap id="BaseResultMap" type="com.shengpingj.kuntai.pojo.WP_Klinedata" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="ktime" property="ktime" jdbcType="VARCHAR" />
+    <result column="updata" property="updata" jdbcType="VARCHAR" />
+    <result column="downdata" property="downdata" jdbcType="VARCHAR" />
+    <result column="pid" property="pid" jdbcType="INTEGER" />
+    <result column="opendata" property="opendata" jdbcType="VARCHAR" />
+    <result column="closdata" property="closdata" jdbcType="VARCHAR" />
+  </resultMap>
+  <!--<sql id="Example_Where_Clause" >-->
+    <!--<where >-->
+      <!--<foreach collection="oredCriteria" item="criteria" separator="or" >-->
+        <!--<if test="criteria.valid" >-->
+          <!--<trim prefix="(" suffix=")" prefixOverrides="and" >-->
+            <!--<foreach collection="criteria.criteria" item="criterion" >-->
+              <!--<choose >-->
+                <!--<when test="criterion.noValue" >-->
+                  <!--and ${criterion.condition}-->
+                <!--</when>-->
+                <!--<when test="criterion.singleValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value}-->
+                <!--</when>-->
+                <!--<when test="criterion.betweenValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}-->
+                <!--</when>-->
+                <!--<when test="criterion.listValue" >-->
+                  <!--and ${criterion.condition}-->
+                  <!--<foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >-->
+                    <!--#{listItem}-->
+                  <!--</foreach>-->
+                <!--</when>-->
+              <!--</choose>-->
+            <!--</foreach>-->
+          <!--</trim>-->
+        <!--</if>-->
+      <!--</foreach>-->
+    <!--</where>-->
+  <!--</sql>-->
+  <!--<sql id="Update_By_Example_Where_Clause" >-->
+    <!--<where >-->
+      <!--<foreach collection="example.oredCriteria" item="criteria" separator="or" >-->
+        <!--<if test="criteria.valid" >-->
+          <!--<trim prefix="(" suffix=")" prefixOverrides="and" >-->
+            <!--<foreach collection="criteria.criteria" item="criterion" >-->
+              <!--<choose >-->
+                <!--<when test="criterion.noValue" >-->
+                  <!--and ${criterion.condition}-->
+                <!--</when>-->
+                <!--<when test="criterion.singleValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value}-->
+                <!--</when>-->
+                <!--<when test="criterion.betweenValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}-->
+                <!--</when>-->
+                <!--<when test="criterion.listValue" >-->
+                  <!--and ${criterion.condition}-->
+                  <!--<foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >-->
+                    <!--#{listItem}-->
+                  <!--</foreach>-->
+                <!--</when>-->
+              <!--</choose>-->
+            <!--</foreach>-->
+          <!--</trim>-->
+        <!--</if>-->
+      <!--</foreach>-->
+    <!--</where>-->
+  <!--</sql>-->
+  <!--<sql id="Base_Column_List" >-->
+    <!--id, ktime, updata, downdata, pid, opendata, closdata-->
+  <!--</sql>-->
+  <!--<select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shengpingj.kuntai.pojo.WP_KlinedataExample" >-->
+    <!--select-->
+    <!--<if test="distinct" >-->
+      <!--distinct-->
+    <!--</if>-->
+    <!--<include refid="Base_Column_List" />-->
+    <!--from wp_klinedata-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+    <!--<if test="orderByClause != null" >-->
+      <!--order by ${orderByClause}-->
+    <!--</if>-->
+  <!--</select>-->
+  <!--<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >-->
+    <!--select -->
+    <!--<include refid="Base_Column_List" />-->
+    <!--from wp_klinedata-->
+    <!--where id = #{id,jdbcType=INTEGER}-->
+  <!--</select>-->
+  <!--<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >-->
+    <!--delete from wp_klinedata-->
+    <!--where id = #{id,jdbcType=INTEGER}-->
+  <!--</delete>-->
+  <!--<delete id="deleteByExample" parameterType="com.shengpingj.kuntai.pojo.WP_KlinedataExample" >-->
+    <!--delete from wp_klinedata-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</delete>-->
+  <!--<insert id="insert" parameterType="com.shengpingj.kuntai.pojo.WP_Klinedata" >-->
+    <!--insert into wp_klinedata (id, ktime, updata, -->
+      <!--downdata, pid, opendata, -->
+      <!--closdata)-->
+    <!--values (#{id,jdbcType=INTEGER}, #{ktime,jdbcType=VARCHAR}, #{updata,jdbcType=VARCHAR}, -->
+      <!--#{downdata,jdbcType=VARCHAR}, #{pid,jdbcType=INTEGER}, #{opendata,jdbcType=VARCHAR}, -->
+      <!--#{closdata,jdbcType=VARCHAR})-->
+  <!--</insert>-->
+  <!--<insert id="insertSelective" parameterType="com.shengpingj.kuntai.pojo.WP_Klinedata" >-->
+    <!--insert into wp_klinedata-->
+    <!--<trim prefix="(" suffix=")" suffixOverrides="," >-->
+      <!--<if test="id != null" >-->
+        <!--id,-->
+      <!--</if>-->
+      <!--<if test="ktime != null" >-->
+        <!--ktime,-->
+      <!--</if>-->
+      <!--<if test="updata != null" >-->
+        <!--updata,-->
+      <!--</if>-->
+      <!--<if test="downdata != null" >-->
+        <!--downdata,-->
+      <!--</if>-->
+      <!--<if test="pid != null" >-->
+        <!--pid,-->
+      <!--</if>-->
+      <!--<if test="opendata != null" >-->
+        <!--opendata,-->
+      <!--</if>-->
+      <!--<if test="closdata != null" >-->
+        <!--closdata,-->
+      <!--</if>-->
+    <!--</trim>-->
+    <!--<trim prefix="values (" suffix=")" suffixOverrides="," >-->
+      <!--<if test="id != null" >-->
+        <!--#{id,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="ktime != null" >-->
+        <!--#{ktime,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="updata != null" >-->
+        <!--#{updata,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="downdata != null" >-->
+        <!--#{downdata,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="pid != null" >-->
+        <!--#{pid,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="opendata != null" >-->
+        <!--#{opendata,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="closdata != null" >-->
+        <!--#{closdata,jdbcType=VARCHAR},-->
+      <!--</if>-->
+    <!--</trim>-->
+  <!--</insert>-->
+  <!--<select id="countByExample" parameterType="com.shengpingj.kuntai.pojo.WP_KlinedataExample" resultType="java.lang.Integer" >-->
+    <!--select count(*) from wp_klinedata-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</select>-->
+  <!--<update id="updateByExampleSelective" parameterType="map" >-->
+    <!--update wp_klinedata-->
+    <!--<set >-->
+      <!--<if test="record.id != null" >-->
+        <!--id = #{record.id,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.ktime != null" >-->
+        <!--ktime = #{record.ktime,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.updata != null" >-->
+        <!--updata = #{record.updata,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.downdata != null" >-->
+        <!--downdata = #{record.downdata,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.pid != null" >-->
+        <!--pid = #{record.pid,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.opendata != null" >-->
+        <!--opendata = #{record.opendata,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.closdata != null" >-->
+        <!--closdata = #{record.closdata,jdbcType=VARCHAR},-->
+      <!--</if>-->
+    <!--</set>-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Update_By_Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</update>-->
+  <!--<update id="updateByExample" parameterType="map" >-->
+    <!--update wp_klinedata-->
+    <!--set id = #{record.id,jdbcType=INTEGER},-->
+      <!--ktime = #{record.ktime,jdbcType=VARCHAR},-->
+      <!--updata = #{record.updata,jdbcType=VARCHAR},-->
+      <!--downdata = #{record.downdata,jdbcType=VARCHAR},-->
+      <!--pid = #{record.pid,jdbcType=INTEGER},-->
+      <!--opendata = #{record.opendata,jdbcType=VARCHAR},-->
+      <!--closdata = #{record.closdata,jdbcType=VARCHAR}-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Update_By_Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</update>-->
+  <!--<update id="updateByPrimaryKeySelective" parameterType="com.shengpingj.kuntai.pojo.WP_Klinedata" >-->
+    <!--update wp_klinedata-->
+    <!--<set >-->
+      <!--<if test="ktime != null" >-->
+        <!--ktime = #{ktime,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="updata != null" >-->
+        <!--updata = #{updata,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="downdata != null" >-->
+        <!--downdata = #{downdata,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="pid != null" >-->
+        <!--pid = #{pid,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="opendata != null" >-->
+        <!--opendata = #{opendata,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="closdata != null" >-->
+        <!--closdata = #{closdata,jdbcType=VARCHAR},-->
+      <!--</if>-->
+    <!--</set>-->
+    <!--where id = #{id,jdbcType=INTEGER}-->
+  <!--</update>-->
+  <!--<update id="updateByPrimaryKey" parameterType="com.shengpingj.kuntai.pojo.WP_Klinedata" >-->
+    <!--update wp_klinedata-->
+    <!--set ktime = #{ktime,jdbcType=VARCHAR},-->
+      <!--updata = #{updata,jdbcType=VARCHAR},-->
+      <!--downdata = #{downdata,jdbcType=VARCHAR},-->
+      <!--pid = #{pid,jdbcType=INTEGER},-->
+      <!--opendata = #{opendata,jdbcType=VARCHAR},-->
+      <!--closdata = #{closdata,jdbcType=VARCHAR}-->
+    <!--where id = #{id,jdbcType=INTEGER}-->
+  <!--</update>-->
+</mapper>

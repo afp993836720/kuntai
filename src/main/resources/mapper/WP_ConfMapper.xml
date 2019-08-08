@@ -1,0 +1,501 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shengpingj.kuntai.mapper.WP_ConfMapper" >
+  <resultMap id="BaseResultMap" type="com.shengpingj.kuntai.pojo.WP_Conf" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="webname" property="webname" jdbcType="VARCHAR" />
+    <result column="onelive" property="onelive" jdbcType="DOUBLE" />
+    <result column="twolive" property="twolive" jdbcType="DOUBLE" />
+    <result column="threelive" property="threelive" jdbcType="DOUBLE" />
+    <result column="pagenum" property="pagenum" jdbcType="INTEGER" />
+    <result column="webisopen" property="webisopen" jdbcType="INTEGER" />
+    <result column="daygiveint" property="daygiveint" jdbcType="INTEGER" />
+    <result column="inttomoney" property="inttomoney" jdbcType="VARCHAR" />
+    <result column="ordermin" property="ordermin" jdbcType="DECIMAL" />
+    <result column="ordermax" property="ordermax" jdbcType="DECIMAL" />
+    <result column="cashmin" property="cashmin" jdbcType="DECIMAL" />
+    <result column="cashmax" property="cashmax" jdbcType="DECIMAL" />
+    <result column="rechargemin" property="rechargemin" jdbcType="DECIMAL" />
+    <result column="rechargemax" property="rechargemax" jdbcType="DECIMAL" />
+    <result column="usermaxrecharge" property="usermaxrecharge" jdbcType="DECIMAL" />
+    <result column="festivalisrec" property="festivalisrec" jdbcType="TINYINT" />
+    <result column="userallhold" property="userallhold" jdbcType="DECIMAL" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.shengpingj.kuntai.pojo.WP_Conf" extends="BaseResultMap" >
+    <result column="closswebcon" property="closswebcon" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <!--<sql id="Example_Where_Clause" >-->
+    <!--<where >-->
+      <!--<foreach collection="oredCriteria" item="criteria" separator="or" >-->
+        <!--<if test="criteria.valid" >-->
+          <!--<trim prefix="(" suffix=")" prefixOverrides="and" >-->
+            <!--<foreach collection="criteria.criteria" item="criterion" >-->
+              <!--<choose >-->
+                <!--<when test="criterion.noValue" >-->
+                  <!--and ${criterion.condition}-->
+                <!--</when>-->
+                <!--<when test="criterion.singleValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value}-->
+                <!--</when>-->
+                <!--<when test="criterion.betweenValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}-->
+                <!--</when>-->
+                <!--<when test="criterion.listValue" >-->
+                  <!--and ${criterion.condition}-->
+                  <!--<foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >-->
+                    <!--#{listItem}-->
+                  <!--</foreach>-->
+                <!--</when>-->
+              <!--</choose>-->
+            <!--</foreach>-->
+          <!--</trim>-->
+        <!--</if>-->
+      <!--</foreach>-->
+    <!--</where>-->
+  <!--</sql>-->
+  <!--<sql id="Update_By_Example_Where_Clause" >-->
+    <!--<where >-->
+      <!--<foreach collection="example.oredCriteria" item="criteria" separator="or" >-->
+        <!--<if test="criteria.valid" >-->
+          <!--<trim prefix="(" suffix=")" prefixOverrides="and" >-->
+            <!--<foreach collection="criteria.criteria" item="criterion" >-->
+              <!--<choose >-->
+                <!--<when test="criterion.noValue" >-->
+                  <!--and ${criterion.condition}-->
+                <!--</when>-->
+                <!--<when test="criterion.singleValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value}-->
+                <!--</when>-->
+                <!--<when test="criterion.betweenValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}-->
+                <!--</when>-->
+                <!--<when test="criterion.listValue" >-->
+                  <!--and ${criterion.condition}-->
+                  <!--<foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >-->
+                    <!--#{listItem}-->
+                  <!--</foreach>-->
+                <!--</when>-->
+              <!--</choose>-->
+            <!--</foreach>-->
+          <!--</trim>-->
+        <!--</if>-->
+      <!--</foreach>-->
+    <!--</where>-->
+  <!--</sql>-->
+  <!--<sql id="Base_Column_List" >-->
+    <!--id, webname, onelive, twolive, threelive, pagenum, webisopen, daygiveint, inttomoney, -->
+    <!--ordermin, ordermax, cashmin, cashmax, rechargemin, rechargemax, usermaxrecharge, -->
+    <!--festivalisrec, userallhold-->
+  <!--</sql>-->
+  <!--<sql id="Blob_Column_List" >-->
+    <!--closswebcon-->
+  <!--</sql>-->
+  <!--<select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.shengpingj.kuntai.pojo.WP_ConfExample" >-->
+    <!--select-->
+    <!--<if test="distinct" >-->
+      <!--distinct-->
+    <!--</if>-->
+    <!--<include refid="Base_Column_List" />-->
+    <!--,-->
+    <!--<include refid="Blob_Column_List" />-->
+    <!--from wp_conf-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+    <!--<if test="orderByClause != null" >-->
+      <!--order by ${orderByClause}-->
+    <!--</if>-->
+  <!--</select>-->
+  <!--<select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shengpingj.kuntai.pojo.WP_ConfExample" >-->
+    <!--select-->
+    <!--<if test="distinct" >-->
+      <!--distinct-->
+    <!--</if>-->
+    <!--<include refid="Base_Column_List" />-->
+    <!--from wp_conf-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+    <!--<if test="orderByClause != null" >-->
+      <!--order by ${orderByClause}-->
+    <!--</if>-->
+  <!--</select>-->
+  <!--<select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >-->
+    <!--select -->
+    <!--<include refid="Base_Column_List" />-->
+    <!--,-->
+    <!--<include refid="Blob_Column_List" />-->
+    <!--from wp_conf-->
+    <!--where id = #{id,jdbcType=INTEGER}-->
+  <!--</select>-->
+  <!--<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >-->
+    <!--delete from wp_conf-->
+    <!--where id = #{id,jdbcType=INTEGER}-->
+  <!--</delete>-->
+  <!--<delete id="deleteByExample" parameterType="com.shengpingj.kuntai.pojo.WP_ConfExample" >-->
+    <!--delete from wp_conf-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</delete>-->
+  <!--<insert id="insert" parameterType="com.shengpingj.kuntai.pojo.WP_Conf" >-->
+    <!--insert into wp_conf (id, webname, onelive, -->
+      <!--twolive, threelive, pagenum, -->
+      <!--webisopen, daygiveint, inttomoney, -->
+      <!--ordermin, ordermax, cashmin, -->
+      <!--cashmax, rechargemin, rechargemax, -->
+      <!--usermaxrecharge, festivalisrec, userallhold, -->
+      <!--closswebcon)-->
+    <!--values (#{id,jdbcType=INTEGER}, #{webname,jdbcType=VARCHAR}, #{onelive,jdbcType=DOUBLE}, -->
+      <!--#{twolive,jdbcType=DOUBLE}, #{threelive,jdbcType=DOUBLE}, #{pagenum,jdbcType=INTEGER}, -->
+      <!--#{webisopen,jdbcType=INTEGER}, #{daygiveint,jdbcType=INTEGER}, #{inttomoney,jdbcType=VARCHAR}, -->
+      <!--#{ordermin,jdbcType=DECIMAL}, #{ordermax,jdbcType=DECIMAL}, #{cashmin,jdbcType=DECIMAL}, -->
+      <!--#{cashmax,jdbcType=DECIMAL}, #{rechargemin,jdbcType=DECIMAL}, #{rechargemax,jdbcType=DECIMAL}, -->
+      <!--#{usermaxrecharge,jdbcType=DECIMAL}, #{festivalisrec,jdbcType=TINYINT}, #{userallhold,jdbcType=DECIMAL}, -->
+      <!--#{closswebcon,jdbcType=LONGVARCHAR})-->
+  <!--</insert>-->
+  <!--<insert id="insertSelective" parameterType="com.shengpingj.kuntai.pojo.WP_Conf" >-->
+    <!--insert into wp_conf-->
+    <!--<trim prefix="(" suffix=")" suffixOverrides="," >-->
+      <!--<if test="id != null" >-->
+        <!--id,-->
+      <!--</if>-->
+      <!--<if test="webname != null" >-->
+        <!--webname,-->
+      <!--</if>-->
+      <!--<if test="onelive != null" >-->
+        <!--onelive,-->
+      <!--</if>-->
+      <!--<if test="twolive != null" >-->
+        <!--twolive,-->
+      <!--</if>-->
+      <!--<if test="threelive != null" >-->
+        <!--threelive,-->
+      <!--</if>-->
+      <!--<if test="pagenum != null" >-->
+        <!--pagenum,-->
+      <!--</if>-->
+      <!--<if test="webisopen != null" >-->
+        <!--webisopen,-->
+      <!--</if>-->
+      <!--<if test="daygiveint != null" >-->
+        <!--daygiveint,-->
+      <!--</if>-->
+      <!--<if test="inttomoney != null" >-->
+        <!--inttomoney,-->
+      <!--</if>-->
+      <!--<if test="ordermin != null" >-->
+        <!--ordermin,-->
+      <!--</if>-->
+      <!--<if test="ordermax != null" >-->
+        <!--ordermax,-->
+      <!--</if>-->
+      <!--<if test="cashmin != null" >-->
+        <!--cashmin,-->
+      <!--</if>-->
+      <!--<if test="cashmax != null" >-->
+        <!--cashmax,-->
+      <!--</if>-->
+      <!--<if test="rechargemin != null" >-->
+        <!--rechargemin,-->
+      <!--</if>-->
+      <!--<if test="rechargemax != null" >-->
+        <!--rechargemax,-->
+      <!--</if>-->
+      <!--<if test="usermaxrecharge != null" >-->
+        <!--usermaxrecharge,-->
+      <!--</if>-->
+      <!--<if test="festivalisrec != null" >-->
+        <!--festivalisrec,-->
+      <!--</if>-->
+      <!--<if test="userallhold != null" >-->
+        <!--userallhold,-->
+      <!--</if>-->
+      <!--<if test="closswebcon != null" >-->
+        <!--closswebcon,-->
+      <!--</if>-->
+    <!--</trim>-->
+    <!--<trim prefix="values (" suffix=")" suffixOverrides="," >-->
+      <!--<if test="id != null" >-->
+        <!--#{id,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="webname != null" >-->
+        <!--#{webname,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="onelive != null" >-->
+        <!--#{onelive,jdbcType=DOUBLE},-->
+      <!--</if>-->
+      <!--<if test="twolive != null" >-->
+        <!--#{twolive,jdbcType=DOUBLE},-->
+      <!--</if>-->
+      <!--<if test="threelive != null" >-->
+        <!--#{threelive,jdbcType=DOUBLE},-->
+      <!--</if>-->
+      <!--<if test="pagenum != null" >-->
+        <!--#{pagenum,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="webisopen != null" >-->
+        <!--#{webisopen,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="daygiveint != null" >-->
+        <!--#{daygiveint,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="inttomoney != null" >-->
+        <!--#{inttomoney,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="ordermin != null" >-->
+        <!--#{ordermin,jdbcType=DECIMAL},-->
+      <!--</if>-->
+      <!--<if test="ordermax != null" >-->
+        <!--#{ordermax,jdbcType=DECIMAL},-->
+      <!--</if>-->
+      <!--<if test="cashmin != null" >-->
+        <!--#{cashmin,jdbcType=DECIMAL},-->
+      <!--</if>-->
+      <!--<if test="cashmax != null" >-->
+        <!--#{cashmax,jdbcType=DECIMAL},-->
+      <!--</if>-->
+      <!--<if test="rechargemin != null" >-->
+        <!--#{rechargemin,jdbcType=DECIMAL},-->
+      <!--</if>-->
+      <!--<if test="rechargemax != null" >-->
+        <!--#{rechargemax,jdbcType=DECIMAL},-->
+      <!--</if>-->
+      <!--<if test="usermaxrecharge != null" >-->
+        <!--#{usermaxrecharge,jdbcType=DECIMAL},-->
+      <!--</if>-->
+      <!--<if test="festivalisrec != null" >-->
+        <!--#{festivalisrec,jdbcType=TINYINT},-->
+      <!--</if>-->
+      <!--<if test="userallhold != null" >-->
+        <!--#{userallhold,jdbcType=DECIMAL},-->
+      <!--</if>-->
+      <!--<if test="closswebcon != null" >-->
+        <!--#{closswebcon,jdbcType=LONGVARCHAR},-->
+      <!--</if>-->
+    <!--</trim>-->
+  <!--</insert>-->
+  <!--<select id="countByExample" parameterType="com.shengpingj.kuntai.pojo.WP_ConfExample" resultType="java.lang.Integer" >-->
+    <!--select count(*) from wp_conf-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</select>-->
+  <!--<update id="updateByExampleSelective" parameterType="map" >-->
+    <!--update wp_conf-->
+    <!--<set >-->
+      <!--<if test="record.id != null" >-->
+        <!--id = #{record.id,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.webname != null" >-->
+        <!--webname = #{record.webname,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.onelive != null" >-->
+        <!--onelive = #{record.onelive,jdbcType=DOUBLE},-->
+      <!--</if>-->
+      <!--<if test="record.twolive != null" >-->
+        <!--twolive = #{record.twolive,jdbcType=DOUBLE},-->
+      <!--</if>-->
+      <!--<if test="record.threelive != null" >-->
+        <!--threelive = #{record.threelive,jdbcType=DOUBLE},-->
+      <!--</if>-->
+      <!--<if test="record.pagenum != null" >-->
+        <!--pagenum = #{record.pagenum,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.webisopen != null" >-->
+        <!--webisopen = #{record.webisopen,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.daygiveint != null" >-->
+        <!--daygiveint = #{record.daygiveint,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.inttomoney != null" >-->
+        <!--inttomoney = #{record.inttomoney,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.ordermin != null" >-->
+        <!--ordermin = #{record.ordermin,jdbcType=DECIMAL},-->
+      <!--</if>-->
+      <!--<if test="record.ordermax != null" >-->
+        <!--ordermax = #{record.ordermax,jdbcType=DECIMAL},-->
+      <!--</if>-->
+      <!--<if test="record.cashmin != null" >-->
+        <!--cashmin = #{record.cashmin,jdbcType=DECIMAL},-->
+      <!--</if>-->
+      <!--<if test="record.cashmax != null" >-->
+        <!--cashmax = #{record.cashmax,jdbcType=DECIMAL},-->
+      <!--</if>-->
+      <!--<if test="record.rechargemin != null" >-->
+        <!--rechargemin = #{record.rechargemin,jdbcType=DECIMAL},-->
+      <!--</if>-->
+      <!--<if test="record.rechargemax != null" >-->
+        <!--rechargemax = #{record.rechargemax,jdbcType=DECIMAL},-->
+      <!--</if>-->
+      <!--<if test="record.usermaxrecharge != null" >-->
+        <!--usermaxrecharge = #{record.usermaxrecharge,jdbcType=DECIMAL},-->
+      <!--</if>-->
+      <!--<if test="record.festivalisrec != null" >-->
+        <!--festivalisrec = #{record.festivalisrec,jdbcType=TINYINT},-->
+      <!--</if>-->
+      <!--<if test="record.userallhold != null" >-->
+        <!--userallhold = #{record.userallhold,jdbcType=DECIMAL},-->
+      <!--</if>-->
+      <!--<if test="record.closswebcon != null" >-->
+        <!--closswebcon = #{record.closswebcon,jdbcType=LONGVARCHAR},-->
+      <!--</if>-->
+    <!--</set>-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Update_By_Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</update>-->
+  <!--<update id="updateByExampleWithBLOBs" parameterType="map" >-->
+    <!--update wp_conf-->
+    <!--set id = #{record.id,jdbcType=INTEGER},-->
+      <!--webname = #{record.webname,jdbcType=VARCHAR},-->
+      <!--onelive = #{record.onelive,jdbcType=DOUBLE},-->
+      <!--twolive = #{record.twolive,jdbcType=DOUBLE},-->
+      <!--threelive = #{record.threelive,jdbcType=DOUBLE},-->
+      <!--pagenum = #{record.pagenum,jdbcType=INTEGER},-->
+      <!--webisopen = #{record.webisopen,jdbcType=INTEGER},-->
+      <!--daygiveint = #{record.daygiveint,jdbcType=INTEGER},-->
+      <!--inttomoney = #{record.inttomoney,jdbcType=VARCHAR},-->
+      <!--ordermin = #{record.ordermin,jdbcType=DECIMAL},-->
+      <!--ordermax = #{record.ordermax,jdbcType=DECIMAL},-->
+      <!--cashmin = #{record.cashmin,jdbcType=DECIMAL},-->
+      <!--cashmax = #{record.cashmax,jdbcType=DECIMAL},-->
+      <!--rechargemin = #{record.rechargemin,jdbcType=DECIMAL},-->
+      <!--rechargemax = #{record.rechargemax,jdbcType=DECIMAL},-->
+      <!--usermaxrecharge = #{record.usermaxrecharge,jdbcType=DECIMAL},-->
+      <!--festivalisrec = #{record.festivalisrec,jdbcType=TINYINT},-->
+      <!--userallhold = #{record.userallhold,jdbcType=DECIMAL},-->
+      <!--closswebcon = #{record.closswebcon,jdbcType=LONGVARCHAR}-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Update_By_Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</update>-->
+  <!--<update id="updateByExample" parameterType="map" >-->
+    <!--update wp_conf-->
+    <!--set id = #{record.id,jdbcType=INTEGER},-->
+      <!--webname = #{record.webname,jdbcType=VARCHAR},-->
+      <!--onelive = #{record.onelive,jdbcType=DOUBLE},-->
+      <!--twolive = #{record.twolive,jdbcType=DOUBLE},-->
+      <!--threelive = #{record.threelive,jdbcType=DOUBLE},-->
+      <!--pagenum = #{record.pagenum,jdbcType=INTEGER},-->
+      <!--webisopen = #{record.webisopen,jdbcType=INTEGER},-->
+      <!--daygiveint = #{record.daygiveint,jdbcType=INTEGER},-->
+      <!--inttomoney = #{record.inttomoney,jdbcType=VARCHAR},-->
+      <!--ordermin = #{record.ordermin,jdbcType=DECIMAL},-->
+      <!--ordermax = #{record.ordermax,jdbcType=DECIMAL},-->
+      <!--cashmin = #{record.cashmin,jdbcType=DECIMAL},-->
+      <!--cashmax = #{record.cashmax,jdbcType=DECIMAL},-->
+      <!--rechargemin = #{record.rechargemin,jdbcType=DECIMAL},-->
+      <!--rechargemax = #{record.rechargemax,jdbcType=DECIMAL},-->
+      <!--usermaxrecharge = #{record.usermaxrecharge,jdbcType=DECIMAL},-->
+      <!--festivalisrec = #{record.festivalisrec,jdbcType=TINYINT},-->
+      <!--userallhold = #{record.userallhold,jdbcType=DECIMAL}-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Update_By_Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</update>-->
+  <!--<update id="updateByPrimaryKeySelective" parameterType="com.shengpingj.kuntai.pojo.WP_Conf" >-->
+    <!--update wp_conf-->
+    <!--<set >-->
+      <!--<if test="webname != null" >-->
+        <!--webname = #{webname,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="onelive != null" >-->
+        <!--onelive = #{onelive,jdbcType=DOUBLE},-->
+      <!--</if>-->
+      <!--<if test="twolive != null" >-->
+        <!--twolive = #{twolive,jdbcType=DOUBLE},-->
+      <!--</if>-->
+      <!--<if test="threelive != null" >-->
+        <!--threelive = #{threelive,jdbcType=DOUBLE},-->
+      <!--</if>-->
+      <!--<if test="pagenum != null" >-->
+        <!--pagenum = #{pagenum,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="webisopen != null" >-->
+        <!--webisopen = #{webisopen,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="daygiveint != null" >-->
+        <!--daygiveint = #{daygiveint,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="inttomoney != null" >-->
+        <!--inttomoney = #{inttomoney,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="ordermin != null" >-->
+        <!--ordermin = #{ordermin,jdbcType=DECIMAL},-->
+      <!--</if>-->
+      <!--<if test="ordermax != null" >-->
+        <!--ordermax = #{ordermax,jdbcType=DECIMAL},-->
+      <!--</if>-->
+      <!--<if test="cashmin != null" >-->
+        <!--cashmin = #{cashmin,jdbcType=DECIMAL},-->
+      <!--</if>-->
+      <!--<if test="cashmax != null" >-->
+        <!--cashmax = #{cashmax,jdbcType=DECIMAL},-->
+      <!--</if>-->
+      <!--<if test="rechargemin != null" >-->
+        <!--rechargemin = #{rechargemin,jdbcType=DECIMAL},-->
+      <!--</if>-->
+      <!--<if test="rechargemax != null" >-->
+        <!--rechargemax = #{rechargemax,jdbcType=DECIMAL},-->
+      <!--</if>-->
+      <!--<if test="usermaxrecharge != null" >-->
+        <!--usermaxrecharge = #{usermaxrecharge,jdbcType=DECIMAL},-->
+      <!--</if>-->
+      <!--<if test="festivalisrec != null" >-->
+        <!--festivalisrec = #{festivalisrec,jdbcType=TINYINT},-->
+      <!--</if>-->
+      <!--<if test="userallhold != null" >-->
+        <!--userallhold = #{userallhold,jdbcType=DECIMAL},-->
+      <!--</if>-->
+      <!--<if test="closswebcon != null" >-->
+        <!--closswebcon = #{closswebcon,jdbcType=LONGVARCHAR},-->
+      <!--</if>-->
+    <!--</set>-->
+    <!--where id = #{id,jdbcType=INTEGER}-->
+  <!--</update>-->
+  <!--<update id="updateByPrimaryKeyWithBLOBs" parameterType="com.shengpingj.kuntai.pojo.WP_Conf" >-->
+    <!--update wp_conf-->
+    <!--set webname = #{webname,jdbcType=VARCHAR},-->
+      <!--onelive = #{onelive,jdbcType=DOUBLE},-->
+      <!--twolive = #{twolive,jdbcType=DOUBLE},-->
+      <!--threelive = #{threelive,jdbcType=DOUBLE},-->
+      <!--pagenum = #{pagenum,jdbcType=INTEGER},-->
+      <!--webisopen = #{webisopen,jdbcType=INTEGER},-->
+      <!--daygiveint = #{daygiveint,jdbcType=INTEGER},-->
+      <!--inttomoney = #{inttomoney,jdbcType=VARCHAR},-->
+      <!--ordermin = #{ordermin,jdbcType=DECIMAL},-->
+      <!--ordermax = #{ordermax,jdbcType=DECIMAL},-->
+      <!--cashmin = #{cashmin,jdbcType=DECIMAL},-->
+      <!--cashmax = #{cashmax,jdbcType=DECIMAL},-->
+      <!--rechargemin = #{rechargemin,jdbcType=DECIMAL},-->
+      <!--rechargemax = #{rechargemax,jdbcType=DECIMAL},-->
+      <!--usermaxrecharge = #{usermaxrecharge,jdbcType=DECIMAL},-->
+      <!--festivalisrec = #{festivalisrec,jdbcType=TINYINT},-->
+      <!--userallhold = #{userallhold,jdbcType=DECIMAL},-->
+      <!--closswebcon = #{closswebcon,jdbcType=LONGVARCHAR}-->
+    <!--where id = #{id,jdbcType=INTEGER}-->
+  <!--</update>-->
+  <!--<update id="updateByPrimaryKey" parameterType="com.shengpingj.kuntai.pojo.WP_Conf" >-->
+    <!--update wp_conf-->
+    <!--set webname = #{webname,jdbcType=VARCHAR},-->
+      <!--onelive = #{onelive,jdbcType=DOUBLE},-->
+      <!--twolive = #{twolive,jdbcType=DOUBLE},-->
+      <!--threelive = #{threelive,jdbcType=DOUBLE},-->
+      <!--pagenum = #{pagenum,jdbcType=INTEGER},-->
+      <!--webisopen = #{webisopen,jdbcType=INTEGER},-->
+      <!--daygiveint = #{daygiveint,jdbcType=INTEGER},-->
+      <!--inttomoney = #{inttomoney,jdbcType=VARCHAR},-->
+      <!--ordermin = #{ordermin,jdbcType=DECIMAL},-->
+      <!--ordermax = #{ordermax,jdbcType=DECIMAL},-->
+      <!--cashmin = #{cashmin,jdbcType=DECIMAL},-->
+      <!--cashmax = #{cashmax,jdbcType=DECIMAL},-->
+      <!--rechargemin = #{rechargemin,jdbcType=DECIMAL},-->
+      <!--rechargemax = #{rechargemax,jdbcType=DECIMAL},-->
+      <!--usermaxrecharge = #{usermaxrecharge,jdbcType=DECIMAL},-->
+      <!--festivalisrec = #{festivalisrec,jdbcType=TINYINT},-->
+      <!--userallhold = #{userallhold,jdbcType=DECIMAL}-->
+    <!--where id = #{id,jdbcType=INTEGER}-->
+  <!--</update>-->
+</mapper>

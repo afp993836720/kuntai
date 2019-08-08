@@ -1,0 +1,68 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div th:insert="~{admin/head :: headFragment}"></div>
+<div th:insert="~{admin/menu :: menuFragment}"></div>
+<div th:insert="~{admin/head :: sectionFragment}"></div>
+
+<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+
+<section id="main-content">
+      <section class="wrapper">
+			<div class="col-sm-8">
+		      <aside class="profile-info col-lg-12">
+		      <section class="panel">
+		          <hr>
+		          <div class="panel-body bio-graph-info">
+		              <form class="form-horizontal" role="form" action="editconf" enctype="multipart/form-data" method="post" id="formid">
+						
+		                <!--{volist name="data" id="vo"}-->
+		                  <div class="form-group" th:each="vo : ${list}">
+		                      <label class="col-lg-3 control-label" th:text="${vo.title}">{$vo.title}：</label>
+		                      <div class="col-lg-6">
+		                      	<!--{if $vo.type == 1}-->
+		                          <input th:if="${vo.type == 1}" type="text" class="form-control" th:name="'value_'+${vo.id}+'_'+${vo.type}" th:value="${vo.value}">
+		                        <!--{elseif $vo.type == 2 /}-->
+		                        <textarea th:if="${vo.type==2}"  th:name="'value_'+${vo.id}+'_'+${vo.type}"  class="form-control" cols="30" rows="10" th:text="${vo.value}">{$vo['value']}</textarea>
+		                        <!--{elseif $vo.type == 3 /}-->
+
+								<!--{if $vo['value']}-->
+		                        <div th:if="${vo.type==3 && vo.value !=null}" class="upload-pre-item"><a th:href="${vo.value}" target="_block" title="点击查看大图"><img height="100" th:src="${vo.value}" alt=""></a></div><br>
+								<!--{/if}-->
+								<input th:if="${vo.type == 3}" type="hidden"  th:name="'value_'+${vo.id}+'_'+${vo.type}">
+								<input th:if="${vo.type == 3}" type="file" th:id="'pic_'+${vo.id}" th:name="'pic_'+${vo.id}">
+
+		                        <!--{/if}if-->
+		                      </div>
+		                      <label class="col-lg-3 control-label" th:text="${vo.extra}">{$vo.extra}</label>
+		                  </div>
+						<!--{/volistlist}volistlist-->
+		                  
+		                  <div class="form-group">
+		                      <div class="col-lg-offset-2 col-lg-10">
+		                          <input type="submit" class="btn btn-success"    value="提交">
+		                      </div>
+		                  </div>
+		              </form>
+		          </div>
+		      </section>
+		      
+		  </aside>
+		  </div>
+
+      </section>
+  </section>
+<div th:insert="~{admin/foot :: footerFragment}"></div>
+<script>
+
+function formeidt() {
+	var formurl = "editconf";
+    var data = $('#formid').serialize();
+
+    WPpost(formurl,data,locurl);
+    
+    return false;
+}
+
+
+
+</script>

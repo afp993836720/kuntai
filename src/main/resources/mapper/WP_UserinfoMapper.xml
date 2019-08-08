@@ -1,0 +1,679 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shengpingj.kuntai.mapper.WP_UserinfoMapper" >
+  <resultMap id="Wp_UserinfoResultMap" type="com.shengpingj.kuntai.pojo.WP_Userinfo" >
+    <id column="uid" property="uid" jdbcType="INTEGER" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="upwd" property="upwd" jdbcType="VARCHAR" />
+    <result column="utel" property="utel" jdbcType="VARCHAR" />
+    <result column="utime" property="utime" jdbcType="VARCHAR" />
+    <result column="agenttype" property="agenttype" jdbcType="INTEGER" />
+    <result column="otype" property="otype" jdbcType="INTEGER" />
+    <result column="ustatus" property="ustatus" jdbcType="INTEGER" />
+    <result column="oid" property="oid" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="portrait" property="portrait" jdbcType="VARCHAR" />
+    <result column="lastlog" property="lastlog" jdbcType="VARCHAR" />
+    <result column="managername" property="managername" jdbcType="VARCHAR" />
+    <result column="comname" property="comname" jdbcType="VARCHAR" />
+    <result column="comqua" property="comqua" jdbcType="VARCHAR" />
+    <result column="rebate" property="rebate" jdbcType="VARCHAR" />
+    <result column="feerebate" property="feerebate" jdbcType="VARCHAR" />
+    <result column="usertype" property="usertype" jdbcType="INTEGER" />
+    <result column="wxtype" property="wxtype" jdbcType="INTEGER" />
+    <result column="openid" property="openid" jdbcType="VARCHAR" />
+    <result column="nickname" property="nickname" jdbcType="VARCHAR" />
+    <result column="logintime" property="logintime" jdbcType="VARCHAR" />
+    <result column="usermoney" property="usermoney" jdbcType="DOUBLE" />
+    <result column="userpoint" property="userpoint" jdbcType="INTEGER" />
+    <result column="minprice" property="minprice" jdbcType="DOUBLE" />
+  </resultMap>
+  <select id="selectMaxUid" resultType="java.lang.Integer">
+    SELECT u.uid FROM wp_userinfo u ORDER BY u.uid DESC LIMIT 0,1;
+  </select>
+  <insert id="insertUser" parameterType="com.shengpingj.kuntai.pojo.WP_Userinfo">
+    insert into wp_userinfo(utel,nickname,upwd,oid,managername,utime,username) values (#{user.utel},#{user.nickname},#{user.upwd},#{user.oid},#{user.managername},#{user.utime},#{user.username})
+  </insert>
+  <update id="updateUserByUserinfo" parameterType="com.shengpingj.kuntai.pojo.WP_Userinfo">
+    update wp_userinfo
+    <set>
+      <if test="user.utel != null">
+        utel = #{user.utel},
+      </if>
+      <if test="user.nickname != null">
+        nickname=#{user.nickname},
+      </if>
+      <if test="user.upwd != null">
+        upwd = #{user.upwd},
+      </if>
+      <if test="user.usermoney != null">
+        usermoney = #{user.usermoney},
+      </if>
+      <if test="user.ustatus != null">
+        ustatus = #{user.ustatus}
+      </if>
+    </set>
+    where uid = #{user.uid}
+  </update>
+  <select id="selectUserByUtel" parameterType="java.lang.String" resultType="com.shengpingj.kuntai.pojo.WP_Userinfo">
+    select * from wp_userinfo where utel = #{utel}
+  </select>
+    <select id="selectByUsernameOrUtelOrNickname" parameterType="java.lang.String" resultType="com.shengpingj.kuntai.pojo.WP_Userinfo">
+      select * from wp_userinfo where username = #{usern ame,jdbcType=VARCHAR} or nickname=#{username,jdbcType=VARCHAR} or utel = #{username,jdbcType=VARCHAR}
+   </select>
+  <select id="selectAllUserCount" resultType="java.lang.Integer">
+    SELECT COUNT(*) FROM wp_userinfo;
+  </select>
+  <select id="selectAllUserMoneySum" resultType="java.lang.Double">
+    SELECT SUM(usermoney) FROM wp_userinfo
+  </select>
+  <select id="selectAllUserIdByOid" resultType="java.lang.Integer">
+  SELECT u.uid  FROM wp_userinfo u WHERE oid = #{uid};
+</select>
+  <select id="selectAllUser" resultType="com.shengpingj.kuntai.pojo.vo.UserView" parameterType="com.shengpingj.kuntai.pojo.vo.UserSearchData">
+    select u.* from wp_userinfo as u
+    <where>
+      <if test="userSearchData.username != null">
+        AND u.username like "%"#{userSearchData.username}"%" or u.utel like "%"#{userSearchData.username}"%" or u.nickname like "%"#{userSearchData.username}"%"
+      </if>
+      <if test="userSearchData.otype != null">
+        AND u.otype = #{userSearchData.otype}
+      </if>
+      <if test="userSearchData.starttime !=null">
+        AND u.utime >= #{userSearchData.starttime}
+      </if>
+      <if test="userSearchData.endtime !=null">
+        AND #{userSearchData.endtime} >= u.utime
+      </if>
+      <if test="userSearchData.oid !=null">
+        AND u.oid = #{userSearchData.oid }
+      </if>
+    </where>
+    order by u.uid desc
+  </select>
+  <select id="selectAllUserByIds" resultType="com.shengpingj.kuntai.pojo.vo.UserView" parameterType="com.shengpingj.kuntai.pojo.vo.UserSearchData">
+    select u.* from wp_userinfo as u
+    <where>
+    <if test="userSearchData.username != null">
+      AND u.username like "%"#{userSearchData.username}"%" or u.utel like "%"#{userSearchData.username}"%" or u.nickname like "%"#{userSearchData.username}"%"
+
+    </if>
+    <if test="userSearchData.otype != null">
+      AND u.otype = #{userSearchData.otype}
+    </if>
+      <if test="userSearchData.starttime !=null">
+        AND u.utime >= #{userSearchData.starttime}
+      </if>
+      <if test="userSearchData.endtime !=null">
+        AND #{userSearchData.endtime} >= u.utime
+      </if>
+      <if test="userSearchData.oid !=null">
+        AND u.oid = #{userSearchData.oid }
+      </if>
+    <if test="userSearchData.ids != null">
+      AND u.uid IN
+      <foreach collection="userSearchData.ids" item="id" open="(" close=")" separator="," index="">
+        #{id}
+      </foreach>
+    </if>
+    </where>
+    order by u.uid desc
+
+  </select>
+  <select id="selectAllUserByGetDateAndIds" resultType="com.shengpingj.kuntai.pojo.vo.PriceListView" parameterType="com.shengpingj.kuntai.pojo.vo.GetData">
+    select u.uid,u.username,u.utel,u.oid,u.managername,u.usermoney from wp_userinfo as u
+    <where>
+      <if test="getdata.username != null">
+        AND u.username like "%"#{getdata.username}"%" or u.utel like "%"#{getdata.username}"%" or u.nickname like "%"#{getdata.username}"%" or uid like "%"#{getdata.username}"%"
+      </if>
+      <if test="ids != null">
+        AND u.uid IN
+        <foreach collection="ids" item="id" open="(" close=")" separator="," index="">
+          #{id}
+        </foreach>
+      </if>
+    </where>
+    order by u.uid desc
+
+  </select>
+  <select id="selectUsersByUid" resultType="com.shengpingj.kuntai.pojo.WP_Userinfo">
+    select * from wp_userinfo where uid = #{uid}
+  </select>
+  <select id="selectAllUserByOtype" resultType="com.shengpingj.kuntai.pojo.vo.AdminView">
+    select u.uid,u.username,u.otype from wp_userinfo u  where u.otype = 3;
+  </select>
+  <select id="selectUserByUid" parameterType="java.lang.Integer" resultType="com.shengpingj.kuntai.pojo.vo.AdminView">
+    select u.uid,u.username,u.otype  from wp_userinfo u  where u.uid = #{uid};
+  </select>
+  <update id="updateAdminByAdminView" parameterType="com.shengpingj.kuntai.pojo.vo.AdminView">
+    update wp_userinfo set
+
+       username = #{adminView.username}, upwd = #{adminView.upwd} where uid = #{adminView.uid}
+  </update>
+  <update id="updateUserUstatusByUid">
+    update wp_userinfo set
+
+       ustatus = #{ustatus} where uid = #{uid}
+  </update>
+  <update id="updateUserOtypeByUid">
+    update wp_userinfo set
+
+       otype = #{otype} where uid = #{uid}
+  </update>
+  <delete id="deleteUserByUid">
+    delete from wp_userinfo where uid = #{uid}
+  </delete>
+  <insert id="InsertAdminByAdminView" parameterType="com.shengpingj.kuntai.pojo.vo.AdminView">
+    insert into wp_userinfo(username,upwd,utime) values (#{adminView.username},#{adminView.upwd},#{adminView.utime})
+  </insert>
+  <update id="updateUserLoginTime" >
+    update wp_userinfo set
+
+       logintime = #{logintime} where uid = #{uid}
+  </update>
+  <update id="updateUserLastlogTime" >
+    update wp_userinfo set
+
+       lastlog = #{lostlogtime} where uid = #{uid}
+  </update>
+  <select id="selectAllUserByTime" parameterType="java.lang.String" resultType="java.lang.Integer">
+    select count(*) from  wp_userinfo where utime >= #{startTime} and #{endTime} >= utime
+  </select>
+  <!--<sql id="Example_Where_Clause" >-->
+    <!--<where >-->
+      <!--<foreach collection="oredCriteria" item="criteria" separator="or" >-->
+        <!--<if test="criteria.valid" >-->
+          <!--<trim prefix="(" suffix=")" prefixOverrides="and" >-->
+            <!--<foreach collection="criteria.criteria" item="criterion" >-->
+              <!--<choose >-->
+                <!--<when test="criterion.noValue" >-->
+                  <!--and ${criterion.condition}-->
+                <!--</when>-->
+                <!--<when test="criterion.singleValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value}-->
+                <!--</when>-->
+                <!--<when test="criterion.betweenValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}-->
+                <!--</when>-->
+                <!--<when test="criterion.listValue" >-->
+                  <!--and ${criterion.condition}-->
+                  <!--<foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >-->
+                    <!--#{listItem}-->
+                  <!--</foreach>-->
+                <!--</when>-->
+              <!--</choose>-->
+            <!--</foreach>-->
+          <!--</trim>-->
+        <!--</if>-->
+      <!--</foreach>-->
+    <!--</where>-->
+  <!--</sql>-->
+  <!--<sql id="Update_By_Example_Where_Clause" >-->
+    <!--<where >-->
+      <!--<foreach collection="example.oredCriteria" item="criteria" separator="or" >-->
+        <!--<if test="criteria.valid" >-->
+          <!--<trim prefix="(" suffix=")" prefixOverrides="and" >-->
+            <!--<foreach collection="criteria.criteria" item="criterion" >-->
+              <!--<choose >-->
+                <!--<when test="criterion.noValue" >-->
+                  <!--and ${criterion.condition}-->
+                <!--</when>-->
+                <!--<when test="criterion.singleValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value}-->
+                <!--</when>-->
+                <!--<when test="criterion.betweenValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}-->
+                <!--</when>-->
+                <!--<when test="criterion.listValue" >-->
+                  <!--and ${criterion.condition}-->
+                  <!--<foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >-->
+                    <!--#{listItem}-->
+                  <!--</foreach>-->
+                <!--</when>-->
+              <!--</choose>-->
+            <!--</foreach>-->
+          <!--</trim>-->
+        <!--</if>-->
+      <!--</foreach>-->
+    <!--</where>-->
+  <!--</sql>-->
+  <!--<sql id="Base_Column_List" >-->
+    <!--uid, username, upwd, utel, utime, agenttype, otype, ustatus, oid, address, portrait, -->
+    <!--lastlog, managername, comname, comqua, rebate, feerebate, usertype, wxtype, openid, -->
+    <!--nickname, logintime, usermoney, userpoint, minprice-->
+  <!--</sql>-->
+  <!--<select id="selectByExample" resultMap="Wp_UserinfoResultMap" parameterType="com.shengpingj.kuntai.pojo.WP_UserinfoExample" >-->
+    <!--select-->
+    <!--<if test="distinct" >-->
+      <!--distinct-->
+    <!--</if>-->
+    <!--<include refid="Base_Column_List" />-->
+    <!--from wp_userinfo-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+    <!--<if test="orderByClause != null" >-->
+      <!--order by ${orderByClause}-->
+    <!--</if>-->
+  <!--</select>-->
+  <!--<select id="selectByPrimaryKey" resultMap="Wp_UserinfoResultMap" parameterType="java.lang.Integer" >-->
+    <!--select -->
+    <!--<include refid="Base_Column_List" />-->
+    <!--from wp_userinfo-->
+    <!--where uid = #{uid,jdbcType=INTEGER}-->
+  <!--</select>-->
+  <!--<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >-->
+    <!--delete from wp_userinfo-->
+    <!--where uid = #{uid,jdbcType=INTEGER}-->
+  <!--</delete>-->
+  <!--<delete id="deleteByExample" parameterType="com.shengpingj.kuntai.pojo.WP_UserinfoExample" >-->
+    <!--delete from wp_userinfo-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</delete>-->
+  <!--<insert id="insert" parameterType="com.shengpingj.kuntai.pojo.WP_Userinfo" >-->
+    <!--insert into wp_userinfo (uid, username, upwd, -->
+      <!--utel, utime, agenttype, -->
+      <!--otype, ustatus, oid, -->
+      <!--address, portrait, lastlog, -->
+      <!--managername, comname, comqua, -->
+      <!--rebate, feerebate, usertype, -->
+      <!--wxtype, openid, nickname, -->
+      <!--logintime, usermoney, userpoint, -->
+      <!--minprice)-->
+    <!--values (#{uid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{upwd,jdbcType=VARCHAR}, -->
+      <!--#{utel,jdbcType=VARCHAR}, #{utime,jdbcType=INTEGER}, #{agenttype,jdbcType=INTEGER}, -->
+      <!--#{otype,jdbcType=INTEGER}, #{ustatus,jdbcType=INTEGER}, #{oid,jdbcType=VARCHAR}, -->
+      <!--#{address,jdbcType=VARCHAR}, #{portrait,jdbcType=VARCHAR}, #{lastlog,jdbcType=INTEGER}, -->
+      <!--#{managername,jdbcType=VARCHAR}, #{comname,jdbcType=VARCHAR}, #{comqua,jdbcType=VARCHAR}, -->
+      <!--#{rebate,jdbcType=VARCHAR}, #{feerebate,jdbcType=VARCHAR}, #{usertype,jdbcType=INTEGER}, -->
+      <!--#{wxtype,jdbcType=INTEGER}, #{openid,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, -->
+      <!--#{logintime,jdbcType=VARCHAR}, #{usermoney,jdbcType=DECIMAL}, #{userpoint,jdbcType=INTEGER}, -->
+      <!--#{minprice,jdbcType=DECIMAL})-->
+  <!--</insert>-->
+  <!--<insert id="insertSelective" parameterType="com.shengpingj.kuntai.pojo.WP_Userinfo" >-->
+    <!--insert into wp_userinfo-->
+    <!--<trim prefix="(" suffix=")" suffixOverrides="," >-->
+      <!--<if test="uid != null" >-->
+        <!--uid,-->
+      <!--</if>-->
+      <!--<if test="username != null" >-->
+        <!--username,-->
+      <!--</if>-->
+      <!--<if test="upwd != null" >-->
+        <!--upwd,-->
+      <!--</if>-->
+      <!--<if test="utel != null" >-->
+        <!--utel,-->
+      <!--</if>-->
+      <!--<if test="utime != null" >-->
+        <!--utime,-->
+      <!--</if>-->
+      <!--<if test="agenttype != null" >-->
+        <!--agenttype,-->
+      <!--</if>-->
+      <!--<if test="otype != null" >-->
+        <!--otype,-->
+      <!--</if>-->
+      <!--<if test="ustatus != null" >-->
+        <!--ustatus,-->
+      <!--</if>-->
+      <!--<if test="oid != null" >-->
+        <!--oid,-->
+      <!--</if>-->
+      <!--<if test="address != null" >-->
+        <!--address,-->
+      <!--</if>-->
+      <!--<if test="portrait != null" >-->
+        <!--portrait,-->
+      <!--</if>-->
+      <!--<if test="lastlog != null" >-->
+        <!--lastlog,-->
+      <!--</if>-->
+      <!--<if test="managername != null" >-->
+        <!--managername,-->
+      <!--</if>-->
+      <!--<if test="comname != null" >-->
+        <!--comname,-->
+      <!--</if>-->
+      <!--<if test="comqua != null" >-->
+        <!--comqua,-->
+      <!--</if>-->
+      <!--<if test="rebate != null" >-->
+        <!--rebate,-->
+      <!--</if>-->
+      <!--<if test="feerebate != null" >-->
+        <!--feerebate,-->
+      <!--</if>-->
+      <!--<if test="usertype != null" >-->
+        <!--usertype,-->
+      <!--</if>-->
+      <!--<if test="wxtype != null" >-->
+        <!--wxtype,-->
+      <!--</if>-->
+      <!--<if test="openid != null" >-->
+        <!--openid,-->
+      <!--</if>-->
+      <!--<if test="nickname != null" >-->
+        <!--nickname,-->
+      <!--</if>-->
+      <!--<if test="logintime != null" >-->
+        <!--logintime,-->
+      <!--</if>-->
+      <!--<if test="usermoney != null" >-->
+        <!--usermoney,-->
+      <!--</if>-->
+      <!--<if test="userpoint != null" >-->
+        <!--userpoint,-->
+      <!--</if>-->
+      <!--<if test="minprice != null" >-->
+        <!--minprice,-->
+      <!--</if>-->
+    <!--</trim>-->
+    <!--<trim prefix="values (" suffix=")" suffixOverrides="," >-->
+      <!--<if test="uid != null" >-->
+        <!--#{uid,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="username != null" >-->
+        <!--#{username,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="upwd != null" >-->
+        <!--#{upwd,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="utel != null" >-->
+        <!--#{utel,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="utime != null" >-->
+        <!--#{utime,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="agenttype != null" >-->
+        <!--#{agenttype,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="otype != null" >-->
+        <!--#{otype,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="ustatus != null" >-->
+        <!--#{ustatus,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="oid != null" >-->
+        <!--#{oid,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="address != null" >-->
+        <!--#{address,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="portrait != null" >-->
+        <!--#{portrait,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="lastlog != null" >-->
+        <!--#{lastlog,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="managername != null" >-->
+        <!--#{managername,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="comname != null" >-->
+        <!--#{comname,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="comqua != null" >-->
+        <!--#{comqua,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="rebate != null" >-->
+        <!--#{rebate,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="feerebate != null" >-->
+        <!--#{feerebate,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="usertype != null" >-->
+        <!--#{usertype,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="wxtype != null" >-->
+        <!--#{wxtype,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="openid != null" >-->
+        <!--#{openid,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="nickname != null" >-->
+        <!--#{nickname,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="logintime != null" >-->
+        <!--#{logintime,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="usermoney != null" >-->
+        <!--#{usermoney,jdbcType=DECIMAL},-->
+      <!--</if>-->
+      <!--<if test="userpoint != null" >-->
+        <!--#{userpoint,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="minprice != null" >-->
+        <!--#{minprice,jdbcType=DECIMAL},-->
+      <!--</if>-->
+    <!--</trim>-->
+  <!--</insert>-->
+  <!--<select id="countByExample" parameterType="com.shengpingj.kuntai.pojo.WP_UserinfoExample" resultType="java.lang.Integer" >-->
+    <!--select count(*) from wp_userinfo-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</select>-->
+  <!--<update id="updateByExampleSelective" parameterType="map" >-->
+    <!--update wp_userinfo-->
+    <!--<set >-->
+      <!--<if test="record.uid != null" >-->
+        <!--uid = #{record.uid,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.username != null" >-->
+        <!--username = #{record.username,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.upwd != null" >-->
+        <!--upwd = #{record.upwd,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.utel != null" >-->
+        <!--utel = #{record.utel,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.utime != null" >-->
+        <!--utime = #{record.utime,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.agenttype != null" >-->
+        <!--agenttype = #{record.agenttype,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.otype != null" >-->
+        <!--otype = #{record.otype,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.ustatus != null" >-->
+        <!--ustatus = #{record.ustatus,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.oid != null" >-->
+        <!--oid = #{record.oid,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.address != null" >-->
+        <!--address = #{record.address,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.portrait != null" >-->
+        <!--portrait = #{record.portrait,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.lastlog != null" >-->
+        <!--lastlog = #{record.lastlog,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.managername != null" >-->
+        <!--managername = #{record.managername,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.comname != null" >-->
+        <!--comname = #{record.comname,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.comqua != null" >-->
+        <!--comqua = #{record.comqua,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.rebate != null" >-->
+        <!--rebate = #{record.rebate,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.feerebate != null" >-->
+        <!--feerebate = #{record.feerebate,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.usertype != null" >-->
+        <!--usertype = #{record.usertype,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.wxtype != null" >-->
+        <!--wxtype = #{record.wxtype,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.openid != null" >-->
+        <!--openid = #{record.openid,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.nickname != null" >-->
+        <!--nickname = #{record.nickname,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.logintime != null" >-->
+        <!--logintime = #{record.logintime,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.usermoney != null" >-->
+        <!--usermoney = #{record.usermoney,jdbcType=DECIMAL},-->
+      <!--</if>-->
+      <!--<if test="record.userpoint != null" >-->
+        <!--userpoint = #{record.userpoint,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.minprice != null" >-->
+        <!--minprice = #{record.minprice,jdbcType=DECIMAL},-->
+      <!--</if>-->
+    <!--</set>-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Update_By_Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</update>-->
+  <!--<update id="updateByExample" parameterType="map" >-->
+    <!--update wp_userinfo-->
+    <!--set uid = #{record.uid,jdbcType=INTEGER},-->
+      <!--username = #{record.username,jdbcType=VARCHAR},-->
+      <!--upwd = #{record.upwd,jdbcType=VARCHAR},-->
+      <!--utel = #{record.utel,jdbcType=VARCHAR},-->
+      <!--utime = #{record.utime,jdbcType=INTEGER},-->
+      <!--agenttype = #{record.agenttype,jdbcType=INTEGER},-->
+      <!--otype = #{record.otype,jdbcType=INTEGER},-->
+      <!--ustatus = #{record.ustatus,jdbcType=INTEGER},-->
+      <!--oid = #{record.oid,jdbcType=VARCHAR},-->
+      <!--address = #{record.address,jdbcType=VARCHAR},-->
+      <!--portrait = #{record.portrait,jdbcType=VARCHAR},-->
+      <!--lastlog = #{record.lastlog,jdbcType=INTEGER},-->
+      <!--managername = #{record.managername,jdbcType=VARCHAR},-->
+      <!--comname = #{record.comname,jdbcType=VARCHAR},-->
+      <!--comqua = #{record.comqua,jdbcType=VARCHAR},-->
+      <!--rebate = #{record.rebate,jdbcType=VARCHAR},-->
+      <!--feerebate = #{record.feerebate,jdbcType=VARCHAR},-->
+      <!--usertype = #{record.usertype,jdbcType=INTEGER},-->
+      <!--wxtype = #{record.wxtype,jdbcType=INTEGER},-->
+      <!--openid = #{record.openid,jdbcType=VARCHAR},-->
+      <!--nickname = #{record.nickname,jdbcType=VARCHAR},-->
+      <!--logintime = #{record.logintime,jdbcType=VARCHAR},-->
+      <!--usermoney = #{record.usermoney,jdbcType=DECIMAL},-->
+      <!--userpoint = #{record.userpoint,jdbcType=INTEGER},-->
+      <!--minprice = #{record.minprice,jdbcType=DECIMAL}-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Update_By_Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</update>-->
+  <!--<update id="updateByPrimaryKeySelective" parameterType="com.shengpingj.kuntai.pojo.WP_Userinfo" >-->
+    <!--update wp_userinfo-->
+    <!--<set >-->
+      <!--<if test="username != null" >-->
+        <!--username = #{username,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="upwd != null" >-->
+        <!--upwd = #{upwd,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="utel != null" >-->
+        <!--utel = #{utel,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="utime != null" >-->
+        <!--utime = #{utime,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="agenttype != null" >-->
+        <!--agenttype = #{agenttype,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="otype != null" >-->
+        <!--otype = #{otype,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="ustatus != null" >-->
+        <!--ustatus = #{ustatus,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="oid != null" >-->
+        <!--oid = #{oid,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="address != null" >-->
+        <!--address = #{address,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="portrait != null" >-->
+        <!--portrait = #{portrait,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="lastlog != null" >-->
+        <!--lastlog = #{lastlog,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="managername != null" >-->
+        <!--managername = #{managername,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="comname != null" >-->
+        <!--comname = #{comname,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="comqua != null" >-->
+        <!--comqua = #{comqua,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="rebate != null" >-->
+        <!--rebate = #{rebate,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="feerebate != null" >-->
+        <!--feerebate = #{feerebate,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="usertype != null" >-->
+        <!--usertype = #{usertype,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="wxtype != null" >-->
+        <!--wxtype = #{wxtype,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="openid != null" >-->
+        <!--openid = #{openid,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="nickname != null" >-->
+        <!--nickname = #{nickname,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="logintime != null" >-->
+        <!--logintime = #{logintime,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="usermoney != null" >-->
+        <!--usermoney = #{usermoney,jdbcType=DECIMAL},-->
+      <!--</if>-->
+      <!--<if test="userpoint != null" >-->
+        <!--userpoint = #{userpoint,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="minprice != null" >-->
+        <!--minprice = #{minprice,jdbcType=DECIMAL},-->
+      <!--</if>-->
+    <!--</set>-->
+    <!--where uid = #{uid,jdbcType=INTEGER}-->
+  <!--</update>-->
+  <!--<update id="updateByPrimaryKey" parameterType="com.shengpingj.kuntai.pojo.WP_Userinfo" >-->
+    <!--update wp_userinfo-->
+    <!--set username = #{username,jdbcType=VARCHAR},-->
+      <!--upwd = #{upwd,jdbcType=VARCHAR},-->
+      <!--utel = #{utel,jdbcType=VARCHAR},-->
+      <!--utime = #{utime,jdbcType=INTEGER},-->
+      <!--agenttype = #{agenttype,jdbcType=INTEGER},-->
+      <!--otype = #{otype,jdbcType=INTEGER},-->
+      <!--ustatus = #{ustatus,jdbcType=INTEGER},-->
+      <!--oid = #{oid,jdbcType=VARCHAR},-->
+      <!--address = #{address,jdbcType=VARCHAR},-->
+      <!--portrait = #{portrait,jdbcType=VARCHAR},-->
+      <!--lastlog = #{lastlog,jdbcType=INTEGER},-->
+      <!--managername = #{managername,jdbcType=VARCHAR},-->
+      <!--comname = #{comname,jdbcType=VARCHAR},-->
+      <!--comqua = #{comqua,jdbcType=VARCHAR},-->
+      <!--rebate = #{rebate,jdbcType=VARCHAR},-->
+      <!--feerebate = #{feerebate,jdbcType=VARCHAR},-->
+      <!--usertype = #{usertype,jdbcType=INTEGER},-->
+      <!--wxtype = #{wxtype,jdbcType=INTEGER},-->
+      <!--openid = #{openid,jdbcType=VARCHAR},-->
+      <!--nickname = #{nickname,jdbcType=VARCHAR},-->
+      <!--logintime = #{logintime,jdbcType=VARCHAR},-->
+      <!--usermoney = #{usermoney,jdbcType=DECIMAL},-->
+      <!--userpoint = #{userpoint,jdbcType=INTEGER},-->
+      <!--minprice = #{minprice,jdbcType=DECIMAL}-->
+    <!--where uid = #{uid,jdbcType=INTEGER}-->
+  <!--</update>-->
+
+</mapper>

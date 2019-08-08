@@ -1,0 +1,561 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shengpingj.kuntai.mapper.WP_BalanceMapper" >
+  <resultMap id="BaseResultMap" type="com.shengpingj.kuntai.pojo.WP_Balance" >
+    <id column="bpid" property="bpid" jdbcType="INTEGER" />
+    <result column="bptype" property="bptype" jdbcType="VARCHAR" />
+    <result column="bptime" property="bptime" jdbcType="INTEGER" />
+    <result column="bpprice" property="bpprice" jdbcType="DOUBLE" />
+    <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+    <result column="uid" property="uid" jdbcType="INTEGER" />
+    <result column="isverified" property="isverified" jdbcType="INTEGER" />
+    <result column="cltime" property="cltime" jdbcType="INTEGER" />
+    <result column="bankid" property="bankid" jdbcType="INTEGER" />
+    <result column="bpbalance" property="bpbalance" jdbcType="VARCHAR" />
+    <result column="btime" property="btime" jdbcType="VARCHAR" />
+    <result column="reg_par" property="regPar" jdbcType="VARCHAR" />
+    <result column="balance_sn" property="balanceSn" jdbcType="VARCHAR" />
+    <result column="pay_type" property="payType" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="CountBPrice" parameterType="com.shengpingj.kuntai.pojo.vo.GetData" resultType="java.lang.Integer">
+    select count(*) from wp_balance b
+    <where>
+      <if test="uid != null">
+        and b.uid = #{uid}
+      </if>
+      <if test="bptype != null">
+        and b.bptype = #{bptype}
+      </if>
+      <if test="isverified != null">
+        and b.isverified = #{isverified}
+      </if>
+      <if test="getdata.starttime != null">
+        and b.btime >= #{getdata.starttime}
+      </if>
+      <if test="getdata.endtime != null">
+        and #{getdata.endtime} >=  b.btime
+      </if>
+    </where>
+  </select>
+  <select id="SumBPrice" parameterType="com.shengpingj.kuntai.pojo.vo.GetData" resultType="java.lang.Double">
+    select sum(b.bpprice) from wp_balance b
+    <where>
+      <if test="uid != null">
+        and b.uid = #{uid}
+      </if>
+      <if test="bptype != null">
+        and b.bptype = #{bptype}
+      </if>
+      <if test="isverified != null">
+        and b.isverified = #{isverified}
+      </if>
+      <if test="getdata!=null">
+        <if test="getdata.starttime != null">
+          and b.btime >= #{getdata.starttime}
+        </if>
+        <if test="getdata.endtime != null">
+          and #{getdata.endtime} >=  b.btime
+        </if>
+      </if>
+    </where>
+  </select>
+  <select id="SumBPriceByIds" parameterType="com.shengpingj.kuntai.pojo.vo.GetData" resultType="java.lang.Double">
+    select sum(b.bpprice) from wp_balance b
+    <where>
+
+      <if test="bptype != null">
+        and b.bptype = #{bptype}
+      </if>
+      <if test="isverified != null">
+        and b.isverified = #{isverified}
+      </if>
+      <if test="getdata!=null">
+        <if test="getdata.starttime != null">
+          and b.btime >= #{getdata.starttime}
+        </if>
+        <if test="getdata.endtime != null">
+          and #{getdata.endtime} >=  b.btime
+        </if>
+      </if>
+      <if test="ids != null">
+        and b.uid in
+        <foreach collection="ids" index="index" item="id" open="(" close=")" separator=",">
+          #{id}
+        </foreach>
+      </if>
+    </where>
+  </select>
+  <select id="SumBPriceByIdsAndBptypes" parameterType="com.shengpingj.kuntai.pojo.vo.GetData" resultType="java.lang.Double">
+    select sum(b.bpprice) from wp_balance b
+    <where>
+
+
+      <if test="getdata!=null">
+        <if test="getdata.starttime != null">
+          and b.btime >= #{getdata.starttime}
+        </if>
+        <if test="getdata.endtime != null">
+          and #{getdata.endtime} >=  b.btime
+        </if>
+      </if>
+      <if test="bptypes != null">
+        and b.bptype in
+        <foreach collection="bptypes" index="index" item="id" open="(" close=")" separator=",">
+          #{id}
+        </foreach>
+      </if>
+      <if test="ids != null">
+        and b.uid in
+        <foreach collection="ids" index="index" item="id" open="(" close=")" separator=",">
+          #{id}
+        </foreach>
+      </if>
+    </where>
+
+  </select>
+  <select id="SumBPriceByIdsByBptype" parameterType="com.shengpingj.kuntai.pojo.vo.GetData" resultType="java.lang.Double">
+    select sum(b.bpprice) from wp_balance b
+    <where>
+
+
+      <if test="getdata!=null">
+        <if test="getdata.starttime != null">
+          and b.btime >= #{getdata.starttime}
+        </if>
+        <if test="getdata.endtime != null">
+          and #{getdata.endtime} >=  b.btime
+        </if>
+      </if>
+      <if test="bptype != null">
+        and b.bptype =#{bptype}
+      </if>
+      <if test="ids != null">
+        and b.uid in
+        <foreach collection="ids" index="index" item="id" open="(" close=")" separator=",">
+          #{id}
+        </foreach>
+      </if>
+    </where>
+
+  </select>
+  <insert id="insertBalanceByBp" parameterType="com.shengpingj.kuntai.pojo.WP_Balance">
+    insert into wp_balance(uid,bptype,bptime,bpprice,bpbalance,remarks,cltime,isverified) values (#{balance.uid},#{balance.bptype},#{balance.bptime},#{balance.bpprice},#{balance.bpbalance},#{balance.remarks},#{balance.cltime},#{balance.isverified })
+  </insert>
+  <select id="selectBanlanceByIds" parameterType="com.shengpingj.kuntai.pojo.vo.GetData" resultType="com.shengpingj.kuntai.pojo.vo.BanlanceView">
+    select b.*,u.* from wp_balance b join wp_userinfo u
+    <where>
+      u.uid=b.uid
+
+      <if test="getdata!=null">
+        <if test="getdata.bptype != null">
+          and b.bptype = #{getdata.bptype}
+        </if>
+        <if test="getdata.stype != null">
+          and u.otype = #{getdata.bptype}
+        </if>
+        <if test="getdata.username != null">
+          AND u.username like "%"#{getdata.username}"%" or u.utel like "%"#{getdata.username}"%" or u.nickname like "%"#{getdata.username}"%"
+        </if>
+        <if test="getdata.starttime != null">
+          and b.btime >= #{getdata.starttime}
+        </if>
+        <if test="getdata.endtime != null">
+          and #{getdata.endtime} >=  b.btime
+        </if>
+      </if>
+      <if test="ids != null">
+        and b.uid in
+        <foreach collection="ids" index="index" item="id" open="(" close=")" separator=",">
+          #{id}
+        </foreach>
+      </if>
+    </where>
+    order by b.bpid desc
+  </select>
+  <select id="selectBalanceByBpid" resultType="com.shengpingj.kuntai.pojo.WP_Balance">
+    select b.* from wp_balance b where b.bpid=#{bpid}
+  </select>
+  <update id="updateBalanceByBalance" parameterType="com.shengpingj.kuntai.pojo.WP_Balance">
+    update wp_balance
+    set bptype = #{wpBalance.bptype,jdbcType=VARCHAR},
+    bptime = #{wpBalance.bptime,jdbcType=INTEGER},
+    bpprice = #{wpBalance.bpprice,jdbcType=DOUBLE},
+    remarks = #{wpBalance.remarks,jdbcType=VARCHAR},
+    uid = #{wpBalance.uid,jdbcType=INTEGER},
+    isverified = #{wpBalance.isverified,jdbcType=INTEGER},
+    cltime = #{wpBalance.cltime,jdbcType=INTEGER},
+    bankid = #{wpBalance.bankid,jdbcType=INTEGER},
+    bpbalance = #{wpBalance.bpbalance,jdbcType=VARCHAR},
+    btime = #{wpBalance.btime,jdbcType=VARCHAR},
+    balance_sn = #{wpBalance.balanceSn,jdbcType=VARCHAR},
+    pay_type = #{wpBalance.payType,jdbcType=VARCHAR}
+    where bpid = #{wpBalance.bpid,jdbcType=INTEGER}
+  </update>
+  <select id="selectBanlanceByIdsByBptype" parameterType="com.shengpingj.kuntai.pojo.vo.GetData" resultType="com.shengpingj.kuntai.pojo.vo.CashView">
+    select b.*,u.* from wp_balance b join wp_userinfo u
+    <where>
+      u.uid=b.uid
+
+      <if test="getdata!=null">
+        <if test="getdata.bptype != null">
+          and b.bptype = #{getdata.bptype}
+        </if>
+        <if test="getdata.stype != null">
+          and u.otype = #{getdata.stype}
+        </if>
+        <if test="getdata.username != null">
+          AND u.username like "%"#{getdata.username}"%" or u.utel like "%"#{getdata.username}"%" or u.nickname like "%"#{getdata.username}"%"
+        </if>
+        <if test="getdata.starttime != null">
+          and b.btime >= #{getdata.starttime}
+        </if>
+        <if test="getdata.endtime != null">
+          and #{getdata.endtime} >=  b.btime
+        </if>
+      </if>
+      <if test="ids != null">
+        and b.uid in
+        <foreach collection="ids" index="index" item="id" open="(" close=")" separator=",">
+          #{id}
+        </foreach>
+      </if>
+    </where>
+    order by b.bpid desc
+  </select>
+  <select id="sumBppriceByTimeAndbptype" resultType="java.lang.Double">
+    select sum(bpprice) from wp_balance where bptime >= #{startTime} and bptype=#{bptype} and isverified=#{isverified} and #{endTime} >= bptime
+  </select>
+  <!--<sql id="Example_Where_Clause" >-->
+    <!--<where >-->
+      <!--<foreach collection="oredCriteria" item="criteria" separator="or" >-->
+        <!--<if test="criteria.valid" >-->
+          <!--<trim prefix="(" suffix=")" prefixOverrides="and" >-->
+            <!--<foreach collection="criteria.criteria" item="criterion" >-->
+              <!--<choose >-->
+                <!--<when test="criterion.noValue" >-->
+                  <!--and ${criterion.condition}-->
+                <!--</when>-->
+                <!--<when test="criterion.singleValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value}-->
+                <!--</when>-->
+                <!--<when test="criterion.betweenValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}-->
+                <!--</when>-->
+                <!--<when test="criterion.listValue" >-->
+                  <!--and ${criterion.condition}-->
+                  <!--<foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >-->
+                    <!--#{listItem}-->
+                  <!--</foreach>-->
+                <!--</when>-->
+              <!--</choose>-->
+            <!--</foreach>-->
+          <!--</trim>-->
+        <!--</if>-->
+      <!--</foreach>-->
+    <!--</where>-->
+  <!--</sql>-->
+  <!--<sql id="Update_By_Example_Where_Clause" >-->
+    <!--<where >-->
+      <!--<foreach collection="example.oredCriteria" item="criteria" separator="or" >-->
+        <!--<if test="criteria.valid" >-->
+          <!--<trim prefix="(" suffix=")" prefixOverrides="and" >-->
+            <!--<foreach collection="criteria.criteria" item="criterion" >-->
+              <!--<choose >-->
+                <!--<when test="criterion.noValue" >-->
+                  <!--and ${criterion.condition}-->
+                <!--</when>-->
+                <!--<when test="criterion.singleValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value}-->
+                <!--</when>-->
+                <!--<when test="criterion.betweenValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}-->
+                <!--</when>-->
+                <!--<when test="criterion.listValue" >-->
+                  <!--and ${criterion.condition}-->
+                  <!--<foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >-->
+                    <!--#{listItem}-->
+                  <!--</foreach>-->
+                <!--</when>-->
+              <!--</choose>-->
+            <!--</foreach>-->
+          <!--</trim>-->
+        <!--</if>-->
+      <!--</foreach>-->
+    <!--</where>-->
+  <!--</sql>-->
+  <!--<sql id="Base_Column_List" >-->
+    <!--bpid, bptype, bptime, bpprice, remarks, uid, isverified, cltime, bankid, bpbalance, -->
+    <!--btime, reg_par, balance_sn, pay_type-->
+  <!--</sql>-->
+  <!--<select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shengpingj.kuntai.pojo.WP_BalanceExample" >-->
+    <!--select-->
+    <!--<if test="distinct" >-->
+      <!--distinct-->
+    <!--</if>-->
+    <!--<include refid="Base_Column_List" />-->
+    <!--from wp_balance-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+    <!--<if test="orderByClause != null" >-->
+      <!--order by ${orderByClause}-->
+    <!--</if>-->
+  <!--</select>-->
+  <!--<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >-->
+    <!--select -->
+    <!--<include refid="Base_Column_List" />-->
+    <!--from wp_balance-->
+    <!--where bpid = #{bpid,jdbcType=INTEGER}-->
+  <!--</select>-->
+  <!--<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >-->
+    <!--delete from wp_balance-->
+    <!--where bpid = #{bpid,jdbcType=INTEGER}-->
+  <!--</delete>-->
+  <!--<delete id="deleteByExample" parameterType="com.shengpingj.kuntai.pojo.WP_BalanceExample" >-->
+    <!--delete from wp_balance-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</delete>-->
+  <!--<insert id="insert" parameterType="com.shengpingj.kuntai.pojo.WP_Balance" >-->
+    <!--insert into wp_balance (bpid, bptype, bptime, -->
+      <!--bpprice, remarks, uid, -->
+      <!--isverified, cltime, bankid, -->
+      <!--bpbalance, btime, reg_par, -->
+      <!--balance_sn, pay_type)-->
+    <!--values (#{bpid,jdbcType=INTEGER}, #{bptype,jdbcType=VARCHAR}, #{bptime,jdbcType=INTEGER}, -->
+      <!--#{bpprice,jdbcType=DOUBLE}, #{remarks,jdbcType=VARCHAR}, #{uid,jdbcType=INTEGER}, -->
+      <!--#{isverified,jdbcType=INTEGER}, #{cltime,jdbcType=INTEGER}, #{bankid,jdbcType=INTEGER}, -->
+      <!--#{bpbalance,jdbcType=VARCHAR}, #{btime,jdbcType=VARCHAR}, #{regPar,jdbcType=VARCHAR}, -->
+      <!--#{balanceSn,jdbcType=VARCHAR}, #{payType,jdbcType=VARCHAR})-->
+  <!--</insert>-->
+  <!--<insert id="insertSelective" parameterType="com.shengpingj.kuntai.pojo.WP_Balance" >-->
+    <!--insert into wp_balance-->
+    <!--<trim prefix="(" suffix=")" suffixOverrides="," >-->
+      <!--<if test="bpid != null" >-->
+        <!--bpid,-->
+      <!--</if>-->
+      <!--<if test="bptype != null" >-->
+        <!--bptype,-->
+      <!--</if>-->
+      <!--<if test="bptime != null" >-->
+        <!--bptime,-->
+      <!--</if>-->
+      <!--<if test="bpprice != null" >-->
+        <!--bpprice,-->
+      <!--</if>-->
+      <!--<if test="remarks != null" >-->
+        <!--remarks,-->
+      <!--</if>-->
+      <!--<if test="uid != null" >-->
+        <!--uid,-->
+      <!--</if>-->
+      <!--<if test="isverified != null" >-->
+        <!--isverified,-->
+      <!--</if>-->
+      <!--<if test="cltime != null" >-->
+        <!--cltime,-->
+      <!--</if>-->
+      <!--<if test="bankid != null" >-->
+        <!--bankid,-->
+      <!--</if>-->
+      <!--<if test="bpbalance != null" >-->
+        <!--bpbalance,-->
+      <!--</if>-->
+      <!--<if test="btime != null" >-->
+        <!--btime,-->
+      <!--</if>-->
+      <!--<if test="regPar != null" >-->
+        <!--reg_par,-->
+      <!--</if>-->
+      <!--<if test="balanceSn != null" >-->
+        <!--balance_sn,-->
+      <!--</if>-->
+      <!--<if test="payType != null" >-->
+        <!--pay_type,-->
+      <!--</if>-->
+    <!--</trim>-->
+    <!--<trim prefix="values (" suffix=")" suffixOverrides="," >-->
+      <!--<if test="bpid != null" >-->
+        <!--#{bpid,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="bptype != null" >-->
+        <!--#{bptype,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="bptime != null" >-->
+        <!--#{bptime,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="bpprice != null" >-->
+        <!--#{bpprice,jdbcType=DOUBLE},-->
+      <!--</if>-->
+      <!--<if test="remarks != null" >-->
+        <!--#{remarks,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="uid != null" >-->
+        <!--#{uid,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="isverified != null" >-->
+        <!--#{isverified,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="cltime != null" >-->
+        <!--#{cltime,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="bankid != null" >-->
+        <!--#{bankid,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="bpbalance != null" >-->
+        <!--#{bpbalance,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="btime != null" >-->
+        <!--#{btime,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="regPar != null" >-->
+        <!--#{regPar,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="balanceSn != null" >-->
+        <!--#{balanceSn,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="payType != null" >-->
+        <!--#{payType,jdbcType=VARCHAR},-->
+      <!--</if>-->
+    <!--</trim>-->
+  <!--</insert>-->
+  <!--<select id="countByExample" parameterType="com.shengpingj.kuntai.pojo.WP_BalanceExample" resultType="java.lang.Integer" >-->
+    <!--select count(*) from wp_balance-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</select>-->
+  <!--<update id="updateByExampleSelective" parameterType="map" >-->
+    <!--update wp_balance-->
+    <!--<set >-->
+      <!--<if test="record.bpid != null" >-->
+        <!--bpid = #{record.bpid,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.bptype != null" >-->
+        <!--bptype = #{record.bptype,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.bptime != null" >-->
+        <!--bptime = #{record.bptime,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.bpprice != null" >-->
+        <!--bpprice = #{record.bpprice,jdbcType=DOUBLE},-->
+      <!--</if>-->
+      <!--<if test="record.remarks != null" >-->
+        <!--remarks = #{record.remarks,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.uid != null" >-->
+        <!--uid = #{record.uid,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.isverified != null" >-->
+        <!--isverified = #{record.isverified,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.cltime != null" >-->
+        <!--cltime = #{record.cltime,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.bankid != null" >-->
+        <!--bankid = #{record.bankid,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.bpbalance != null" >-->
+        <!--bpbalance = #{record.bpbalance,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.btime != null" >-->
+        <!--btime = #{record.btime,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.regPar != null" >-->
+        <!--reg_par = #{record.regPar,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.balanceSn != null" >-->
+        <!--balance_sn = #{record.balanceSn,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.payType != null" >-->
+        <!--pay_type = #{record.payType,jdbcType=VARCHAR},-->
+      <!--</if>-->
+    <!--</set>-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Update_By_Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</update>-->
+  <!--<update id="updateByExample" parameterType="map" >-->
+    <!--update wp_balance-->
+    <!--set bpid = #{record.bpid,jdbcType=INTEGER},-->
+      <!--bptype = #{record.bptype,jdbcType=VARCHAR},-->
+      <!--bptime = #{record.bptime,jdbcType=INTEGER},-->
+      <!--bpprice = #{record.bpprice,jdbcType=DOUBLE},-->
+      <!--remarks = #{record.remarks,jdbcType=VARCHAR},-->
+      <!--uid = #{record.uid,jdbcType=INTEGER},-->
+      <!--isverified = #{record.isverified,jdbcType=INTEGER},-->
+      <!--cltime = #{record.cltime,jdbcType=INTEGER},-->
+      <!--bankid = #{record.bankid,jdbcType=INTEGER},-->
+      <!--bpbalance = #{record.bpbalance,jdbcType=VARCHAR},-->
+      <!--btime = #{record.btime,jdbcType=VARCHAR},-->
+      <!--reg_par = #{record.regPar,jdbcType=VARCHAR},-->
+      <!--balance_sn = #{record.balanceSn,jdbcType=VARCHAR},-->
+      <!--pay_type = #{record.payType,jdbcType=VARCHAR}-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Update_By_Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</update>-->
+  <!--<update id="updateByPrimaryKeySelective" parameterType="com.shengpingj.kuntai.pojo.WP_Balance" >-->
+    <!--update wp_balance-->
+    <!--<set >-->
+      <!--<if test="bptype != null" >-->
+        <!--bptype = #{bptype,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="bptime != null" >-->
+        <!--bptime = #{bptime,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="bpprice != null" >-->
+        <!--bpprice = #{bpprice,jdbcType=DOUBLE},-->
+      <!--</if>-->
+      <!--<if test="remarks != null" >-->
+        <!--remarks = #{remarks,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="uid != null" >-->
+        <!--uid = #{uid,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="isverified != null" >-->
+        <!--isverified = #{isverified,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="cltime != null" >-->
+        <!--cltime = #{cltime,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="bankid != null" >-->
+        <!--bankid = #{bankid,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="bpbalance != null" >-->
+        <!--bpbalance = #{bpbalance,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="btime != null" >-->
+        <!--btime = #{btime,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="regPar != null" >-->
+        <!--reg_par = #{regPar,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="balanceSn != null" >-->
+        <!--balance_sn = #{balanceSn,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="payType != null" >-->
+        <!--pay_type = #{payType,jdbcType=VARCHAR},-->
+      <!--</if>-->
+    <!--</set>-->
+    <!--where bpid = #{bpid,jdbcType=INTEGER}-->
+  <!--</update>-->
+  <!--<update id="updateByPrimaryKey" parameterType="com.shengpingj.kuntai.pojo.WP_Balance" >-->
+    <!--update wp_balance-->
+    <!--set bptype = #{bptype,jdbcType=VARCHAR},-->
+      <!--bptime = #{bptime,jdbcType=INTEGER},-->
+      <!--bpprice = #{bpprice,jdbcType=DOUBLE},-->
+      <!--remarks = #{remarks,jdbcType=VARCHAR},-->
+      <!--uid = #{uid,jdbcType=INTEGER},-->
+      <!--isverified = #{isverified,jdbcType=INTEGER},-->
+      <!--cltime = #{cltime,jdbcType=INTEGER},-->
+      <!--bankid = #{bankid,jdbcType=INTEGER},-->
+      <!--bpbalance = #{bpbalance,jdbcType=VARCHAR},-->
+      <!--btime = #{btime,jdbcType=VARCHAR},-->
+      <!--reg_par = #{regPar,jdbcType=VARCHAR},-->
+      <!--balance_sn = #{balanceSn,jdbcType=VARCHAR},-->
+      <!--pay_type = #{payType,jdbcType=VARCHAR}-->
+    <!--where bpid = #{bpid,jdbcType=INTEGER}-->
+  <!--</update>-->
+</mapper>

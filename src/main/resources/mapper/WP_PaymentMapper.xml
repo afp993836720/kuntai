@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shengpingj.kuntai.mapper.WP_PaymentMapper" >
+  <resultMap id="BaseResultMap" type="com.shengpingj.kuntai.pojo.WP_Payment" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="pay_name" property="payName" jdbcType="VARCHAR" />
+    <result column="is_use" property="isUse" jdbcType="INTEGER" />
+    <result column="pay_point" property="payPoint" jdbcType="VARCHAR" />
+    <result column="isdelete" property="isdelete" jdbcType="INTEGER" />
+    <result column="dotime" property="dotime" jdbcType="VARCHAR" />
+    <result column="pay_order" property="payOrder" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.shengpingj.kuntai.pojo.WP_Payment" extends="BaseResultMap" >
+    <result column="pay_conf" property="payConf" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <select id="selectAllPaymentByIsUse" resultMap="ResultMapWithBLOBs">
+    select * from wp_payment where  is_use = 1 AND isdelete = 0
+  </select>
+  <select id="selectPaymentById" resultMap="ResultMapWithBLOBs">
+     select * from wp_payment where  id = #{id}
+  </select>
+  <delete id="deletePaymentById">
+    delete from wp_payment where id = #{id}
+  </delete>
+  <update id="updatePaymentByWP_Payment" parameterType="com.shengpingj.kuntai.pojo.WP_Payment">
+    update wp_payment set pay_name=#{payment.payName},pay_conf=#{payment.payConf},pay_order=#{payment.payOrder},pay_point=#{payment.payPoint},is_use=#{payment.isUse},dotime=#{payment.dotime} where id = #{payment.id}
+  </update>
+  <insert id="insertPayment" parameterType="com.shengpingj.kuntai.pojo.WP_Payment">
+    insert into wp_payment(pay_name, is_use, pay_point, pay_conf,  dotime, pay_order) values (#{payment.payName},#{payment.isUse},#{payment.payPoint},#{payment.payConf},#{payment.dotime},#{payment.payOrder})
+  </insert>
+  <!--<sql id="Example_Where_Clause" >-->
+    <!--<where >-->
+      <!--<foreach collection="oredCriteria" item="criteria" separator="or" >-->
+        <!--<if test="criteria.valid" >-->
+          <!--<trim prefix="(" suffix=")" prefixOverrides="and" >-->
+            <!--<foreach collection="criteria.criteria" item="criterion" >-->
+              <!--<choose >-->
+                <!--<when test="criterion.noValue" >-->
+                  <!--and ${criterion.condition}-->
+                <!--</when>-->
+                <!--<when test="criterion.singleValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value}-->
+                <!--</when>-->
+                <!--<when test="criterion.betweenValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}-->
+                <!--</when>-->
+                <!--<when test="criterion.listValue" >-->
+                  <!--and ${criterion.condition}-->
+                  <!--<foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >-->
+                    <!--#{listItem}-->
+                  <!--</foreach>-->
+                <!--</when>-->
+              <!--</choose>-->
+            <!--</foreach>-->
+          <!--</trim>-->
+        <!--</if>-->
+      <!--</foreach>-->
+    <!--</where>-->
+  <!--</sql>-->
+  <!--<sql id="Update_By_Example_Where_Clause" >-->
+    <!--<where >-->
+      <!--<foreach collection="example.oredCriteria" item="criteria" separator="or" >-->
+        <!--<if test="criteria.valid" >-->
+          <!--<trim prefix="(" suffix=")" prefixOverrides="and" >-->
+            <!--<foreach collection="criteria.criteria" item="criterion" >-->
+              <!--<choose >-->
+                <!--<when test="criterion.noValue" >-->
+                  <!--and ${criterion.condition}-->
+                <!--</when>-->
+                <!--<when test="criterion.singleValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value}-->
+                <!--</when>-->
+                <!--<when test="criterion.betweenValue" >-->
+                  <!--and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}-->
+                <!--</when>-->
+                <!--<when test="criterion.listValue" >-->
+                  <!--and ${criterion.condition}-->
+                  <!--<foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >-->
+                    <!--#{listItem}-->
+                  <!--</foreach>-->
+                <!--</when>-->
+              <!--</choose>-->
+            <!--</foreach>-->
+          <!--</trim>-->
+        <!--</if>-->
+      <!--</foreach>-->
+    <!--</where>-->
+  <!--</sql>-->
+  <!--<sql id="Base_Column_List" >-->
+    <!--id, pay_name, is_use, pay_point, isdelete, dotime, pay_order-->
+  <!--</sql>-->
+  <!--<sql id="Blob_Column_List" >-->
+    <!--pay_conf-->
+  <!--</sql>-->
+  <!--<select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.shengpingj.kuntai.pojo.WP_PaymentExample" >-->
+    <!--select-->
+    <!--<if test="distinct" >-->
+      <!--distinct-->
+    <!--</if>-->
+    <!--<include refid="Base_Column_List" />-->
+    <!--,-->
+    <!--<include refid="Blob_Column_List" />-->
+    <!--from wp_payment-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+    <!--<if test="orderByClause != null" >-->
+      <!--order by ${orderByClause}-->
+    <!--</if>-->
+  <!--</select>-->
+  <!--<select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shengpingj.kuntai.pojo.WP_PaymentExample" >-->
+    <!--select-->
+    <!--<if test="distinct" >-->
+      <!--distinct-->
+    <!--</if>-->
+    <!--<include refid="Base_Column_List" />-->
+    <!--from wp_payment-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+    <!--<if test="orderByClause != null" >-->
+      <!--order by ${orderByClause}-->
+    <!--</if>-->
+  <!--</select>-->
+  <!--<select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >-->
+    <!--select -->
+    <!--<include refid="Base_Column_List" />-->
+    <!--,-->
+    <!--<include refid="Blob_Column_List" />-->
+    <!--from wp_payment-->
+    <!--where id = #{id,jdbcType=INTEGER}-->
+  <!--</select>-->
+  <!--<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >-->
+    <!--delete from wp_payment-->
+    <!--where id = #{id,jdbcType=INTEGER}-->
+  <!--</delete>-->
+  <!--<delete id="deleteByExample" parameterType="com.shengpingj.kuntai.pojo.WP_PaymentExample" >-->
+    <!--delete from wp_payment-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</delete>-->
+  <!--<insert id="insert" parameterType="com.shengpingj.kuntai.pojo.WP_Payment" >-->
+    <!--insert into wp_payment (id, pay_name, is_use, -->
+      <!--pay_point, isdelete, dotime, -->
+      <!--pay_order, pay_conf)-->
+    <!--values (#{id,jdbcType=INTEGER}, #{payName,jdbcType=VARCHAR}, #{isUse,jdbcType=BIT}, -->
+      <!--#{payPoint,jdbcType=VARCHAR}, #{isdelete,jdbcType=BIT}, #{dotime,jdbcType=VARCHAR}, -->
+      <!--#{payOrder,jdbcType=INTEGER}, #{payConf,jdbcType=LONGVARCHAR})-->
+  <!--</insert>-->
+  <!--<insert id="insertSelective" parameterType="com.shengpingj.kuntai.pojo.WP_Payment" >-->
+    <!--insert into wp_payment-->
+    <!--<trim prefix="(" suffix=")" suffixOverrides="," >-->
+      <!--<if test="id != null" >-->
+        <!--id,-->
+      <!--</if>-->
+      <!--<if test="payName != null" >-->
+        <!--pay_name,-->
+      <!--</if>-->
+      <!--<if test="isUse != null" >-->
+        <!--is_use,-->
+      <!--</if>-->
+      <!--<if test="payPoint != null" >-->
+        <!--pay_point,-->
+      <!--</if>-->
+      <!--<if test="isdelete != null" >-->
+        <!--isdelete,-->
+      <!--</if>-->
+      <!--<if test="dotime != null" >-->
+        <!--dotime,-->
+      <!--</if>-->
+      <!--<if test="payOrder != null" >-->
+        <!--pay_order,-->
+      <!--</if>-->
+      <!--<if test="payConf != null" >-->
+        <!--pay_conf,-->
+      <!--</if>-->
+    <!--</trim>-->
+    <!--<trim prefix="values (" suffix=")" suffixOverrides="," >-->
+      <!--<if test="id != null" >-->
+        <!--#{id,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="payName != null" >-->
+        <!--#{payName,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="isUse != null" >-->
+        <!--#{isUse,jdbcType=BIT},-->
+      <!--</if>-->
+      <!--<if test="payPoint != null" >-->
+        <!--#{payPoint,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="isdelete != null" >-->
+        <!--#{isdelete,jdbcType=BIT},-->
+      <!--</if>-->
+      <!--<if test="dotime != null" >-->
+        <!--#{dotime,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="payOrder != null" >-->
+        <!--#{payOrder,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="payConf != null" >-->
+        <!--#{payConf,jdbcType=LONGVARCHAR},-->
+      <!--</if>-->
+    <!--</trim>-->
+  <!--</insert>-->
+  <!--<select id="countByExample" parameterType="com.shengpingj.kuntai.pojo.WP_PaymentExample" resultType="java.lang.Integer" >-->
+    <!--select count(*) from wp_payment-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</select>-->
+  <!--<update id="updateByExampleSelective" parameterType="map" >-->
+    <!--update wp_payment-->
+    <!--<set >-->
+      <!--<if test="record.id != null" >-->
+        <!--id = #{record.id,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.payName != null" >-->
+        <!--pay_name = #{record.payName,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.isUse != null" >-->
+        <!--is_use = #{record.isUse,jdbcType=BIT},-->
+      <!--</if>-->
+      <!--<if test="record.payPoint != null" >-->
+        <!--pay_point = #{record.payPoint,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.isdelete != null" >-->
+        <!--isdelete = #{record.isdelete,jdbcType=BIT},-->
+      <!--</if>-->
+      <!--<if test="record.dotime != null" >-->
+        <!--dotime = #{record.dotime,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="record.payOrder != null" >-->
+        <!--pay_order = #{record.payOrder,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="record.payConf != null" >-->
+        <!--pay_conf = #{record.payConf,jdbcType=LONGVARCHAR},-->
+      <!--</if>-->
+    <!--</set>-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Update_By_Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</update>-->
+  <!--<update id="updateByExampleWithBLOBs" parameterType="map" >-->
+    <!--update wp_payment-->
+    <!--set id = #{record.id,jdbcType=INTEGER},-->
+      <!--pay_name = #{record.payName,jdbcType=VARCHAR},-->
+      <!--is_use = #{record.isUse,jdbcType=BIT},-->
+      <!--pay_point = #{record.payPoint,jdbcType=VARCHAR},-->
+      <!--isdelete = #{record.isdelete,jdbcType=BIT},-->
+      <!--dotime = #{record.dotime,jdbcType=VARCHAR},-->
+      <!--pay_order = #{record.payOrder,jdbcType=INTEGER},-->
+      <!--pay_conf = #{record.payConf,jdbcType=LONGVARCHAR}-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Update_By_Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</update>-->
+  <!--<update id="updateByExample" parameterType="map" >-->
+    <!--update wp_payment-->
+    <!--set id = #{record.id,jdbcType=INTEGER},-->
+      <!--pay_name = #{record.payName,jdbcType=VARCHAR},-->
+      <!--is_use = #{record.isUse,jdbcType=BIT},-->
+      <!--pay_point = #{record.payPoint,jdbcType=VARCHAR},-->
+      <!--isdelete = #{record.isdelete,jdbcType=BIT},-->
+      <!--dotime = #{record.dotime,jdbcType=VARCHAR},-->
+      <!--pay_order = #{record.payOrder,jdbcType=INTEGER}-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Update_By_Example_Where_Clause" />-->
+    <!--</if>-->
+  <!--</update>-->
+  <!--<update id="updateByPrimaryKeySelective" parameterType="com.shengpingj.kuntai.pojo.WP_Payment" >-->
+    <!--update wp_payment-->
+    <!--<set >-->
+      <!--<if test="payName != null" >-->
+        <!--pay_name = #{payName,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="isUse != null" >-->
+        <!--is_use = #{isUse,jdbcType=BIT},-->
+      <!--</if>-->
+      <!--<if test="payPoint != null" >-->
+        <!--pay_point = #{payPoint,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="isdelete != null" >-->
+        <!--isdelete = #{isdelete,jdbcType=BIT},-->
+      <!--</if>-->
+      <!--<if test="dotime != null" >-->
+        <!--dotime = #{dotime,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="payOrder != null" >-->
+        <!--pay_order = #{payOrder,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="payConf != null" >-->
+        <!--pay_conf = #{payConf,jdbcType=LONGVARCHAR},-->
+      <!--</if>-->
+    <!--</set>-->
+    <!--where id = #{id,jdbcType=INTEGER}-->
+  <!--</update>-->
+  <!--<update id="updateByPrimaryKeyWithBLOBs" parameterType="com.shengpingj.kuntai.pojo.WP_Payment" >-->
+    <!--update wp_payment-->
+    <!--set pay_name = #{payName,jdbcType=VARCHAR},-->
+      <!--is_use = #{isUse,jdbcType=BIT},-->
+      <!--pay_point = #{payPoint,jdbcType=VARCHAR},-->
+      <!--isdelete = #{isdelete,jdbcType=BIT},-->
+      <!--dotime = #{dotime,jdbcType=VARCHAR},-->
+      <!--pay_order = #{payOrder,jdbcType=INTEGER},-->
+      <!--pay_conf = #{payConf,jdbcType=LONGVARCHAR}-->
+    <!--where id = #{id,jdbcType=INTEGER}-->
+  <!--</update>-->
+  <!--<update id="updateByPrimaryKey" parameterType="com.shengpingj.kuntai.pojo.WP_Payment" >-->
+    <!--update wp_payment-->
+    <!--set pay_name = #{payName,jdbcType=VARCHAR},-->
+      <!--is_use = #{isUse,jdbcType=BIT},-->
+      <!--pay_point = #{payPoint,jdbcType=VARCHAR},-->
+      <!--isdelete = #{isdelete,jdbcType=BIT},-->
+      <!--dotime = #{dotime,jdbcType=VARCHAR},-->
+      <!--pay_order = #{payOrder,jdbcType=INTEGER}-->
+    <!--where id = #{id,jdbcType=INTEGER}-->
+  <!--</update>-->
+</mapper>
